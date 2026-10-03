@@ -78,3 +78,13 @@ The Game Library, Main Hub, Command Palette and Archive read from `src/utils/con
 5. Run `npm run build`, which type-checks first.
 
 Game images were taken from the game repositories, except Palm Plantation, which has no screenshots in its repository, so its images are captures of its own browser preview.
+
+---
+
+## 📚 Studio knowledge base
+
+- [`CLAUDE.md`](CLAUDE.md) — the admin and director handbook: rules, routines, open decisions.
+- [`docs/COMPETITOR-RESEARCH.md`](docs/COMPETITOR-RESEARCH.md) — how leading game studio websites work, with sources.
+- [`docs/WEBSITE-AUDIT-AND-ROADMAP.md`](docs/WEBSITE-AUDIT-AND-ROADMAP.md) — today's gaps and the phased plan to a professional launch site.
+- [`docs/LAUNCH-PLAYBOOK.md`](docs/LAUNCH-PLAYBOOK.md) — Google Play and Steam requirements, gates and timelines.
+- [`docs/GAME-REGISTRY.md`](docs/GAME-REGISTRY.md) — per-game readiness, blockers and next actions.
