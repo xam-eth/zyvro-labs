@@ -15,7 +15,8 @@ import {
   Activity,
   Flame,
   DownloadCloud,
-  ChevronRight
+  ChevronRight,
+  ExternalLink
 } from 'lucide-react';
 
 interface GameDetailModalProps {
@@ -30,10 +31,7 @@ export const GameDetailModal: React.FC<GameDetailModalProps> = ({
   onWishlist
 }) => {
   const [initStage, setInitStage] = useState<'loading' | 'loaded'>('loading');
-  const [worldProgress, setWorldProgress] = useState(0);
-  const [charProgress, setCharProgress] = useState(0);
-  const [combatProgress, setCombatProgress] = useState(0);
-  const [audioProgress, setAudioProgress] = useState(0);
+  const [metricProgress, setMetricProgress] = useState<number[]>([]);
   const [activeGalleryIdx, setActiveGalleryIdx] = useState(0);
   const [isPlayingSim, setIsPlayingSim] = useState(true);
   const [showWishlistSuccess, setShowWishlistSuccess] = useState(false);
@@ -43,22 +41,20 @@ export const GameDetailModal: React.FC<GameDetailModalProps> = ({
   useEffect(() => {
     if (!project) return;
     setInitStage('loading');
+    setActiveGalleryIdx(0);
     sound.playHover();
 
+    setMetricProgress(project.progress.map(() => 0));
     let step = 0;
     const interval = setInterval(() => {
       step += 4;
-      setWorldProgress(Math.min(project.progress.world, step * (project.progress.world / 100)));
-      setCharProgress(Math.min(project.progress.characters, step * (project.progress.characters / 100)));
-      setCombatProgress(Math.min(project.progress.combat, step * (project.progress.combat / 100)));
-      setAudioProgress(Math.min(project.progress.audio, step * (project.progress.audio / 100)));
+      setMetricProgress(
+        project.progress.map((metric) => Math.min(metric.value, step * (metric.value / 100)))
+      );
 
       if (step >= 100) {
         clearInterval(interval);
-        setWorldProgress(project.progress.world);
-        setCharProgress(project.progress.characters);
-        setCombatProgress(project.progress.combat);
-        setAudioProgress(project.progress.audio);
+        setMetricProgress(project.progress.map((metric) => metric.value));
         setTimeout(() => {
           setInitStage('loaded');
           sound.playAccessGranted();
@@ -190,7 +186,7 @@ export const GameDetailModal: React.FC<GameDetailModalProps> = ({
             <div className="text-center space-y-2">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#171717] border border-[#262626] text-[11px] font-mono text-[#D7FF3F]">
                 <Activity className="w-3.5 h-3.5 animate-spin-slow" />
-                <span>ALLOCATING 4K BUFFER &amp; SYSTEM GEOMETRY</span>
+                <span>LOADING PROJECT DIAGNOSTICS</span>
               </div>
               <h2 className="text-3xl md:text-5xl font-black font-display text-white uppercase tracking-wider">
                 INITIALIZING {project.title}
@@ -203,54 +199,23 @@ export const GameDetailModal: React.FC<GameDetailModalProps> = ({
             {/* Diagnostic Progress Telemetry Bars */}
             <div className="w-full max-w-lg space-y-4 font-mono text-xs">
               
-              {/* World */}
-              <div>
-                <div className="flex justify-between text-[#A0A0A0] mb-1 font-bold">
-                  <span>WORLD GEOMETRY &amp; SHADERS</span>
-                  <span className="text-[#D7FF3F]">{Math.round(worldProgress)}%</span>
+              {project.progress.map((metric, idx) => (
+                <div key={metric.label}>
+                  <div className="flex justify-between text-[#A0A0A0] mb-1 font-bold">
+                    <span>{metric.label}</span>
+                    <span className="text-[#D7FF3F]">{Math.round(metricProgress[idx] ?? 0)}%</span>
+                  </div>
+                  <div className="w-full bg-[#171717] h-2 border border-[#262626]">
+                    <div className="bg-[#D7FF3F] h-full transition-all duration-75" style={{ width: `${metricProgress[idx] ?? 0}%` }} />
+                  </div>
+                  <p className="mt-1 text-[10px] font-normal text-[#666666] leading-snug">{metric.evidence}</p>
                 </div>
-                <div className="w-full bg-[#171717] h-2 border border-[#262626]">
-                  <div className="bg-[#D7FF3F] h-full transition-all duration-75" style={{ width: `${worldProgress}%` }} />
-                </div>
-              </div>
-
-              {/* Characters */}
-              <div>
-                <div className="flex justify-between text-[#A0A0A0] mb-1 font-bold">
-                  <span>CHARACTER RIGS &amp; NEURAL AGENTS</span>
-                  <span className="text-[#D7FF3F]">{Math.round(charProgress)}%</span>
-                </div>
-                <div className="w-full bg-[#171717] h-2 border border-[#262626]">
-                  <div className="bg-[#D7FF3F] h-full transition-all duration-75" style={{ width: `${charProgress}%` }} />
-                </div>
-              </div>
-
-              {/* Combat */}
-              <div>
-                <div className="flex justify-between text-[#A0A0A0] mb-1 font-bold">
-                  <span>COMBAT DYNAMICS &amp; BALLISTICS</span>
-                  <span className="text-[#D7FF3F]">{Math.round(combatProgress)}%</span>
-                </div>
-                <div className="w-full bg-[#171717] h-2 border border-[#262626]">
-                  <div className="bg-[#D7FF3F] h-full transition-all duration-75" style={{ width: `${combatProgress}%` }} />
-                </div>
-              </div>
-
-              {/* Audio */}
-              <div>
-                <div className="flex justify-between text-[#A0A0A0] mb-1 font-bold">
-                  <span>SPATIAL RAYTRACED ACOUSTICS</span>
-                  <span className="text-[#D7FF3F]">{Math.round(audioProgress)}%</span>
-                </div>
-                <div className="w-full bg-[#171717] h-2 border border-[#262626]">
-                  <div className="bg-[#D7FF3F] h-full transition-all duration-75" style={{ width: `${audioProgress}%` }} />
-                </div>
-              </div>
+              ))}
 
             </div>
 
             <div className="text-xs font-mono text-[#666666] animate-pulse">
-              [ STREAMING HIGH-PRECISION TEXTURES &amp; LEVEL VECTORS ]
+              [ READING BUILD STATUS FROM SOURCE REPOSITORY ]
             </div>
 
           </div>
@@ -275,7 +240,7 @@ export const GameDetailModal: React.FC<GameDetailModalProps> = ({
                   {/* Resolution Badge */}
                   <div className="absolute top-3 left-3 bg-[#080808]/90 border border-[#292929] px-2.5 py-1 text-[10px] font-mono text-[#D7FF3F] flex items-center gap-1.5 font-bold backdrop-blur-md">
                     <Maximize2 className="w-3 h-3" />
-                    <span>4K ULTRA-HD MASTER RENDER</span>
+                    <span>SOURCE CAPTURE // {project.links.repository}</span>
                   </div>
                 </div>
 
@@ -348,7 +313,7 @@ export const GameDetailModal: React.FC<GameDetailModalProps> = ({
                     <div className="flex items-center justify-between text-[10px] font-mono">
                       <span className="flex items-center gap-1 text-[#D7FF3F]">
                         <Volume2 className="w-3 h-3" />
-                        <span>SPATIAL AUDIO FEED</span>
+                        <span>SIGNAL MONITOR</span>
                       </span>
                       <button
                         onClick={() => {
@@ -369,6 +334,20 @@ export const GameDetailModal: React.FC<GameDetailModalProps> = ({
 
                 {/* Primary Wishlist / Request Token Action */}
                 <div className="space-y-2">
+                  <a
+                    href={project.links.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => sound.playClick()}
+                    onMouseEnter={() => sound.playHover()}
+                    data-cursor="interact"
+                    data-cursor-label="OPEN REPO"
+                    className="w-full py-3 px-4 border border-[#D7FF3F]/60 text-[#D7FF3F] hover:bg-[#D7FF3F] hover:text-[#080808] font-mono font-bold tracking-widest text-xs uppercase transition-all flex items-center justify-center gap-2"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    <span>OPEN SOURCE REPOSITORY</span>
+                  </a>
+
                   <button
                     onClick={handleTriggerWishlist}
                     onMouseEnter={() => sound.playHover()}
@@ -427,6 +406,28 @@ export const GameDetailModal: React.FC<GameDetailModalProps> = ({
                 </div>
               </div>
 
+            </div>
+
+            {/* Build Status Evidence */}
+            <div className="space-y-4 pt-4 border-t border-[#202020]">
+              <div className="flex items-center space-x-2 text-xs font-mono text-[#D7FF3F] tracking-widest uppercase">
+                <span className="w-2 h-2 bg-[#D7FF3F]" />
+                <span>BUILD STATUS &amp; EVIDENCE // {project.links.branch}</span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {project.progress.map((metric) => (
+                  <div key={metric.label} className="p-3 bg-[#121212] border border-[#262626] space-y-2">
+                    <div className="flex justify-between text-xs font-mono font-bold text-[#E0E0E0]">
+                      <span>{metric.label}</span>
+                      <span className="text-[#D7FF3F]">{metric.value}%</span>
+                    </div>
+                    <div className="w-full bg-[#1c1c1c] h-1">
+                      <div className="bg-[#D7FF3F] h-full" style={{ width: `${metric.value}%` }} />
+                    </div>
+                    <p className="text-[11px] font-mono text-[#888888] leading-snug">{metric.evidence}</p>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Bottom Transmission Prompt */}

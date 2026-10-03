@@ -75,7 +75,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       case 'help':
         newLogs.push({
           type: 'output',
-          text: 'AVAILABLE PROTOCOLS:\n • hub, projects, lab, archive, origin, crew, transmission\n • valen, exo, null, aether (direct world launch)\n • sound (toggle audio), scanlines (toggle CRT)\n • reboot (restart OS), purge (vram reset), clear (cls)'
+          text: 'AVAILABLE PROTOCOLS:\n • hub, projects, lab, archive, origin, crew, transmission\n • last-night, chain-rider, phagos, palm (direct world launch)\n • sound (toggle audio), scanlines (toggle CRT)\n • reboot (restart OS), purge (vram reset), clear (cls)'
         });
         break;
 
@@ -132,30 +132,34 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         setTimeout(onClose, 400);
         break;
 
-      case 'valen':
+      case 'last-night':
+      case 'lastnight':
+      case 'scary-night':
         onSelectProject(GAME_PROJECTS[0]);
-        newLogs.push({ type: 'success', text: 'INITIALIZING PROJECT 001: VALEN...' });
+        newLogs.push({ type: 'success', text: 'INITIALIZING PROJECT 001: LAST NIGHT...' });
         setTimeout(onClose, 400);
         break;
 
-      case 'exo':
-      case 'exo-chrono':
+      case 'chain-rider':
+      case 'chain':
+      case 'rider':
         onSelectProject(GAME_PROJECTS[1]);
-        newLogs.push({ type: 'success', text: 'INITIALIZING PROJECT 002: EXO-CHRONO...' });
+        newLogs.push({ type: 'success', text: 'INITIALIZING PROJECT 002: CHAIN RIDER...' });
         setTimeout(onClose, 400);
         break;
 
-      case 'null':
-      case 'null-sector':
+      case 'phagos':
+      case 'dermal-rift':
         onSelectProject(GAME_PROJECTS[2]);
-        newLogs.push({ type: 'success', text: 'INITIALIZING PROJECT 003: NULL//SECTOR...' });
+        newLogs.push({ type: 'success', text: 'INITIALIZING PROJECT 003: PHAGOS // DERMAL RIFT...' });
         setTimeout(onClose, 400);
         break;
 
-      case 'aether':
-      case 'aether-voyager':
+      case 'palm':
+      case 'palm-plantation':
+      case 'plantation':
         onSelectProject(GAME_PROJECTS[3]);
-        newLogs.push({ type: 'success', text: 'INITIALIZING PROJECT 004: AETHER VOYAGER...' });
+        newLogs.push({ type: 'success', text: 'INITIALIZING PROJECT 004: PALM PLANTATION...' });
         setTimeout(onClose, 400);
         break;
 
@@ -257,7 +261,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
               sound.playKeyTick();
               setCmdInput(e.target.value);
             }}
-            placeholder="Type 'help', 'valen', 'lab', 'reboot'..."
+            placeholder="Type 'help', 'last-night', 'lab', 'reboot'..."
             className="flex-1 bg-transparent text-xs font-mono text-white outline-none uppercase placeholder:text-[#444444]"
           />
           <button

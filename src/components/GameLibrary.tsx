@@ -157,7 +157,7 @@ export const GameLibrary: React.FC<GameLibraryProps> = ({ onSelectProject }) => 
                 }}
                 onMouseEnter={() => sound.playHover()}
                 data-cursor="interact"
-                data-cursor-label="INSPECT 4K"
+                data-cursor-label="INSPECT"
                 className="absolute top-4 right-4 z-10 p-2 bg-[#080808]/90 hover:bg-[#D7FF3F] hover:text-[#080808] border border-[#3F3F46] text-[#A0A0A0] transition-all flex items-center gap-1.5 text-xs font-mono font-bold backdrop-blur-md"
               >
                 <Eye className="w-4 h-4" />
@@ -166,36 +166,18 @@ export const GameLibrary: React.FC<GameLibraryProps> = ({ onSelectProject }) => 
             </div>
 
             {/* Bottom Progress Bars Preview */}
-            <div className="p-4 bg-[#101010] border-t border-[#202020] grid grid-cols-3 gap-3 text-[11px] font-mono">
-              <div>
-                <div className="flex justify-between text-[#A0A0A0] mb-1">
-                  <span>WORLD ARCH</span>
-                  <span className="text-[#D7FF3F] font-bold">{currentProject.progress.world}%</span>
+            <div className="p-4 bg-[#101010] border-t border-[#202020] grid grid-cols-2 sm:grid-cols-4 gap-3 text-[11px] font-mono">
+              {currentProject.progress.map((metric) => (
+                <div key={metric.label} title={metric.evidence}>
+                  <div className="flex justify-between text-[#A0A0A0] mb-1 gap-2">
+                    <span className="truncate">{metric.label}</span>
+                    <span className="text-[#D7FF3F] font-bold">{metric.value}%</span>
+                  </div>
+                  <div className="w-full bg-[#1c1c1c] h-1">
+                    <div className="bg-[#D7FF3F] h-full" style={{ width: `${metric.value}%` }} />
+                  </div>
                 </div>
-                <div className="w-full bg-[#1c1c1c] h-1">
-                  <div className="bg-[#D7FF3F] h-full" style={{ width: `${currentProject.progress.world}%` }} />
-                </div>
-              </div>
-
-              <div>
-                <div className="flex justify-between text-[#A0A0A0] mb-1">
-                  <span>COMBAT RIG</span>
-                  <span className="text-[#D7FF3F] font-bold">{currentProject.progress.combat}%</span>
-                </div>
-                <div className="w-full bg-[#1c1c1c] h-1">
-                  <div className="bg-[#D7FF3F] h-full" style={{ width: `${currentProject.progress.combat}%` }} />
-                </div>
-              </div>
-
-              <div>
-                <div className="flex justify-between text-[#A0A0A0] mb-1">
-                  <span>AUDIO KERNEL</span>
-                  <span className="text-[#D7FF3F] font-bold">{currentProject.progress.audio}%</span>
-                </div>
-                <div className="w-full bg-[#1c1c1c] h-1">
-                  <div className="bg-[#D7FF3F] h-full" style={{ width: `${currentProject.progress.audio}%` }} />
-                </div>
-              </div>
+              ))}
             </div>
 
           </div>
