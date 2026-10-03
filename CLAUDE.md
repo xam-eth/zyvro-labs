@@ -22,6 +22,8 @@ Discover (search, social, press, creators)
 
 Competitor evidence behind this is in [`docs/COMPETITOR-RESEARCH.md`](docs/COMPETITOR-RESEARCH.md). The gap between this site today and that standard is in [`docs/WEBSITE-AUDIT-AND-ROADMAP.md`](docs/WEBSITE-AUDIT-AND-ROADMAP.md). Store requirements and timelines are in [`docs/LAUNCH-PLAYBOOK.md`](docs/LAUNCH-PLAYBOOK.md). Per-game readiness is in [`docs/GAME-REGISTRY.md`](docs/GAME-REGISTRY.md).
 
+Long-term competitive strategy and player benefits are in [`docs/STRATEGY-LONG-TERM.md`](docs/STRATEGY-LONG-TERM.md). How the studio gets known by gamers and early testers is in [`docs/MARKETING-PLAN.md`](docs/MARKETING-PLAN.md).
+
 ## 2. Hard rules (never break these)
 
 1. **Real code only.** Write complete, working implementations with all functions and logic. No placeholder code, no stubs, no `TODO` bodies, no dummy or sample data. This is the owner's standing instruction.
@@ -33,6 +35,7 @@ Competitor evidence behind this is in [`docs/COMPETITOR-RESEARCH.md`](docs/COMPE
 7. **Respect the real games.** Do not edit a game repository unless the task explicitly says so. This repo only describes and distributes them.
 8. **No model or tool identifiers in anything pushed** (commits, PR text, code comments, docs). Chat replies only.
 9. **Attribution:** end commits and PR descriptions with the attribution lines the session's system reminder specifies.
+10. **Do not implement site code yourself unless the owner says so.** Website changes are done by the owner's site agent working in this repository. Claude writes the issues, reviews the pull requests and supervises (see §12).
 
 ## 3. Language and tone
 
@@ -175,9 +178,48 @@ docs/COMPETITOR-RESEARCH.md        what leading studio sites do, with sources
 docs/WEBSITE-AUDIT-AND-ROADMAP.md  today's gaps and the phased plan to launch
 docs/LAUNCH-PLAYBOOK.md            Steam and Google Play requirements and timelines
 docs/GAME-REGISTRY.md              per-game readiness, blockers, next actions
+docs/STRATEGY-LONG-TERM.md         competitive strategy, player benefits, horizons, KPIs
+docs/MARKETING-PLAN.md             audience, tester programme, channels, 12-week campaign
 src/utils/constants.ts             all site content (games, logs, crew, lab)
 src/types/index.ts                 content types
 public/assets/                     brand kit, game art, crew images
 ```
+
+## 12. Delegation, triage and supervision protocol
+
+The games are still in development by their own teams, so the site does **not** run the full launch roadmap yet. Work is split like this:
+
+| Role | Does | Does not |
+|---|---|---|
+| **Owner** | Decides, approves anything outward-facing, merges pull requests | |
+| **Site agent** (the owner's agent working in this repository) | Implements website changes from issues, opens draft pull requests, verifies in a real browser | Does not expand scope beyond the issue |
+| **Claude (director)** | Writes issues with exact instructions, reviews pull requests, supervises, keeps docs and the registry current, owns strategy and marketing plans | Does not write site code unless the owner asks; never merges |
+| **Game teams** | Own their game repositories and roadmaps | |
+
+### Triage: urgent versus deferred
+
+**Urgent** (open an issue now) means any of:
+
+1. The public site shows something false or interactive-but-fake (a button or form that pretends to work).
+2. Security, privacy or legal exposure (secrets, personal data, missing consent where data is collected).
+3. A blocker for people using the site (a broken build, a viewport that blocks zoom, a link that goes nowhere useful).
+4. A listing that contradicts its game's repository.
+
+**Deferred** (record in `docs/WEBSITE-AUDIT-AND-ROADMAP.md`, do not build yet): routing and SEO, forum, newsletter, press kit, analytics, news feed, game pages with store links. These start when the owner approves a launch horizon in `docs/STRATEGY-LONG-TERM.md`.
+
+**Owner-blocked** (do not change until the owner answers): the crew roster, the Origin page, archive logs 003 and 004 and the contact email address. Ask once, record the answer in §9.
+
+### Issue format Claude writes
+
+Every instruction issue contains: **Context** (why now), **Scope** (what is in and what is explicitly out), **Steps** (exact files and behaviour), **Acceptance criteria** (a checklist someone can verify), **Verification** (commands and the browser checks to run), **Rules** (this file's hard rules), and **Delivery** (branch, draft pull request, no merge). One issue per concern, small enough for a single pull request.
+
+### Supervision checklist for each pull request
+
+1. The pull request links its issue and stays inside the issue's scope.
+2. `npm run build` passes; the author states what was and was not verified.
+3. Each acceptance criterion is demonstrably met, with screenshots for UI changes at 390 px and 1440 px.
+4. No new fake interaction, no invented content, no secret, no console error.
+5. The relevant docs (`CLAUDE.md` §7, `docs/GAME-REGISTRY.md`, the README) are updated in the same pull request.
+6. Claude leaves specific review comments, re-reviews after pushes and reports the state to the owner in Indonesian. The owner merges.
 
 Keep this handbook current. When a decision in §9 is answered or a problem in §7 is fixed, edit the section in the same PR.

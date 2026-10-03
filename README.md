@@ -88,3 +88,5 @@ Game images were taken from the game repositories, except Palm Plantation, which
 - [`docs/WEBSITE-AUDIT-AND-ROADMAP.md`](docs/WEBSITE-AUDIT-AND-ROADMAP.md) — today's gaps and the phased plan to a professional launch site.
 - [`docs/LAUNCH-PLAYBOOK.md`](docs/LAUNCH-PLAYBOOK.md) — Google Play and Steam requirements, gates and timelines.
 - [`docs/GAME-REGISTRY.md`](docs/GAME-REGISTRY.md) — per-game readiness, blockers and next actions.
+- [`docs/STRATEGY-LONG-TERM.md`](docs/STRATEGY-LONG-TERM.md) — how Zyvro competes and what players get, by horizon, with KPIs.
+- [`docs/MARKETING-PLAN.md`](docs/MARKETING-PLAN.md) — reaching gamers and early testers: channels, tester programme and a 12-week campaign.
