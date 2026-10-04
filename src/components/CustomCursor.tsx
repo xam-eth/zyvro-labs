@@ -1,12 +1,62 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 
 export const CustomCursor: React.FC = () => {
   const [pos, setPos] = useState({ x: -100, y: -100 });
-  const [targetPos, setTargetPos] = useState({ x: -100, y: -100 });
   const [cursorState, setCursorState] = useState<'default' | 'select' | 'interact' | 'scan'>('default');
   const [cursorLabel, setCursorLabel] = useState<string>('');
   const [isVisible, setIsVisible] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
+
+  // Use refs for values read inside the animation loop to avoid stale closures
+  const targetPosRef = useRef({ x: -100, y: -100 });
+  const isVisibleRef = useRef(false);
+
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    targetPosRef.current = { x: e.clientX, y: e.clientY };
+    if (!isVisibleRef.current) {
+      isVisibleRef.current = true;
+      setIsVisible(true);
+    }
+
+    // Check hovered element
+    const target = e.target as HTMLElement | null;
+    if (!target) return;
+
+    const interactive = target.closest('[data-cursor]');
+    const clickable = target.closest('button, a, input, select, textarea, [role="button"]');
+
+    if (interactive) {
+      const type = interactive.getAttribute('data-cursor');
+      const label = interactive.getAttribute('data-cursor-label') || '';
+      if (type === 'select') {
+        setCursorState('select');
+        setCursorLabel(label || 'SELECT');
+      } else if (type === 'scan') {
+        setCursorState('scan');
+        setCursorLabel(label || 'SCANNING');
+      } else if (type === 'interact') {
+        setCursorState('interact');
+        setCursorLabel(label || 'INTERACT');
+      }
+    } else if (clickable) {
+      setCursorState('interact');
+      setCursorLabel('INTERACT');
+    } else {
+      setCursorState('default');
+      setCursorLabel('');
+    }
+  }, []);
+
+  const handleMouseDown = useCallback(() => setIsClicking(true), []);
+  const handleMouseUp = useCallback(() => setIsClicking(false), []);
+  const handleMouseLeave = useCallback(() => {
+    isVisibleRef.current = false;
+    setIsVisible(false);
+  }, []);
+  const handleMouseEnter = useCallback(() => {
+    isVisibleRef.current = true;
+    setIsVisible(true);
+  }, []);
 
   useEffect(() => {
     // Check if touch device - if so, don't show custom cursor
@@ -14,57 +64,26 @@ export const CustomCursor: React.FC = () => {
       return;
     }
 
-    const handleMouseMove = (e: MouseEvent) => {
-      setTargetPos({ x: e.clientX, y: e.clientY });
-      if (!isVisible) setIsVisible(true);
-
-      // Check hovered element
-      const target = e.target as HTMLElement | null;
-      if (!target) return;
-
-      const interactive = target.closest('[data-cursor]');
-      const clickable = target.closest('button, a, input, select, textarea, [role="button"]');
-
-      if (interactive) {
-        const type = interactive.getAttribute('data-cursor');
-        const label = interactive.getAttribute('data-cursor-label') || '';
-        if (type === 'select') {
-          setCursorState('select');
-          setCursorLabel(label || 'SELECT');
-        } else if (type === 'scan') {
-          setCursorState('scan');
-          setCursorLabel(label || 'SCANNING');
-        } else if (type === 'interact') {
-          setCursorState('interact');
-          setCursorLabel(label || 'INTERACT');
-        }
-      } else if (clickable) {
-        setCursorState('interact');
-        setCursorLabel('INTERACT');
-      } else {
-        setCursorState('default');
-        setCursorLabel('');
-      }
-    };
-
-    const handleMouseDown = () => setIsClicking(true);
-    const handleMouseUp = () => setIsClicking(false);
-    const handleMouseLeave = () => setIsVisible(false);
-    const handleMouseEnter = () => setIsVisible(true);
-
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mouseup', handleMouseUp);
     document.addEventListener('mouseleave', handleMouseLeave);
     document.addEventListener('mouseenter', handleMouseEnter);
 
-    // Smooth lerp animation loop
+    // Smooth lerp animation loop — runs continuously, reads targetPos from ref
     let animId: number;
     const updateCursor = () => {
-      setPos(prev => ({
-        x: prev.x + (targetPos.x - prev.x) * 0.35,
-        y: prev.y + (targetPos.y - prev.y) * 0.35,
-      }));
+      setPos(prev => {
+        const target = targetPosRef.current;
+        const dx = target.x - prev.x;
+        const dy = target.y - prev.y;
+        // Skip state update if the cursor has converged (avoids unnecessary re-renders)
+        if (Math.abs(dx) < 0.3 && Math.abs(dy) < 0.3) return prev;
+        return {
+          x: prev.x + dx * 0.35,
+          y: prev.y + dy * 0.35,
+        };
+      });
       animId = requestAnimationFrame(updateCursor);
     };
     animId = requestAnimationFrame(updateCursor);
@@ -77,7 +96,7 @@ export const CustomCursor: React.FC = () => {
       document.removeEventListener('mouseenter', handleMouseEnter);
       cancelAnimationFrame(animId);
     };
-  }, [targetPos, isVisible]);
+  }, [handleMouseMove, handleMouseDown, handleMouseUp, handleMouseLeave, handleMouseEnter]);
 
   if (!isVisible) return null;
 

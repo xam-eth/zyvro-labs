@@ -46,7 +46,19 @@ export default {
         blink: {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0' },
-        }
+        },
+        glitch: {
+          '0%, 100%': { transform: 'translate(0, 0) skew(0deg)' },
+          '10%': { transform: 'translate(-3px, 2px) skew(1deg)' },
+          '20%': { transform: 'translate(3px, -1px) skew(-1deg)' },
+          '30%': { transform: 'translate(-2px, 3px) skew(0.5deg)' },
+          '40%': { transform: 'translate(2px, -2px) skew(-0.5deg)' },
+          '50%': { transform: 'translate(-1px, 1px) skew(1.5deg)' },
+          '60%': { transform: 'translate(1px, -3px) skew(-1.5deg)' },
+          '70%': { transform: 'translate(-3px, 2px) skew(0.8deg)' },
+          '80%': { transform: 'translate(3px, -1px) skew(-0.8deg)' },
+          '90%': { transform: 'translate(-2px, 2px) skew(0.3deg)' },
+        },
       },
       backgroundImage: {
         'grid-pattern': 'radial-gradient(circle, rgba(215,255,63,0.08) 1px, transparent 1px)',

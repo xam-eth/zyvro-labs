@@ -577,8 +577,8 @@ const GravitySingularitySimulation: React.FC = () => {
       { x: width / 2, y: height / 2, mass: 600 }
     ];
 
-    // 2,000 Particles
-    const particleCount = 1200;
+    // 2,000 Particles (matches LAB_EXPERIMENTS metric)
+    const particleCount = 2000;
     const particles = Array.from({ length: particleCount }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
