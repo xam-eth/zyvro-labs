@@ -14,6 +14,21 @@ interface ZyvroLogoProps {
   showText?: boolean;
 }
 
+/**
+ * Returns the correct symbol image path based on color mode.
+ * - full-color / toxic-lime → lime ZV symbol
+ * - monochrome-white → white ZV symbol
+ * - monochrome-dark → white symbol with dark filter
+ */
+function getSymbolSrcSet(colorMode: ZVColorMode): { src: string; srcSet: string } {
+  const isWhite = colorMode === 'monochrome-white' || colorMode === 'monochrome-dark';
+  const base = isWhite ? 'zyvro-zv-symbol-white' : 'zyvro-zv-symbol-lime';
+  return {
+    src: `/assets/brandkit/${base}.png`,
+    srcSet: `/assets/brandkit/${base}-128px.png 1x, /assets/brandkit/${base}-512px.png 2x, /assets/brandkit/${base}-1024px.png 3x`,
+  };
+}
+
 export const ZyvroLogo: React.FC<ZyvroLogoProps> = ({
   variant = 'symbol',
   state = 'normal',
@@ -52,20 +67,21 @@ export const ZyvroLogo: React.FC<ZyvroLogoProps> = ({
   const isVertical = variant === 'vertical';
   const isHorizontal = variant === 'horizontal' || variant === 'full' || showText;
   const stateFilter = getStateFilter();
+  const { src, srcSet } = getSymbolSrcSet(colorMode);
 
   return (
     <div 
       className={`inline-flex ${isVertical ? 'flex-col items-center space-y-2' : 'items-center space-x-3'} select-none ${className}`}
     >
-      {/* 1. Ultra-HD Master Photorealistic Mode (100% Identical to Generated 4K Assets) */}
+      {/* 1. Ultra-HD Master Photorealistic Mode (real PNG assets) */}
       {!isOnlyWordmark && renderMode === 'ultra-hd' && (
         <div 
           className={`relative flex items-center justify-center flex-shrink-0 transition-all duration-300 ${state === 'loading' ? 'animate-pulse' : ''}`}
           style={{ width: size, height: size }}
         >
           <img 
-            src="/assets/brandkit/zyvro-zv-symbol-transparent.png"
-            srcSet="/assets/brandkit/zyvro-zv-symbol-128px.png 1x, /assets/brandkit/zyvro-zv-symbol-512px.png 2x, /assets/brandkit/zyvro-zv-symbol-1024px.png 3x"
+            src={src}
+            srcSet={srcSet}
             alt="ZYVRO LABS Official ZV Monogram"
             className="w-full h-full object-contain pointer-events-none transition-all duration-300"
             style={{ 
@@ -76,7 +92,7 @@ export const ZyvroLogo: React.FC<ZyvroLogoProps> = ({
         </div>
       )}
 
-      {/* 2. Scalable Vector Mode (Pure SVG Geometry) */}
+      {/* 2. Scalable Vector Mode (Pure SVG Geometry — fallback) */}
       {!isOnlyWordmark && renderMode === 'vector' && (
         <svg
           width={size}

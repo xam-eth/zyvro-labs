@@ -250,7 +250,7 @@ export const OriginSystem: React.FC = () => {
             {/* Layout Showcase Grid (1:1 Symbol, Horizontal, Vertical, App Icon) */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
               
-              {/* 1. Master Symbol 1:1 */}
+              {/* 1. Master Symbol 1:1 — NEW BRAND LOGO */}
               <div className={`p-6 border border-[#222222] flex flex-col items-center justify-between space-y-4 rounded transition-colors ${
                 previewColorMode === 'monochrome-white' ? 'bg-[#18181b]' : previewColorMode === 'monochrome-dark' ? 'bg-[#f4f4f5]' : 'bg-[#121212]'
               }`}>
@@ -263,7 +263,7 @@ export const OriginSystem: React.FC = () => {
                 <span className="text-[10px] font-mono text-[#A0A0A0]">ICON / AVATAR / FAVICON</span>
               </div>
 
-              {/* 2. Horizontal Master Lockup */}
+              {/* 2. Horizontal Master Lockup — NEW BRAND LOGO */}
               <div className={`p-6 border border-[#222222] flex flex-col items-center justify-between space-y-4 rounded transition-colors ${
                 previewColorMode === 'monochrome-white' ? 'bg-[#18181b]' : previewColorMode === 'monochrome-dark' ? 'bg-[#f4f4f5]' : 'bg-[#121212]'
               }`}>
@@ -271,7 +271,12 @@ export const OriginSystem: React.FC = () => {
                   02 // HORIZONTAL LOCKUP
                 </span>
                 <div className="p-4 flex items-center justify-center">
-                  <ZyvroLogo variant="horizontal" colorMode={previewColorMode} size={48} />
+                  <img 
+                    src="/assets/brandkit/zyvro-zv-horizontal-lockup-new.png" 
+                    alt="ZYVRO LABS Horizontal Lockup"
+                    className="w-full max-w-xs object-contain pointer-events-none"
+                    style={{ filter: previewColorMode === 'monochrome-dark' ? 'brightness(0.15) contrast(2) grayscale(1)' : previewColorMode === 'monochrome-white' ? 'brightness(2) contrast(1.5) grayscale(1)' : 'none' }}
+                  />
                 </div>
                 <span className="text-[10px] font-mono text-[#A0A0A0]">WEB HUD / HEADER / SPONSOR</span>
               </div>
@@ -295,7 +300,11 @@ export const OriginSystem: React.FC = () => {
                   04 // APP STORE &amp; STEAM
                 </span>
                 <div className="w-20 h-20 rounded-2xl bg-[#080808] border-2 border-[#D7FF3F]/80 p-2 flex items-center justify-center shadow-[0_0_20px_rgba(215,255,63,0.3)]">
-                  <ZyvroLogo variant="symbol" state="active" size={56} />
+                  <img 
+                    src="/assets/brandkit/zyvro-zv-symbol-lime-256px.png" 
+                    alt="ZYVRO App Icon"
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <span className="text-[10px] font-mono text-[#A0A0A0]">IOS / ANDROID / STEAM LAUNCHER</span>
               </div>
@@ -389,22 +398,22 @@ export const OriginSystem: React.FC = () => {
                 </div>
               </div>
 
-              {/* Asset 2: 1:1 Master Symbol Dark */}
+              {/* Asset 2: 1:1 Master Symbol — NEW BRAND */}
               <div className="bg-[#121212] border border-[#252525] p-3 space-y-2 group">
                 <div className="aspect-square w-full overflow-hidden bg-black relative max-h-48 flex items-center justify-center">
                   <img 
-                    src="/assets/brandkit/zyvro-zv-master-symbol-1x1-dark.jpg" 
-                    alt="1:1 Master Symbol Dark"
+                    src="/assets/brandkit/zyvro-zv-symbol-lime.png" 
+                    alt="1:1 Master Symbol Lime"
                     className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                   />
                   <span className="absolute bottom-2 left-2 px-1.5 py-0.5 bg-black/80 text-[9px] font-mono text-[#D7FF3F] border border-[#D7FF3F]/40">
-                    1:1 DARK // 1024px
+                    1:1 LIME // 1254px
                   </span>
                 </div>
                 <div className="flex items-center justify-between pt-1">
-                  <span className="text-xs font-mono text-white font-bold">1:1 SYMBOL (DARK)</span>
+                  <span className="text-xs font-mono text-white font-bold">1:1 SYMBOL (LIME)</span>
                   <a 
-                    href="/assets/brandkit/zyvro-zv-master-symbol-1x1-dark.jpg" 
+                    href="/assets/brandkit/zyvro-zv-symbol-lime.png" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-[10px] font-mono text-[#D7FF3F] hover:underline"
@@ -414,12 +423,12 @@ export const OriginSystem: React.FC = () => {
                 </div>
               </div>
 
-              {/* Asset 3: Horizontal Lockup Dark */}
+              {/* Asset 3: Horizontal Lockup — NEW BRAND */}
               <div className="bg-[#121212] border border-[#252525] p-3 space-y-2 group">
                 <div className="aspect-video w-full overflow-hidden bg-black relative flex items-center justify-center">
                   <img 
-                    src="/assets/brandkit/zyvro-zv-master-horizontal-lockup-dark.jpg" 
-                    alt="Horizontal Lockup Dark"
+                    src="/assets/brandkit/zyvro-zv-horizontal-lockup-new.png" 
+                    alt="Horizontal Lockup New"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <span className="absolute bottom-2 left-2 px-1.5 py-0.5 bg-black/80 text-[9px] font-mono text-[#D7FF3F] border border-[#D7FF3F]/40">
@@ -427,9 +436,9 @@ export const OriginSystem: React.FC = () => {
                   </span>
                 </div>
                 <div className="flex items-center justify-between pt-1">
-                  <span className="text-xs font-mono text-white font-bold">HORIZONTAL (DARK)</span>
+                  <span className="text-xs font-mono text-white font-bold">HORIZONTAL (NEW)</span>
                   <a 
-                    href="/assets/brandkit/zyvro-zv-master-horizontal-lockup-dark.jpg" 
+                    href="/assets/brandkit/zyvro-zv-horizontal-lockup-new.png" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-[10px] font-mono text-[#D7FF3F] hover:underline"
@@ -498,7 +507,7 @@ export const OriginSystem: React.FC = () => {
                 <div className="flex items-center justify-between pt-1">
                   <span className="text-xs font-mono text-white font-bold">VECTOR SVG ASSET</span>
                   <a 
-                    href="/assets/brandkit/zyvro-zv-horizontal-lockup-transparent.svg" 
+                    href="/assets/brandkit/zyvro-zv-symbol-lime-transparent.svg" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-[10px] font-mono text-[#D7FF3F] hover:underline"
@@ -525,7 +534,11 @@ export const OriginSystem: React.FC = () => {
               </p>
               <div className="p-4 bg-[#121212] border border-dashed border-[#333333] flex items-center justify-center">
                 <div className="p-4 border border-dashed border-[#D7FF3F]/50">
-                  <ZyvroLogo variant="symbol" size={54} />
+                  <img 
+                    src="/assets/brandkit/zyvro-zv-symbol-lime-256px.png" 
+                    alt="ZYVRO Safe Zone Demo"
+                    className="w-14 h-14 object-contain"
+                  />
                 </div>
               </div>
             </div>
