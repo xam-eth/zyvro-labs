@@ -22,7 +22,7 @@ Discover (search, social, press, creators)
 
 Competitor evidence behind this is in [`docs/COMPETITOR-RESEARCH.md`](docs/COMPETITOR-RESEARCH.md). The gap between this site today and that standard is in [`docs/WEBSITE-AUDIT-AND-ROADMAP.md`](docs/WEBSITE-AUDIT-AND-ROADMAP.md). Store requirements and timelines are in [`docs/LAUNCH-PLAYBOOK.md`](docs/LAUNCH-PLAYBOOK.md). Per-game readiness is in [`docs/GAME-REGISTRY.md`](docs/GAME-REGISTRY.md).
 
-Long-term competitive strategy and player benefits are in [`docs/STRATEGY-LONG-TERM.md`](docs/STRATEGY-LONG-TERM.md). How the studio gets known by gamers and early testers is in [`docs/MARKETING-PLAN.md`](docs/MARKETING-PLAN.md).
+Long-term competitive strategy and player benefits are in [`docs/STRATEGY-LONG-TERM.md`](docs/STRATEGY-LONG-TERM.md). How the studio gets known by gamers and early testers is in [`docs/MARKETING-PLAN.md`](docs/MARKETING-PLAN.md). The Web3 funding, grant and on-chain plan is in [`docs/WEB3-STRATEGY.md`](docs/WEB3-STRATEGY.md). The access the director needs to operate is in [`docs/TOOLS-ACCESS.md`](docs/TOOLS-ACCESS.md).
 
 ## 2. Hard rules (never break these)
 
@@ -155,6 +155,9 @@ Claude cannot resolve these alone. Ask once, record the answer here, then procee
 6. **Community stack:** Discord plus a web forum. Claude recommends both, because Discord is where chat happens and a web forum gives searchable, indexable content. Confirm the platform and who moderates.
 7. **Promote a real `main`:** the repos' `main` branches are stubs. Decide the production branch and deployment host.
 8. **Monetisation stance per game:** LAST NIGHT ships a sandbox store with Midtrans server routes. A Google Play build must bill digital goods through Google Play Billing.
+9. **Access unlocks (see `docs/TOOLS-ACCESS.md`):** provide a live hosting target + domain, a Supabase project, verified mailboxes and an analytics tool; create the Google Play, Steam, Discord and forum accounts. These gate almost all site and launch work.
+10. **Web3 sequencing gate (see `docs/WEB3-STRATEGY.md`):** confirm that no token or airdrop happens before a game is stable with a measured, retained user base, and that Ronin is the primary grant target with Arbitrum/Immutable as alternatives.
+11. **Web3 legal:** agree to engage Indonesian crypto counsel (OJK regime) before any token decision; the token is never a payment method, rupiah/e-wallet rails stay.
 
 ## 10. Tools available in this environment
 
@@ -180,6 +183,8 @@ docs/LAUNCH-PLAYBOOK.md            Steam and Google Play requirements and timeli
 docs/GAME-REGISTRY.md              per-game readiness, blockers, next actions
 docs/STRATEGY-LONG-TERM.md         competitive strategy, player benefits, horizons, KPIs
 docs/MARKETING-PLAN.md             audience, tester programme, channels, 12-week campaign
+docs/WEB3-STRATEGY.md              funding (Ronin/other grants), airdrop reality, on-chain plan, legal
+docs/TOOLS-ACCESS.md               tools/accounts/approvals the director needs to work at maximum
 src/utils/constants.ts             all site content (games, logs, crew, lab)
 src/types/index.ts                 content types
 public/assets/                     brand kit, game art, crew images

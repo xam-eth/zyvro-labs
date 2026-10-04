@@ -90,3 +90,5 @@ Game images were taken from the game repositories, except Palm Plantation, which
 - [`docs/GAME-REGISTRY.md`](docs/GAME-REGISTRY.md) — per-game readiness, blockers and next actions.
 - [`docs/STRATEGY-LONG-TERM.md`](docs/STRATEGY-LONG-TERM.md) — how Zyvro competes and what players get, by horizon, with KPIs.
 - [`docs/MARKETING-PLAN.md`](docs/MARKETING-PLAN.md) — reaching gamers and early testers: channels, tester programme and a 12-week campaign.
+- [`docs/WEB3-STRATEGY.md`](docs/WEB3-STRATEGY.md) — Web3 funding (grants), the airdrop reality, the on-chain plan and Indonesian legal notes.
+- [`docs/TOOLS-ACCESS.md`](docs/TOOLS-ACCESS.md) — the tools, accounts and approvals the director needs to operate at full capacity.
