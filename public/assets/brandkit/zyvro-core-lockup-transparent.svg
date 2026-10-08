@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 700" width="100%" height="100%" fill="none">
+  <!-- THE CORE FULL LOCKUP - Transparent Master Vector (ZYVRO LABS) -->
+  <defs>
+    <linearGradient id="vectorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="60%" stop-color="#D0D0CA" />
+      <stop offset="100%" stop-color="#888884" />
+    </linearGradient>
+    <filter id="coreGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="10" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Group: The Core Symbol -->
+  <g transform="translate(50, 20)">
+    <!-- North Vector -->
+    <polygon points="250,25 325,145 250,200 175,145" fill="url(#vectorGrad)" />
+    <!-- South Vector -->
+    <polygon points="250,475 175,355 250,300 325,355" fill="url(#vectorGrad)" />
+    <!-- West Vector -->
+    <polygon points="25,250 145,175 200,250 145,325" fill="url(#vectorGrad)" />
+    <!-- East Vector -->
+    <polygon points="475,250 355,325 300,250 355,175" fill="url(#vectorGrad)" />
+
+    <!-- Central Quantum Core -->
+    <polygon points="250,195 305,250 250,305 195,250" fill="#D7FF3F" filter="url(#coreGlow)" />
+    <polygon points="250,225 275,250 250,275 225,250" fill="#FFFFFF" opacity="0.9" />
+  </g>
+
+  <!-- Group: Typography ZYVRO -->
+  <text x="300" y="590" text-anchor="middle" font-family="'Chakra Petch', 'Syne', sans-serif" font-weight="900" font-size="78" fill="#F1F1EA" letter-spacing="14">
+    ZYVRO
+  </text>
+
+  <!-- Group: Sub-Text LABS -->
+  <text x="300" y="650" text-anchor="middle" font-family="'JetBrains Mono', 'Share Tech Mono', monospace" font-weight="700" font-size="28" fill="#D7FF3F" letter-spacing="22">
+    LABS
+  </text>
+</svg>

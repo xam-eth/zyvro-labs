@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <!-- Brushed Titanium Steel Gradient for Z -->
+    <linearGradient id="zv-titanium-grad" x1="10%" y1="20%" x2="90%" y2="80%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="35%" stop-color="#D1D5DB" />
+      <stop offset="70%" stop-color="#9CA3AF" />
+      <stop offset="100%" stop-color="#6B7280" />
+    </linearGradient>
+
+    <!-- Toxic Lime Glow Gradient for V -->
+    <linearGradient id="zv-lime-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E5FF66" />
+      <stop offset="100%" stop-color="#D7FF3F" />
+    </linearGradient>
+
+    <!-- Ambient Shadow for depth separation -->
+    <filter id="zv-depth" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="2" dy="3" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Right 'V' Arm (Radiant Toxic Lime #D7FF3F) -->
+  <polygon 
+    points="44,56 60,86 86,26 72,26 58,64 48,46" 
+    fill="url(#zv-lime-grad)"
+  />
+
+  <!-- Left 'Z' Monogram (Heavy Brushed Titanium Steel) with Chamfered Edges -->
+  <polygon 
+    points="14,26 58,26 68,38 38,38 52,66 52,78 14,78 24,66 38,66 24,38 14,38" 
+    fill="url(#zv-titanium-grad)"
+    filter="url(#zv-depth)"
+  />
+</svg>

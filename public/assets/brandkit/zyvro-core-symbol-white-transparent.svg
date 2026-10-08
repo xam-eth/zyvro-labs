@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%" fill="none">
+  <!-- THE CORE MONOCHROME WHITE - Transparent Vector (ZYVRO LABS) -->
+  <!-- North Vector -->
+  <polygon points="250,25 325,145 250,200 175,145" fill="#F1F1EA" />
+  <!-- South Vector -->
+  <polygon points="250,475 175,355 250,300 325,355" fill="#F1F1EA" />
+  <!-- West Vector -->
+  <polygon points="25,250 145,175 200,250 145,325" fill="#F1F1EA" />
+  <!-- East Vector -->
+  <polygon points="475,250 355,325 300,250 355,175" fill="#F1F1EA" />
+  <!-- Center Core -->
+  <polygon points="250,195 305,250 250,305 195,250" fill="#FFFFFF" />
+</svg>
