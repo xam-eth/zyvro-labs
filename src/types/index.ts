@@ -7,6 +7,12 @@ export type SystemSection =
   | 'crew' 
   | 'transmission';
 
+export interface ProgressMetric {
+  label: string;
+  value: number; // 0-100, derived from the evidence string
+  evidence: string;
+}
+
 export interface GameProject {
   id: string;
   code: string; // e.g. "PROJECT 001"
@@ -16,17 +22,12 @@ export interface GameProject {
   tagline: string;
   brief: string;
   description: string;
-  status: 'ACTIVE' | 'TESTING' | 'ALPHA' | 'CLASSIFIED';
+  status: 'ACTIVE' | 'TESTING' | 'ALPHA' | 'BETA' | 'PROTOTYPE' | 'CLASSIFIED';
   build: string;
   engine: string;
   threatLevel: 'OMEGA' | 'ALPHA' | 'CRITICAL' | 'STABLE';
   year: string;
-  progress: {
-    world: number;
-    characters: number;
-    combat: number;
-    audio: number;
-  };
+  progress: ProgressMetric[];
   features: string[];
   specs: {
     targetPlatforms: string[];
@@ -40,6 +41,11 @@ export interface GameProject {
     conceptArt: string[];
   };
   loreQuote: string;
+  links: {
+    repository: string;
+    branch: string;
+    sourceUrl: string;
+  };
 }
 
 export interface LabExperiment {

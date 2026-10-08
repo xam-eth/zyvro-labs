@@ -37,7 +37,7 @@
 
 - **`[ ENTER ]` or `[ SPACE ]`**: Start system on Boot Screen.
 - **`[ ← ]` / `[ → ]` (or `[ A ]` / `[ D ]`)**: Cycle active project in Game Selection screen.
-- **`[ ~ ]` or Console Button**: Open In-Game Terminal CLI prompt (`help`, `valen`, `lab`, `sound`, `scanlines`, `reboot`, `purge`).
+- **`[ ~ ]` or Console Button**: Open In-Game Terminal CLI prompt (`help`, `last-night`, `chain-rider`, `phagos`, `palm`, `lab`, `sound`, `scanlines`, `reboot`, `purge`).
 - **Sound Toggle (HUD)**: Enable/disable the built-in procedural Web Audio synthesizer.
 - **CRT Scanlines (HUD)**: Toggle retro high-frequency scanline matrix.
 - **Interactive Prototypes (Zyvro Lab)**:
@@ -55,3 +55,40 @@
 - **Audio Engine**: Web Audio API Procedural Synthesizer (Zero network overhead)
 - **Canvas Systems**: High-DPI hardware-accelerated 2D/3D procedural renderers
 - **Iconography**: Lucide React System Identifiers
+
+---
+
+## 🕹️ Game Library — Source of Truth
+
+The Game Library, Main Hub, Command Palette and Archive read from `src/utils/constants.ts`. Each project is a real game maintained in its own repository, and each build status below is read from that repository's README, roadmap or status documents.
+
+| Slot | Title | Genre | Status / Build | Engine | Source |
+|---|---|---|---|---|---|
+| 001 | **LAST NIGHT** | 3/4 vampire survival horror | BETA // v1.0.0-beta.1 | Custom ES modules, Canvas 2D + Three.js GLB | [`Scary-Night`](https://github.com/xam-eth/Scary-Night/tree/arena/01a0cee1-scary-night) |
+| 002 | **CHAIN RIDER** | Bullet-steering crowd shooter | TESTING // MVP v2 | Godot 4.3 + Three.js r128 web build | [`Chain-Rider`](https://github.com/xam-eth/Chain-Rider/tree/arena/01a0ee17-chain-shot-rider) |
+| 003 | **PHAGOS: DERMAL RIFT** | Organic 2D exploration adventure | ALPHA // Dermal Rift slice | Godot 4.3 GDScript 2D | [`Phagosinec`](https://github.com/xam-eth/Phagosinec/tree/arena/01a0d899-phagos-space) |
+| 004 | **PALM PLANTATION** | Plantation strategy / management | PROTOTYPE // 0.2 | Godot 4.3 + Three.js browser preview | [`Ground-to-Empire`](https://github.com/xam-eth/Ground-to-Empire/tree/arena/01a0f46d-palm-plantation) |
+
+### Updating a game
+
+1. Read the game repository's README and status documents on its newest branch. `main` only holds a stub README in these repositories, so check every branch.
+2. Edit the matching entry in `GAME_PROJECTS`. Every `progress` metric carries an `evidence` string that must come from a number or a statement in that repository, never an estimate.
+3. Put screenshots and key art in `public/assets/games/`, named `<game>-<subject>.jpg`. Capture them from the game itself.
+4. Keep `links.branch` and `links.sourceUrl` pointing at the branch the data was read from.
+5. Run `npm run build`, which type-checks first.
+
+Game images were taken from the game repositories, except Palm Plantation, which has no screenshots in its repository, so its images are captures of its own browser preview.
+
+---
+
+## 📚 Studio knowledge base
+
+- [`CLAUDE.md`](CLAUDE.md) — the admin and director handbook: rules, routines, open decisions.
+- [`docs/COMPETITOR-RESEARCH.md`](docs/COMPETITOR-RESEARCH.md) — how leading game studio websites work, with sources.
+- [`docs/WEBSITE-AUDIT-AND-ROADMAP.md`](docs/WEBSITE-AUDIT-AND-ROADMAP.md) — today's gaps and the phased plan to a professional launch site.
+- [`docs/LAUNCH-PLAYBOOK.md`](docs/LAUNCH-PLAYBOOK.md) — Google Play and Steam requirements, gates and timelines.
+- [`docs/GAME-REGISTRY.md`](docs/GAME-REGISTRY.md) — per-game readiness, blockers and next actions.
+- [`docs/STRATEGY-LONG-TERM.md`](docs/STRATEGY-LONG-TERM.md) — how Zyvro competes and what players get, by horizon, with KPIs.
+- [`docs/MARKETING-PLAN.md`](docs/MARKETING-PLAN.md) — reaching gamers and early testers: channels, tester programme and a 12-week campaign.
+- [`docs/WEB3-STRATEGY.md`](docs/WEB3-STRATEGY.md) — Web3 funding (grants), the airdrop reality, the on-chain plan and Indonesian legal notes.
+- [`docs/TOOLS-ACCESS.md`](docs/TOOLS-ACCESS.md) — the tools, accounts and approvals the director needs to operate at full capacity.

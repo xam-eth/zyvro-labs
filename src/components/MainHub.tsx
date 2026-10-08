@@ -248,11 +248,11 @@ export const MainHub: React.FC<MainHubProps> = ({ onSelectProject, onNavigate })
               onClick={handleEnterWorld}
               onMouseEnter={() => sound.playHover()}
               data-cursor="interact"
-              data-cursor-label="INSPECT 4K"
+              data-cursor-label="INSPECT"
               className="absolute bottom-4 right-4 z-20 px-3 py-1.5 bg-[#080808]/90 hover:bg-[#D7FF3F] hover:text-[#080808] border border-[#333333] text-[#CCCCCC] text-[11px] font-mono transition-all flex items-center gap-1.5 backdrop-blur-md"
             >
               <Maximize2 className="w-3.5 h-3.5" />
-              <span>INSPECT 4K MASTER</span>
+              <span>INSPECT ARTWORK</span>
             </button>
           </div>
 
