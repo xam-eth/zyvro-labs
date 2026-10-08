@@ -8,13 +8,11 @@ import {
   Volume2, 
   Radio, 
   Maximize2, 
-  CheckCircle2, 
   Layers, 
   Cpu, 
   HardDrive, 
   Activity,
   Flame,
-  DownloadCloud,
   ChevronRight,
   ExternalLink
 } from 'lucide-react';
@@ -22,19 +20,16 @@ import {
 interface GameDetailModalProps {
   project: GameProject | null;
   onClose: () => void;
-  onWishlist: (projectName: string) => void;
 }
 
 export const GameDetailModal: React.FC<GameDetailModalProps> = ({
   project,
-  onClose,
-  onWishlist
+  onClose
 }) => {
   const [initStage, setInitStage] = useState<'loading' | 'loaded'>('loading');
   const [metricProgress, setMetricProgress] = useState<number[]>([]);
   const [activeGalleryIdx, setActiveGalleryIdx] = useState(0);
   const [isPlayingSim, setIsPlayingSim] = useState(true);
-  const [showWishlistSuccess, setShowWishlistSuccess] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   // Progressive Diagnostic Load Simulation
@@ -134,13 +129,6 @@ export const GameDetailModal: React.FC<GameDetailModalProps> = ({
   if (!project) return null;
 
   const galleryImages = [project.images.hero, project.images.cover, ...(project.images.conceptArt || [])];
-
-  const handleTriggerWishlist = () => {
-    sound.playAccessGranted();
-    setShowWishlistSuccess(true);
-    onWishlist(project.title);
-    setTimeout(() => setShowWishlistSuccess(false), 4000);
-  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#050505]/95 backdrop-blur-2xl p-2 sm:p-4 md:p-8 overflow-y-auto select-none">
@@ -332,7 +320,7 @@ export const GameDetailModal: React.FC<GameDetailModalProps> = ({
                   </div>
                 </div>
 
-                {/* Primary Wishlist / Request Token Action */}
+                {/* Primary action: the real source repository */}
                 <div className="space-y-2">
                   <a
                     href={project.links.sourceUrl}
@@ -348,23 +336,6 @@ export const GameDetailModal: React.FC<GameDetailModalProps> = ({
                     <span>OPEN SOURCE REPOSITORY</span>
                   </a>
 
-                  <button
-                    onClick={handleTriggerWishlist}
-                    onMouseEnter={() => sound.playHover()}
-                    data-cursor="interact"
-                    data-cursor-label="TRANSMIT"
-                    className="w-full py-3.5 px-4 bg-[#D7FF3F] hover:bg-white text-[#080808] font-mono font-bold tracking-widest text-xs uppercase transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(215,255,63,0.3)]"
-                  >
-                    <DownloadCloud className="w-4 h-4" />
-                    <span>WISHLIST &amp; REQUEST ACCESS</span>
-                  </button>
-
-                  {showWishlistSuccess && (
-                    <div className="p-2 bg-[#D7FF3F]/15 border border-[#D7FF3F]/50 text-[#D7FF3F] text-[11px] font-mono flex items-center gap-2 animate-fadeIn">
-                      <CheckCircle2 className="w-3.5 h-3.5" />
-                      <span>FREQUENCY REGISTERED. ACCESS TOKEN DISPATCHED.</span>
-                    </div>
-                  )}
                 </div>
 
               </div>

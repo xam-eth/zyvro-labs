@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { GameProject } from '../types';
-import { GAME_PROJECTS } from '../utils/constants';
+import { GAME_PROJECTS, FEATURED_PROJECT_INDEX } from '../utils/constants';
 import { sound } from '../utils/soundManager';
 import { 
   ChevronLeft, 
@@ -18,7 +18,7 @@ interface GameLibraryProps {
 }
 
 export const GameLibrary: React.FC<GameLibraryProps> = ({ onSelectProject }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(FEATURED_PROJECT_INDEX);
   const [isAnimating, setIsAnimating] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const touchStartX = useRef<number | null>(null);
@@ -193,6 +193,11 @@ export const GameLibrary: React.FC<GameLibraryProps> = ({ onSelectProject }) => 
               <Cpu className="w-3.5 h-3.5" />
               <span>{currentProject.code} // {currentProject.build}</span>
             </div>
+            {currentProject.featured && (
+              <div className="inline-flex ml-2 items-center px-3 py-1 bg-[#D7FF3F] text-[#080808] text-[11px] font-mono font-bold tracking-widest uppercase">
+                FIRST RELEASE
+              </div>
+            )}
 
             <h2 className="text-4xl md:text-5xl font-black font-display tracking-tight text-white uppercase leading-none">
               {currentProject.title}

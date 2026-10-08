@@ -47,9 +47,9 @@ Long-term competitive strategy and player benefits are in [`docs/STRATEGY-LONG-T
 
 - **Stack:** React 18, TypeScript, Vite 6, Tailwind CSS 3, Lucide icons. No router, no backend, no analytics.
 - **Entry:** `index.html` → `src/main.tsx` → `src/App.tsx`.
-- **Navigation:** a `SystemSection` state (`hub | projects | lab | archive | origin | crew | transmission`), not URL routes. A mandatory boot screen (`BootScreen`) runs first.
-- **Single source of truth for content:** `src/utils/constants.ts` (`GAME_PROJECTS`, `LAB_EXPERIMENTS`, `ARCHIVE_LOGS`, `CREW_MEMBERS`, `ORIGIN_MANIFESTO`, `SYSTEM_METADATA`). Types live in `src/types/index.ts`.
-- **Media:** `public/assets/games/<game>-<subject>.jpg`, `public/assets/brandkit/*`, `public/assets/crew/*`.
+- **Navigation:** a `SystemSection` state (`hub | projects | lab | archive | origin | founder | transmission`), not URL routes. A skippable boot screen (`BootScreen`) runs on the first visit; `?skipboot=1`, a repeat visit or `prefers-reduced-motion` skip it.
+- **Single source of truth for content:** `src/utils/constants.ts` (`GAME_PROJECTS`, `LAB_EXPERIMENTS`, `ARCHIVE_LOGS`, `FOUNDER`, `CONTACT_EMAIL`, `SOCIAL_LINKS`, `ORIGIN_MANIFESTO`, `SYSTEM_METADATA`). Types live in `src/types/index.ts`.
+- **Media:** `public/assets/games/<game>-<subject>.jpg`, `public/assets/brandkit/*`, `public/assets/founder/*` (the real founder photo, once supplied).
 - **Audio:** procedural Web Audio synthesizer in `src/utils/soundManager.ts`.
 
 Commands:
@@ -120,16 +120,12 @@ These exist in the repo today and break rule 2 or 4. Treat them as priority work
 
 | Item | Where | Problem | Fix |
 |---|---|---|---|
-| Crew roster | `CREW_MEMBERS`, `public/assets/crew/*`, avatar URLs | Five named people, bios, stat radars and stock-photo avatars that are not documented anywhere as the real team | Replace with the real team or remove the section. Ask the owner for names, roles and consent for photos. |
-| Origin page | `ORIGIN_MANIFESTO`, `OriginSystem.tsx` | Studio facts (origin year, focus, "independent self-sovereign") are asserted without a source | Owner confirms each fact. |
-| Archive logs 003 and 004 | `ARCHIVE_LOGS` | Studio-wide claims (a "mandate" against monetisation, a four-week contact-mic recording) are not backed by any repo | Remove or have the owner confirm. Note that LAST NIGHT does ship a store (the Blood Market), so a blanket "no monetisation" mandate contradicts it. |
-| System metadata | `SYSTEM_METADATA` | Coordinates, "Z-CORE.64x" kernel and build string are theatre, not data | Keep only as clearly decorative boot flavour, or derive build from `package.json` and the git commit. |
-| Wishlist button | `GameDetailModal.tsx` | Shows "ACCESS TOKEN DISPATCHED" but sends nothing | Replace with a real wishlist (Steam widget link) or a real signup. |
-| Contact form | `TransmissionTerminal.tsx` | `setTimeout` simulates sending | Wire it to a real endpoint or reduce to the plain `mailto:` link and a verified inbox. |
-| Social links | `SystemFooter.tsx` | Point to `x.com`, `discord.gg`, `youtube.com`, `github.com` homepages | Use the studio's real handles once the owner confirms them. |
-| Contact email | `contact@zyvro.com` | Unverified that this inbox or domain exists | Owner confirms the domain and mailbox. |
+| Founder profile | `FOUNDER` in `constants.ts` | Null until the owner supplies a real name, photo, bio and verified links. While null the Founder section, nav entry and console command do not render. | Owner supplies the data; never invent it. |
+| Contact mailbox | `CONTACT_EMAIL` in `constants.ts` | Null until a working `@zyvrolabs.com` mailbox exists. While null no email is shown and the contact page points to GitHub. `zyvro.com` is **not** an owned domain and must never reappear. | Owner confirms the mailbox. |
+| Social links | `SOCIAL_LINKS` in `constants.ts` | Only GitHub (and email once set) are verified. | Add a row only for an account that exists and is the project's own. |
 | Lab "metrics" | `LAB_EXPERIMENTS` | Values like "1,024 NODES" should match what the canvas demo really does | Verify against the demo code or reword. |
-| "4K" labels | various comments and badges | Screenshots are not 4K masters | Do not claim resolution that the asset does not have. |
+
+Fixed in the trust pass (do not reintroduce): the fictional five-person crew and its stock photos, the San Francisco coordinates, archive logs 003 and 004, fictional log authors, the "studio" positioning, the fake wishlist, the simulated contact form, homepage-only social links, the zoom lock, unverified "4K" and "TLS 1.3" labels, and the Lab cipher's invented origin story.
 
 ## 8. Engineering standards for new work
 

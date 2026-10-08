@@ -7,7 +7,6 @@ import {
   Search, 
   Tag, 
   User, 
-  Lock, 
   FileText
 } from 'lucide-react';
 
@@ -15,9 +14,9 @@ export const ArchiveDatabase: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [activeLog, setActiveLog] = useState<ArchiveEntry | null>(ARCHIVE_LOGS[0]);
-  const [declassifiedIds, setDeclassifiedIds] = useState<string[]>([]);
 
-  const categories = ['ALL', 'WORLD DESIGN', 'AI LOGIC', 'COMBAT TEST', 'AUDIO SYNTHESIS', 'CLASSIFIED'];
+  // Only categories that actually have entries are offered as filters.
+  const categories = ['ALL', ...Array.from(new Set(ARCHIVE_LOGS.map((log) => log.category)))];
 
   const filteredLogs = ARCHIVE_LOGS.filter((log) => {
     const matchesCategory = selectedCategory === 'ALL' || log.category === selectedCategory;
@@ -33,10 +32,6 @@ export const ArchiveDatabase: React.FC = () => {
     setActiveLog(log);
   };
 
-  const handleDeclassify = (logId: string) => {
-    sound.playAccessGranted();
-    setDeclassifiedIds(prev => [...prev, logId]);
-  };
 
   return (
     <div className="relative min-h-screen pt-20 pb-28 md:pl-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col justify-between select-none">
@@ -108,7 +103,6 @@ export const ArchiveDatabase: React.FC = () => {
           ) : (
             filteredLogs.map((log) => {
               const isSelected = activeLog?.id === log.id;
-              const isLocked = log.isClassified && !declassifiedIds.includes(log.id);
 
               return (
                 <div
@@ -142,15 +136,9 @@ export const ArchiveDatabase: React.FC = () => {
 
                   <div className="flex items-center justify-between pt-3 mt-3 border-t border-[#1a1a1a] text-[10px] font-mono text-[#555555]">
                     <span>{log.category}</span>
-                    {isLocked ? (
-                      <span className="text-[#FF3344] flex items-center gap-1 font-bold">
-                        <Lock className="w-3 h-3" /> CLASSIFIED
-                      </span>
-                    ) : (
-                      <span className="text-[#A0A0A0] flex items-center gap-1">
-                        <FileText className="w-3 h-3" /> READ ENTRY
-                      </span>
-                    )}
+                    <span className="text-[#A0A0A0] flex items-center gap-1">
+                      <FileText className="w-3 h-3" /> READ ENTRY
+                    </span>
                   </div>
                 </div>
               );
@@ -184,38 +172,7 @@ export const ArchiveDatabase: React.FC = () => {
                 </div>
               </div>
 
-              {/* Document Content / Redaction Handling */}
-              {activeLog.isClassified && !declassifiedIds.includes(activeLog.id) ? (
-                
-                /* Locked Classified View */
-                <div className="p-8 bg-[#121212] border border-[#FF3344]/40 text-center space-y-4 my-6">
-                  <div className="inline-flex p-3 bg-[#FF3344]/10 border border-[#FF3344]/30 rounded-full text-[#FF3344]">
-                    <Lock className="w-6 h-6 animate-pulse" />
-                  </div>
-
-                  <div className="space-y-1">
-                    <h3 className="text-base font-bold font-display text-white uppercase tracking-wider">
-                      CLASSIFIED DEVELOPMENT LOG
-                    </h3>
-                    <p className="text-xs font-mono text-[#888888] max-w-md mx-auto">
-                      This entry contains sensitive internal architectural decisions and studio post-mortem protocols.
-                    </p>
-                  </div>
-
-                  <button
-                    onClick={() => handleDeclassify(activeLog.id)}
-                    onMouseEnter={() => sound.playHover()}
-                    data-cursor="interact"
-                    data-cursor-label="DECLASSIFY"
-                    className="px-6 py-2.5 bg-[#FF3344] hover:bg-white text-[#080808] text-xs font-mono font-bold tracking-widest uppercase transition-all shadow-[0_0_20px_rgba(255,51,68,0.3)]"
-                  >
-                    [ OVERRIDE &amp; DECLASSIFY LOG ]
-                  </button>
-                </div>
-
-              ) : (
-
-                /* Declassified Full Text */
+              {/* Entry text */}
                 <div className="space-y-4 text-xs md:text-sm font-mono text-[#D0D0D0] leading-relaxed">
                   
                   <div className="p-3 bg-[#141414] border-l-2 border-[#D7FF3F] text-xs italic text-[#A0A0A0]">
@@ -229,13 +186,11 @@ export const ArchiveDatabase: React.FC = () => {
                   ))}
 
                   <div className="pt-6 border-t border-[#202020] flex items-center justify-between text-xs text-[#666666]">
-                    <span>STATUS: DECLASSIFIED // VERIFIED</span>
+                    <span>STATUS: SOURCED FROM THE GAME REPOSITORY</span>
                     <span>ZYVRO LABS ARCHIVE SYSTEM</span>
                   </div>
 
                 </div>
-
-              )}
 
             </div>
           ) : (

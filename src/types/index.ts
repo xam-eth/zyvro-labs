@@ -4,7 +4,7 @@ export type SystemSection =
   | 'lab' 
   | 'archive' 
   | 'origin' 
-  | 'crew' 
+  | 'founder' 
   | 'transmission';
 
 export interface ProgressMetric {
@@ -15,6 +15,7 @@ export interface ProgressMetric {
 
 export interface GameProject {
   id: string;
+  featured: boolean; // the first release, shown as the hub hero
   code: string; // e.g. "PROJECT 001"
   title: string;
   codename: string;
@@ -64,44 +65,37 @@ export interface ArchiveEntry {
   id: string;
   code: string;
   title: string;
-  category: 'WORLD DESIGN' | 'AI LOGIC' | 'COMBAT TEST' | 'AUDIO SYNTHESIS' | 'CLASSIFIED';
+  category: 'WORLD DESIGN' | 'AI LOGIC' | 'COMBAT TEST';
   timestamp: string;
   build: string;
   author: string;
   summary: string;
   content: string[];
-  isClassified?: boolean;
 }
 
-export interface CrewMember {
-  id: string;
-  playerCode: string; // e.g. "PLAYER_001"
-  name: string;
-  alias: string;
-  role: string;
-  department: string;
-  status: 'ONLINE' | 'IN LAB' | 'COMPILING' | 'DEEP DIVE';
-  stats: {
-    design: number;
-    code: number;
-    art: number;
-    lore: number;
-  };
-  loadout: string[];
-  bio: string;
-  avatar: string;
+export interface SocialLink {
+  label: string;
+  url: string;
+}
+
+export interface FounderProfile {
+  name: string;         // real name, as used on the founder's public profiles
+  role: string;         // e.g. "Founder · Game developer"
+  location: string;     // real city or country
+  photo: string;        // path under /assets/founder/ — a real photo of the founder
+  bio: string;          // two or three true sentences, approved by the founder
+  workStyle: string;    // how the work is actually done
+  links: SocialLink[];  // verified profiles only
 }
 
 export interface TransmissionForm {
   from: string;
   callsign: string;
-  frequency: string;
-  purpose: 'BUSINESS' | 'COLLABORATION' | 'PRESS' | 'TALENT' | 'CLASSIFIED';
+  purpose: 'BUSINESS' | 'PARTNERSHIP' | 'PRESS' | 'PLAYER FEEDBACK';
   message: string;
 }
 
 export interface SystemStats {
-  coordinates: string;
   fps: number;
   latencyMs: number;
   systemLoad: number;

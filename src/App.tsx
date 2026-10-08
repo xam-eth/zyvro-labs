@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SystemSection, GameProject } from './types';
-import { SYSTEM_METADATA } from './utils/constants';
+import { FOUNDER } from './utils/constants';
 import { sound } from './utils/soundManager';
 
 import { CustomCursor } from './components/CustomCursor';
@@ -13,21 +13,47 @@ import { GameDetailModal } from './components/GameDetailModal';
 import { ZyvroLab } from './components/ZyvroLab';
 import { ArchiveDatabase } from './components/ArchiveDatabase';
 import { OriginSystem } from './components/OriginSystem';
-import { CrewDatabase } from './components/CrewDatabase';
+import { FounderProfile } from './components/FounderProfile';
 import { TransmissionTerminal } from './components/TransmissionTerminal';
 import { SystemFooter } from './components/SystemFooter';
 import { CommandPalette } from './components/CommandPalette';
 
+const BOOT_SEEN_KEY = 'zyvro_booted';
+
+/**
+ * The boot sequence is skipped for links shared with reviewers (?skipboot=1),
+ * for visitors who already watched it once, and for visitors who asked the
+ * system to reduce motion.
+ */
+function shouldSkipBoot(): boolean {
+  if (typeof window === 'undefined') return false;
+  if (new URLSearchParams(window.location.search).get('skipboot') === '1') return true;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return true;
+  try {
+    return window.localStorage.getItem(BOOT_SEEN_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function rememberBootSeen(): void {
+  try {
+    window.localStorage.setItem(BOOT_SEEN_KEY, '1');
+  } catch {
+    // Storage unavailable (private mode or blocked): the intro simply shows again next visit.
+  }
+}
+
 export const App: React.FC = () => {
-  const [isBooted, setIsBooted] = useState(false);
+  const [isBooted, setIsBooted] = useState<boolean>(shouldSkipBoot);
   const [activeSection, setActiveSection] = useState<SystemSection>('hub');
   const [selectedProject, setSelectedProject] = useState<GameProject | null>(null);
   const [isScanlinesOn, setIsScanlinesOn] = useState(true);
   const [isConsoleOpen, setIsConsoleOpen] = useState(false);
   const [isPurging, setIsPurging] = useState(false);
-  const [wishlistNotifications, setWishlistNotifications] = useState<string[]>([]);
 
   const handleBootComplete = () => {
+    rememberBootSeen();
     setIsBooted(true);
   };
 
@@ -43,13 +69,6 @@ export const App: React.FC = () => {
     setTimeout(() => {
       setIsPurging(false);
     }, 700);
-  };
-
-  const handleWishlist = (projectName: string) => {
-    setWishlistNotifications(prev => [...prev, projectName]);
-    setTimeout(() => {
-      setWishlistNotifications(prev => prev.filter(p => p !== projectName));
-    }, 5000);
   };
 
   // Scroll to top smoothly when section changes
@@ -83,7 +102,7 @@ export const App: React.FC = () => {
             isScanlinesOn={isScanlinesOn}
             onToggleScanlines={() => setIsScanlinesOn(!isScanlinesOn)}
             onOpenConsole={() => setIsConsoleOpen(true)}
-            coordinates={SYSTEM_METADATA.coordinates}
+            showFounder={FOUNDER !== null}
           />
 
           {/* Dynamic Content Views */}
@@ -113,8 +132,8 @@ export const App: React.FC = () => {
               <OriginSystem />
             )}
 
-            {activeSection === 'crew' && (
-              <CrewDatabase />
+            {activeSection === 'founder' && FOUNDER && (
+              <FounderProfile founder={FOUNDER} />
             )}
 
             {activeSection === 'transmission' && (
@@ -126,7 +145,6 @@ export const App: React.FC = () => {
           <GameDetailModal
             project={selectedProject}
             onClose={() => setSelectedProject(null)}
-            onWishlist={handleWishlist}
           />
 
           {/* In-Game Terminal CLI Console */}
@@ -140,18 +158,6 @@ export const App: React.FC = () => {
             onReboot={handleRestartSystem}
             onPurge={handleEmergencyPurge}
           />
-
-          {/* Wishlist Frequency Notification Toast */}
-          {wishlistNotifications.length > 0 && (
-            <div className="fixed bottom-20 right-6 z-50 flex flex-col space-y-2 pointer-events-none">
-              {wishlistNotifications.map((name, i) => (
-                <div key={i} className="p-3 bg-[#101010]/95 border-2 border-[#D7FF3F] text-xs font-mono text-white shadow-[0_0_20px_rgba(215,255,63,0.3)] animate-fadeIn">
-                  <div className="text-[#D7FF3F] font-bold">TRANSMISSION CONFIRMED //</div>
-                  <div>Access Token for <span className="font-bold">{name}</span> dispatched.</div>
-                </div>
-              ))}
-            </div>
-          )}
 
           {/* Footer: End of Transmission / System Shutdown */}
           <SystemFooter
