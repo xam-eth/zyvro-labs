@@ -489,21 +489,21 @@ export const OriginSystem: React.FC = () => {
                 </div>
               </div>
 
-              {/* Asset 6: Scalable Vector SVG Package */}
+              {/* Asset 6: Transparent Horizontal Lockup */}
               <div className="bg-[#121212] border border-[#252525] p-3 space-y-2 group flex flex-col justify-between">
                 <div className="aspect-video w-full bg-[#171717] border border-dashed border-[#333333] flex flex-col items-center justify-center p-4">
-                  <ZyvroLogo variant="horizontal" renderMode="vector" size={42} />
-                  <span className="text-[10px] font-mono text-[#888888] mt-2">100% SCALABLE VECTOR (.SVG)</span>
+                  <ZyvroLogo variant="horizontal" size={42} />
+                  <span className="text-[10px] font-mono text-[#888888] mt-2">TRANSPARENT PNG (.PNG)</span>
                 </div>
                 <div className="flex items-center justify-between pt-1">
-                  <span className="text-xs font-mono text-white font-bold">VECTOR SVG ASSET</span>
-                  <a 
-                    href="/assets/brandkit/zyvro-zv-horizontal-lockup-transparent.svg" 
-                    target="_blank" 
+                  <span className="text-xs font-mono text-white font-bold">TRANSPARENT LOCKUP</span>
+                  <a
+                    href="/assets/brandkit/zyvro-zv-horizontal-lockup-transparent.png"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-[10px] font-mono text-[#D7FF3F] hover:underline"
                   >
-                    SVG SOURCE ↗
+                    PNG SOURCE ↗
                   </a>
                 </div>
               </div>
@@ -521,7 +521,7 @@ export const OriginSystem: React.FC = () => {
                 SAFE ZONE &amp; CLEAR SPACE
               </span>
               <p className="text-xs font-mono text-[#A0A0A0] leading-relaxed">
-                Maintain a minimum clear space equal to <span className="text-white font-bold">1X the width of the central Z-diagonal bar</span> on all four quadrants of the logo. No typography, borders, or competing UI HUD elements may encroach inside this perimeter.
+                Maintain a minimum clear space equal to <span className="text-white font-bold">1X the width of the central lime diamond</span> on all four quadrants of the logo. No typography, borders, or competing UI HUD elements may encroach inside this perimeter.
               </p>
               <div className="p-4 bg-[#121212] border border-dashed border-[#333333] flex items-center justify-center">
                 <div className="p-4 border border-dashed border-[#D7FF3F]/50">

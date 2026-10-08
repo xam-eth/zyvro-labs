@@ -66,7 +66,7 @@ export const ZyvroLogo: React.FC<ZyvroLogoProps> = ({
           <img 
             src="/assets/brandkit/zyvro-zv-symbol-transparent.png"
             srcSet="/assets/brandkit/zyvro-zv-symbol-128px.png 1x, /assets/brandkit/zyvro-zv-symbol-512px.png 2x, /assets/brandkit/zyvro-zv-symbol-1024px.png 3x"
-            alt="ZYVRO LABS Official ZV Monogram"
+            alt="ZYVRO LABS emblem"
             className="w-full h-full object-contain pointer-events-none transition-all duration-300"
             style={{ 
               filter: stateFilter,
