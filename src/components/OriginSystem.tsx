@@ -106,7 +106,7 @@ export const OriginSystem: React.FC = () => {
 
               <div className="flex items-center justify-between border-b border-[#202020] pb-2">
                 <span className="text-[11px] font-mono text-[#666666] tracking-widest uppercase">TYPE</span>
-                <span className="text-xs font-mono text-[#D7FF3F] font-bold">INDEPENDENT GAME STUDIO</span>
+                <span className="text-xs font-mono text-[#D7FF3F] font-bold text-right">{ORIGIN_MANIFESTO.type}</span>
               </div>
 
               <div className="flex items-center justify-between border-b border-[#202020] pb-2">
@@ -116,7 +116,7 @@ export const OriginSystem: React.FC = () => {
 
               <div className="flex items-center justify-between border-b border-[#202020] pb-2">
                 <span className="text-[11px] font-mono text-[#666666] tracking-widest uppercase">STATUS</span>
-                <span className="text-xs font-mono text-[#D7FF3F] font-bold">SOVEREIGN // ACTIVE</span>
+                <span className="text-xs font-mono text-[#D7FF3F] font-bold text-right">{ORIGIN_MANIFESTO.status}</span>
               </div>
 
               <div className="space-y-2 pt-2">
@@ -137,14 +137,14 @@ export const OriginSystem: React.FC = () => {
             <div className="p-4 bg-[#141414] border-l-2 border-[#D7FF3F] space-y-2">
               <div className="text-xs font-mono text-[#A0A0A0] uppercase tracking-widest">DIRECTIVE // 01</div>
               <p className="text-sm md:text-base font-display font-bold text-white tracking-wide leading-snug">
-                WE CRAFT HIGH-PERFORMANCE EXPERIENCES THAT PUSH BOUNDARIES AND REDEFINE WHAT'S POSSIBLE.
+                WE SHIP SMALL, PLAYABLE GAMES AND PUBLISH THE EVIDENCE BEHIND EVERY CLAIM.
               </p>
             </div>
 
             {/* Technical Telemetry */}
             <div className="text-[10px] font-mono text-[#666666] space-y-1">
               <div>KERNEL: {SYSTEM_METADATA.kernel}</div>
-              <div>COORDINATES: {SYSTEM_METADATA.coordinates}</div>
+              <div>SITE BUILD: {SYSTEM_METADATA.build}</div>
             </div>
 
           </div>
@@ -348,16 +348,16 @@ export const OriginSystem: React.FC = () => {
             </div>
           </div>
 
-          {/* Master 4K Assets & Vector Downloads Matrix */}
+          {/* Brand assets & vector downloads */}
           <div className="bg-[#0b0b0b] border border-[#202020] p-6 space-y-4">
             <div className="flex items-center justify-between border-b border-[#202020] pb-3">
               <div>
                 <span className="text-xs font-mono text-[#D7FF3F] uppercase tracking-widest flex items-center gap-2">
                   <Layers className="w-4 h-4 text-[#D7FF3F]" />
-                  4K MASTER RENDERS &amp; VECTOR ASSETS
+                  BRAND RENDERS &amp; VECTOR ASSETS
                 </span>
                 <span className="text-[11px] font-mono text-[#666666]">
-                  HIGH DENSITY PRODUCTION ASSETS (.JPG 4K, .PNG TRANSPARENT, .SVG VECTOR)
+                  BRAND ASSETS (.JPG, .PNG TRANSPARENT, .SVG VECTOR)
                 </span>
               </div>
             </div>
@@ -373,7 +373,7 @@ export const OriginSystem: React.FC = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <span className="absolute bottom-2 left-2 px-1.5 py-0.5 bg-black/80 text-[9px] font-mono text-[#D7FF3F] border border-[#D7FF3F]/40">
-                    4K MASTER BOARD
+                    1254px BOARD
                   </span>
                 </div>
                 <div className="flex items-center justify-between pt-1">
@@ -384,7 +384,7 @@ export const OriginSystem: React.FC = () => {
                     rel="noopener noreferrer"
                     className="text-[10px] font-mono text-[#D7FF3F] hover:underline"
                   >
-                    VIEW 4K ↗
+                    VIEW ↗
                   </a>
                 </div>
               </div>

@@ -1,19 +1,57 @@
-import { GameProject, LabExperiment, ArchiveEntry, CrewMember } from '../types';
+import { GameProject, LabExperiment, ArchiveEntry, FounderProfile, SocialLink } from '../types';
+
+// Site build identifier, injected by vite.config.ts from package.json and the git commit.
+export const SITE_BUILD = `${__SITE_VERSION__}+${__SITE_COMMIT__}`;
 
 export const SYSTEM_METADATA = {
-  codename: "ZYVRO_OS_v2026.09",
-  build: "2026.09.27-RELEASE",
+  codename: "ZYVRO_OS",
+  build: SITE_BUILD,
   kernel: "Z-CORE.64x",
   status: "ONLINE",
-  coordinates: "LAT: 37.7749° N // LON: 122.4194° W // ALT: 412M",
   originYear: "2026",
-  securityTier: "TIER-0 ENCRYPTED",
   tagline: "WE BUILD GAMES, INTERACTIVE WORLDS, AND EXPERIMENTAL DIGITAL EXPERIENCES.",
 };
+
+/**
+ * The real founder. Every field was supplied by the owner; nothing here is invented.
+ * Set this to null to hide the Founder section, its navigation entry and its
+ * console command everywhere on the site.
+ */
+export const FOUNDER: FounderProfile | null = {
+  name: "Jamadianur",
+  role: "Founder · Solo indie game developer",
+  location: "Rantau, South Kalimantan, Indonesia",
+  photo: "/assets/founder/jamadianur-portrait.jpg",
+  bio: "Jamadianur is a solo indie developer from Rantau, South Kalimantan, Indonesia. He works alone by choice and spends his time taking apart new AI tools and new tech, then turning what he learns into playable games.",
+  workStyle: "One person, by design. The ideas, game design and direction are his; implementation is accelerated with AI coding agents. Every game on this site is developed in public repositories, so the progress can be checked.",
+  links: [{ label: "GITHUB", url: "https://github.com/xam-eth" }],
+};
+
+/**
+ * The one verified contact mailbox on the owned domain (zyvrolabs.com).
+ * While this is null no email address is shown anywhere and the contact
+ * terminal points visitors to the verified GitHub profile instead.
+ */
+export const CONTACT_EMAIL: string | null = null;
+
+// Verified public destinations only. Add a row only when the account exists and is the project's own.
+export const GITHUB_PROFILE_URL = "https://github.com/xam-eth";
+
+export const SOCIAL_LINKS: SocialLink[] = [
+  { label: "GITHUB", url: GITHUB_PROFILE_URL },
+  ...(CONTACT_EMAIL ? [{ label: "EMAIL", url: `mailto:${CONTACT_EMAIL}` }] : []),
+];
+
+// Author credited on development logs: the founder once named, otherwise the lab itself.
+function creditName(founder: FounderProfile | null): string {
+  return founder ? founder.name.toUpperCase() : "ZYVRO LABS";
+}
+export const LOG_AUTHOR: string = creditName(FOUNDER);
 
 export const GAME_PROJECTS: GameProject[] = [
   {
     id: "project-001",
+    featured: true,
     code: "PROJECT 001",
     title: "LAST NIGHT",
     codename: "SCARY_NIGHT",
@@ -82,6 +120,7 @@ export const GAME_PROJECTS: GameProject[] = [
   },
   {
     id: "project-002",
+    featured: false,
     code: "PROJECT 002",
     title: "CHAIN RIDER",
     codename: "CHAIN_SHOT_RIDER",
@@ -148,6 +187,7 @@ export const GAME_PROJECTS: GameProject[] = [
   },
   {
     id: "project-003",
+    featured: false,
     code: "PROJECT 003",
     title: "PHAGOS: DERMAL RIFT",
     codename: "PHAGOS_SPACE",
@@ -211,6 +251,7 @@ export const GAME_PROJECTS: GameProject[] = [
   },
   {
     id: "project-004",
+    featured: false,
     code: "PROJECT 004",
     title: "PALM PLANTATION",
     codename: "GROUND_TO_EMPIRE",
@@ -273,6 +314,9 @@ export const GAME_PROJECTS: GameProject[] = [
     }
   }
 ];
+
+// The first release leads the hub and the library carousel.
+export const FEATURED_PROJECT_INDEX: number = Math.max(0, GAME_PROJECTS.findIndex((project) => project.featured));
 
 export const LAB_EXPERIMENTS: LabExperiment[] = [
   {
@@ -345,7 +389,7 @@ export const ARCHIVE_LOGS: ArchiveEntry[] = [
     category: "WORLD DESIGN",
     timestamp: "2026.10.02 — SOURCE: SCARY-NIGHT // ARENA/01A0CEE1",
     build: "v1.0.0-beta.1",
-    author: "PLAYER_001 [DESIGN_ARCHITECT]",
+    author: LOG_AUTHOR,
     summary: "How a pressure budget, slow-decaying moods and enforced quiet stretches replaced random enemy spawns in the five-minute vampire night.",
     content: [
       "Last Night owns a tension director instead of a spawner. It holds a pressure budget, composes waves from it, decides where things come from, and enforces quiet stretches, because pressure only reads as pressure when there is contrast.",
@@ -361,7 +405,7 @@ export const ARCHIVE_LOGS: ArchiveEntry[] = [
     category: "COMBAT TEST",
     timestamp: "2026.10.02 — SOURCE: CHAIN-RIDER // ARENA/01A0EE17",
     build: "MVP v2",
-    author: "PLAYER_002 [COMBAT_LEAD]",
+    author: LOG_AUTHOR,
     summary: "Swept-circle ricochet, a fixed 60 Hz clock and a measured balance pass: how the rideable chain shot stays deterministic across devices.",
     content: [
       "Ricochet is solved analytically with a swept-circle test, the root of a quadratic, rather than by a physics engine. That keeps replays identical across platforms and stops the bullet tunnelling at 150 percent speed.",
@@ -371,43 +415,13 @@ export const ARCHIVE_LOGS: ArchiveEntry[] = [
     ]
   },
   {
-    id: "log-003",
-    code: "LOG // 003",
-    title: "ABANDONED EXPERIMENT: THE PHANTOM REVENUE MATRIX",
-    category: "CLASSIFIED",
-    timestamp: "2026.05.11 — 22:04:44 UTC",
-    build: "EXP_DEAD_SYS",
-    author: "SYSTEM_CORE",
-    summary: "Declassified post-mortem on why we purged conventional predatory monetization systems from our engine blueprints.",
-    content: [
-      "We conducted an internal simulation test: What if game mechanics are intentionally gated by friction to drive micro-transactions? The conclusion was unequivocal.",
-      "Predatory design destroys gameplay rhythm, breaks player immersion, and turns creative worlds into bland financial spreadsheets.",
-      "Mandate #01 codified: Zyvro Labs will only build games that respect the player's intelligence, time, and emotional investment. No battle passes, no fake timers."
-    ],
-    isClassified: true
-  },
-  {
-    id: "log-004",
-    code: "LOG // 004",
-    title: "SYNTHESIZING THE ACID SOUNDSCAPE: AUDIO ENGINEERING",
-    category: "AUDIO SYNTHESIS",
-    timestamp: "2026.04.03 — 14:18:30 UTC",
-    build: "AUDIO_RIG_V2",
-    author: "PLAYER_004 [AUDIO_DIRECTOR]",
-    summary: "Creating the signature ZYVRO audio identity: low-frequency industrial drones, mechanical contact mics, and granular bio-acoustic noise.",
-    content: [
-      "Standard EDM synth drops and orchestra horns don't fit dark industrial laboratories. We spent four weeks recording contact microphones attached to hydraulic presses, high-voltage transformers, and MRI chillers.",
-      "By pitch-shifting industrial friction by -36 semitones and applying granular distortion, we developed the signature Zyvro hum."
-    ]
-  },
-  {
     id: "log-005",
     code: "LOG // 005",
     title: "FIVE PREDATORS: PATHFINDING, PATIENCE AND THE STALKER",
     category: "AI LOGIC",
     timestamp: "2026.10.02 — SOURCE: SCARY-NIGHT // ARENA/01A0CEE1",
     build: "v1.0.0-beta.1",
-    author: "PLAYER_005 [AI_ENGINEER]",
+    author: LOG_AUTHOR,
     summary: "Why Last Night enemies route on a walkability grid, give up after a long hunt, and why one of them only moves when unseen.",
     content: [
       "The mansion has interior walls and large grounds, so enemies route on a coarse walkability grid with BFS instead of steering straight at the player. They also give up: after a long hunt with no contact they leave, which rewards evasion over killing.",
@@ -422,7 +436,7 @@ export const ARCHIVE_LOGS: ArchiveEntry[] = [
     category: "WORLD DESIGN",
     timestamp: "2026.09.30 — SOURCE: PHAGOSINEC // ARENA/01A0D899",
     build: "DERMAL RIFT SLICE",
-    author: "SYSTEM_CORE",
+    author: LOG_AUTHOR,
     summary: "How Phagos lets organs change the map without ever trapping the player: safety rules written as data and validated by tooling.",
     content: [
       "Each organ is a biome and its routes change with organ state: rest, contraction, surge, inflammation and recovery. The change must be learnable, so motion is authored organ behaviour, never particles, stains or random wobble.",
@@ -437,7 +451,7 @@ export const ARCHIVE_LOGS: ArchiveEntry[] = [
     category: "WORLD DESIGN",
     timestamp: "2026.10.02 — SOURCE: GROUND-TO-EMPIRE // ARENA/01A0F46D",
     build: "PROTOTYPE 0.2",
-    author: "SYSTEM_CORE",
+    author: LOG_AUTHOR,
     summary: "Why a plantation loop with 284 passing assertions is still not marked complete: every claim carries its evidence boundary.",
     content: [
       "Palm Plantation keeps a live status file where each feature is labelled implemented, partially implemented, placeholder or unverified. Headless Godot passes 109 core, 65 crop-model and 110 structural assertions, yet milestones M2 and M3 stay open because rendered output, physical input and device FPS have not been verified.",
@@ -447,109 +461,16 @@ export const ARCHIVE_LOGS: ArchiveEntry[] = [
   }
 ];
 
-export const CREW_MEMBERS: CrewMember[] = [
-  {
-    id: "crew-001",
-    playerCode: "PLAYER_001",
-    name: "KAELEN VEX",
-    alias: "ARCHITECT // 001",
-    role: "SYSTEM ARCHITECT & GAME DIRECTOR",
-    department: "CORE DIRECTION // SYSTEMS",
-    status: "ONLINE",
-    stats: {
-      design: 98,
-      code: 88,
-      art: 82,
-      lore: 96
-    },
-    loadout: ["UNREAL ENGINE 5.5", "Z-CORE ARCHITECTURE", "SPATIAL MECHANICS", "NEURAL WORLD-BUILDING"],
-    bio: "Ex-AAA technical director turned experimental game auteur. Obsessed with high-tension tactile immersion, brutalist world design, and boundary-pushing atmospheric mechanics.",
-    avatar: "/assets/crew/player-001.jpg"
-  },
-  {
-    id: "crew-002",
-    playerCode: "PLAYER_002",
-    name: "VALERIE CHEN",
-    alias: "BALLISTIC // 002",
-    role: "LEAD COMBAT & SYSTEMS DESIGNER",
-    department: "GAMEPLAY // COMBAT DYNAMICS",
-    status: "IN LAB",
-    stats: {
-      design: 95,
-      code: 90,
-      art: 68,
-      lore: 74
-    },
-    loadout: ["PHYSICS SOLVERS", "SUB-FRAME ROLLBACK", "WEAPON BALLISTICS", "MECHATRONIC KINEMATICS"],
-    bio: "Owns the combat and simulation layer of CHAIN RIDER: analytic ricochet, fixed-step determinism and the bot-driven balance harness. Former competitive tactical shooter champion and mechanical engineer.",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=90&auto=format&fit=crop"
-  },
-  {
-    id: "crew-003",
-    playerCode: "PLAYER_003",
-    name: "RAVEN KORR",
-    alias: "SHIFTER // 003",
-    role: "PRINCIPAL TECHNICAL ARTIST & SHADER WITCH",
-    department: "VISUAL TECH // RENDER ENGINES",
-    status: "COMPILING",
-    stats: {
-      design: 80,
-      code: 94,
-      art: 98,
-      lore: 78
-    },
-    loadout: ["HLSL / GLSL SHADERS", "VOLUMETRIC RAYMARCHING", "COMPUTE MESH PIPELINES", "DARK INDUSTRIAL LIGHTING"],
-    bio: "Crafts custom compute shaders, procedural micro-geometry, and the signature toxic lime atmospheric illumination that defines Zyvro's visual identity.",
-    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=1200&q=90&auto=format&fit=crop"
-  },
-  {
-    id: "crew-004",
-    playerCode: "PLAYER_004",
-    name: "MORGAN VANCE",
-    alias: "SYNTH // 004",
-    role: "AUDIO DIRECTOR & ACOUSTIC SYNTHESIST",
-    department: "SPATIAL AUDIO // FOLEY LAB",
-    status: "ONLINE",
-    stats: {
-      design: 86,
-      code: 75,
-      art: 88,
-      lore: 92
-    },
-    loadout: ["MODULAR SYNTHESIS RIG", "BINAURAL RAYTRACING", "HYDROPHONE / CONTACT MICS", "SUB-BASS HARMONICS"],
-    bio: "Composer and acoustic researcher behind the synthesised soundscape of LAST NIGHT. Specializes in psychoacoustic tension triggers and industrial sub-bass rumbles.",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=1200&q=90&auto=format&fit=crop"
-  },
-  {
-    id: "crew-005",
-    playerCode: "PLAYER_005",
-    name: "DR. ASTRA NOVA",
-    alias: "CYBERNET // 005",
-    role: "AI ARCHITECT & PROCEDURAL ENGINEER",
-    department: "NEURAL LOGIC // EXPERIMENTAL LAB",
-    status: "DEEP DIVE",
-    stats: {
-      design: 78,
-      code: 99,
-      art: 72,
-      lore: 89
-    },
-    loadout: ["REINFORCEMENT LEARNING", "PROCEDURAL TOPOLOGY", "GENETIC SENSORY SYSTEMS", "GPU COMPUTE SOLVERS"],
-    bio: "Specializes in self-evolving artificial predators and procedural world generation algorithms in Zyvro Labs' R&D division.",
-    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&q=90&auto=format&fit=crop"
-  }
-];
-
 export const ORIGIN_MANIFESTO = {
   entity: "ZYVRO LABS",
-  type: "INDEPENDENT GAME STUDIO & EXPERIMENTAL DIGITAL WORLD",
+  type: "INDEPENDENT GAME LAB · ONE FOUNDER",
   origin: "2026",
-  status: "INDEPENDENT // SELF-SOVEREIGN // EXPERIMENTAL",
+  status: "INDEPENDENT // SELF-FUNDED // BUILDING IN THE OPEN",
   focus: ["HIGH-TENSION MECHANICS", "ATMOSPHERIC WORLDS", "UNCOMPROMISING TECHNICAL UI", "HARD INDUSTRIAL AESTHETICS"],
   manifesto: [
     "We believe modern gaming has grown complacent: bloated corporate committees, recycled formulas, and hollow cinematic distractions.",
     "Zyvro Labs is a return to mechanical weight, sensory audacity, and pure digital craft.",
-    "We do not build ordinary web portals. Every interface we construct, every engine we compile, and every world we release is designed to immerse you into a living simulation.",
+    "Zyvro Labs is one founder building games in the open, with AI coding agents as the workforce and every claim traceable to source.",
     "No predatory gimmicks. No fluff. Only raw interactive atmosphere."
   ],
   pillars: [
@@ -565,8 +486,8 @@ export const ORIGIN_MANIFESTO = {
     },
     {
       code: "03",
-      title: "TECHNICAL AUDACITY",
-      desc: "We engineer custom pipelines, proprietary procedural algorithms, and reactive game systems that challenge hardware limits."
+      title: "EVIDENCE OVER HYPE",
+      desc: "Every progress number on this site links to the repository it came from. If it is not built and tested, it is not claimed."
     }
   ]
 };

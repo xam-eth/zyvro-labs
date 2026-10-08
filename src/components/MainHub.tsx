@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GameProject, SystemSection } from '../types';
-import { GAME_PROJECTS, SYSTEM_METADATA } from '../utils/constants';
+import { GAME_PROJECTS, SYSTEM_METADATA, FEATURED_PROJECT_INDEX } from '../utils/constants';
 import { sound } from '../utils/soundManager';
 import { 
   Play, 
@@ -22,7 +22,7 @@ interface MainHubProps {
 }
 
 export const MainHub: React.FC<MainHubProps> = ({ onSelectProject, onNavigate }) => {
-  const [selectedIdx, setSelectedIdx] = useState(0);
+  const [selectedIdx, setSelectedIdx] = useState(FEATURED_PROJECT_INDEX);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -219,6 +219,12 @@ export const MainHub: React.FC<MainHubProps> = ({ onSelectProject, onNavigate })
               <span className="text-white text-[10px] font-mono tracking-wider uppercase">
                 {activeProject.genre}
               </span>
+              {activeProject.featured && (
+                <>
+                  <span className="text-[#555555]">|</span>
+                  <span className="px-1.5 bg-[#D7FF3F] text-[#080808] text-[10px] font-mono font-bold tracking-widest">FIRST RELEASE</span>
+                </>
+              )}
             </div>
 
             <div className="flex items-center space-x-2 bg-[#080808]/90 border border-[#262626] px-3 py-1 backdrop-blur-md">

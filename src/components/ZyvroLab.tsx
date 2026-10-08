@@ -513,10 +513,10 @@ const CipherSignalSimulation: React.FC = () => {
           <div className="p-4 bg-[#D7FF3F]/10 border border-[#D7FF3F] text-xs space-y-1 text-white animate-fadeIn">
             <div className="text-[#D7FF3F] font-bold flex items-center gap-1.5 uppercase">
               <Unlock className="w-4 h-4" />
-              <span>CLASSIFIED LOG DECRYPTED // TRANSMISSION 2026.09</span>
+              <span>LOG DECRYPTED // HOW ZYVRO LABS WORKS</span>
             </div>
             <p className="text-[#D0D0D0] leading-relaxed pt-1">
-              "The engine protocol was not authored by human engineers. In June 2026, the procedural compiler began compiling code loops that no team member wrote. We didn't cancel it. We built the game around it."
+              "Every game in this lab is built by one founder directing AI coding agents. The design calls are human; the code is real, tested and public. Each game page links to the repository it came from."
             </p>
           </div>
         ) : (

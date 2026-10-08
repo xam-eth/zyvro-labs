@@ -15,17 +15,17 @@
 | **04** | **Color System** | Base (`#080808`, `#101010`, `#171717`), Surface (`#202020`), Text (`#F2F2F2`), Signature Acid Lime (`#D7FF3F`). |
 | **05** | **Typography** | Display: Geometric condensed futuristic (`Chakra Petch`, `Syne`). Technical: Precision monospace (`JetBrains Mono`). |
 | **06** | **Logo Treatment** | System Identifier badge: `SYS // 001`, `ZYVRO® SYSTEM ONLINE`, reactive status indicators. |
-| **07** | **UI Language** | `Main Hub`, `Projects`, `Origin`, `Crew`, `Archive`, `Transmission`, `Worlds`, `Lab`, `Initializing`, `Shutdown`. |
+| **07** | **UI Language** | `Main Hub`, `Projects`, `Origin`, `Founder`, `Archive`, `Transmission`, `Worlds`, `Lab`, `Initializing`, `Shutdown`. |
 | **08** | **Navigation** | Vertical desktop HUD strip with `Z-Y-V-R-O` glyphs, status nodes, flyout tooltips, and mobile console drawer. |
 | **09** | **Custom Cursor** | Precision targeting reticle with dynamic reactive states (`SELECT`, `INTERACT`, `SCANNING`, `ACTIVE`). |
-| **10** | **Boot Screen** | Mandatory opening sequence: `[ PRESS START ]` -> synthesized audio chime -> dynamic diagnostic progress bars -> Main Hub. |
+| **10** | **Boot Screen** | Skippable opening sequence (skip button, `?skipboot=1`, repeat visits, reduced motion): `[ PRESS START ]` -> synthesized audio chime -> dynamic diagnostic progress bars -> Main Hub. |
 | **11** | **Main Hub** | Command Center with dynamic Hero World, interactive 3D particle matrix canvas, telemetry feeds, and quick portal jump. |
 | **12** | **Game Library** | Game selection stage (NOT a card grid): 3D tilt deck, keyboard `←`/`→` controls, swipe gesture, threat gauge, build tags. |
 | **13** | **Game Detail** | `INITIALIZING PROJECT 00X`, diagnostic progress bars (World 82%, Characters 100%, Combat 64%), 4K gallery, audio visualizer. |
 | **14** | **Zyvro Lab** | 4 Live interactive canvas experiments: Bio-Neural Organism, Procedural 3D Terrain Matrix, Quantum Cipher, Gravity Singularities. |
 | **15** | **Archive** | Lore & Dev Database with category filters (`WORLD DESIGN`, `AI LOGIC`, `COMBAT TEST`, `AUDIO SYNTHESIS`, `CLASSIFIED`). |
-| **16** | **Origin** | `SYSTEM // ORIGIN` (About): Studio entity specs, Origin 2026, Core Focus, Studio Manifesto, 3 Core Pillars. |
-| **17** | **Crew** | Operative selection interface: `PLAYER_001` to `PLAYER_005` with stat radars, loadouts, active statuses, and dossiers. |
+| **16** | **Origin** | `SYSTEM // ORIGIN` (About): independent game lab with one founder, Origin 2026, Core Focus, Studio Manifesto, 3 Core Pillars. |
+| **17** | **Founder** | The real founder's profile, rendered only once `FOUNDER` is set in `constants.ts`. No invented team. |
 | **18** | **Transmission** | Comms Terminal: FROM, CALLSIGN, PURPOSE (`[ BUSINESS ]`, `[ COLLABORATION ]`, `[ PRESS ]`, `[ TALENT ]`), typewriter audio feedback. |
 | **19** | **Footer** | `END OF TRANSMISSION // ZYVRO LABS`, `● ONLINE`, Social channels, Build specs, and `[ RESTART SYSTEM ]` reboot button. |
 | **20** | **Motion & Sound** | Procedural Web Audio API synthesizer (boot hum, UI clicks, hover blips, access granted chimes, radar scans, faults). |
@@ -37,7 +37,7 @@
 
 - **`[ ENTER ]` or `[ SPACE ]`**: Start system on Boot Screen.
 - **`[ ← ]` / `[ → ]` (or `[ A ]` / `[ D ]`)**: Cycle active project in Game Selection screen.
-- **`[ ~ ]` or Console Button**: Open In-Game Terminal CLI prompt (`help`, `last-night`, `chain-rider`, `phagos`, `palm`, `lab`, `sound`, `scanlines`, `reboot`, `purge`).
+- **`[ ~ ]` or Console Button**: Open In-Game Terminal CLI prompt (`help`, `founder` when set, `last-night`, `chain-rider`, `phagos`, `palm`, `lab`, `sound`, `scanlines`, `reboot`, `purge`).
 - **Sound Toggle (HUD)**: Enable/disable the built-in procedural Web Audio synthesizer.
 - **CRT Scanlines (HUD)**: Toggle retro high-frequency scanline matrix.
 - **Interactive Prototypes (Zyvro Lab)**:

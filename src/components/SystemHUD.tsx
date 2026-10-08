@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { SystemSection } from '../types';
 import { sound } from '../utils/soundManager';
 import { ZyvroLogo } from './ZyvroLogo';
+import { SYSTEM_METADATA } from '../utils/constants';
 import { 
   Volume2, 
   VolumeX, 
@@ -11,7 +12,7 @@ import {
   FlaskConical, 
   BookOpen, 
   Globe, 
-  Users, 
+  User, 
   Radio, 
   Home
 } from 'lucide-react';
@@ -22,7 +23,7 @@ interface SystemHUDProps {
   isScanlinesOn: boolean;
   onToggleScanlines: () => void;
   onOpenConsole: () => void;
-  coordinates: string;
+  showFounder: boolean;
 }
 
 interface NavItem {
@@ -39,21 +40,25 @@ export const SystemHUD: React.FC<SystemHUDProps> = ({
   isScanlinesOn,
   onToggleScanlines,
   onOpenConsole,
-  coordinates
+  showFounder
 }) => {
   const [isMuted, setIsMuted] = useState(false);
   const [fps, setFps] = useState(60);
   const [timeString, setTimeString] = useState('');
 
-  const navItems: NavItem[] = [
+  const allNavItems: NavItem[] = [
     { id: 'hub', label: 'MAIN HUB', gameTerm: 'COMMAND CENTER', glyph: '01', icon: <Home className="w-4 h-4" /> },
     { id: 'projects', label: 'PROJECTS', gameTerm: 'WORLDS // GAMES', glyph: '02', icon: <Layers className="w-4 h-4" /> },
     { id: 'lab', label: 'ZYVRO LAB', gameTerm: 'R&D PROTOTYPES', glyph: '03', icon: <FlaskConical className="w-4 h-4" /> },
     { id: 'archive', label: 'ARCHIVE', gameTerm: 'LORE DATABASE', glyph: '04', icon: <BookOpen className="w-4 h-4" /> },
     { id: 'origin', label: 'ORIGIN', gameTerm: 'SYSTEM MANIFESTO', glyph: '05', icon: <Globe className="w-4 h-4" /> },
-    { id: 'crew', label: 'CREW', gameTerm: 'PLAYER SELECT', glyph: '06', icon: <Users className="w-4 h-4" /> },
+    { id: 'founder', label: 'FOUNDER', gameTerm: 'THE PERSON BEHIND THE LAB', glyph: '06', icon: <User className="w-4 h-4" /> },
     { id: 'transmission', label: 'TRANSMISSION', gameTerm: 'COMMS TERMINAL', glyph: '07', icon: <Radio className="w-4 h-4" /> },
   ];
+  // The Founder entry exists only once the real founder profile is set.
+  const navItems: NavItem[] = allNavItems
+    .filter((item) => item.id !== 'founder' || showFounder)
+    .map((item, index) => ({ ...item, glyph: String(index + 1).padStart(2, '0') }));
 
   const handleToggleSound = () => {
     const muted = sound.toggleMute();
@@ -129,7 +134,7 @@ export const SystemHUD: React.FC<SystemHUDProps> = ({
 
           <div className="hidden lg:flex items-center space-x-2 text-[10px] text-[#666666] border-l border-[#262626] pl-3">
             <span className="w-1.5 h-1.5 rounded-full bg-[#D7FF3F] animate-pulse" />
-            <span className="text-[#A0A0A0]">{coordinates}</span>
+            <span className="text-[#A0A0A0]">BUILD {SYSTEM_METADATA.build}</span>
           </div>
         </div>
 
