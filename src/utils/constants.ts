@@ -28,11 +28,11 @@ export const FOUNDER: FounderProfile | null = {
 };
 
 /**
- * The one verified contact mailbox on the owned domain (zyvrolabs.com).
- * While this is null no email address is shown anywhere and the contact
- * terminal points visitors to the verified GitHub profile instead.
+ * The one verified contact mailbox on the owned domain (zyvrolabs.com),
+ * confirmed active by the owner; the domain's MX records point to Hostinger.
+ * Set to null to hide every email address and point visitors to GitHub instead.
  */
-export const CONTACT_EMAIL: string | null = null;
+export const CONTACT_EMAIL: string | null = "zamady@zyvrolabs.com";
 
 // Verified public destinations only. Add a row only when the account exists and is the project's own.
 export const GITHUB_PROFILE_URL = "https://github.com/xam-eth";
