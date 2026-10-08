@@ -32,7 +32,7 @@ export const FounderProfile: React.FC<FounderProfileProps> = ({ founder }) => {
             <img
               src={founder.photo}
               alt={`Portrait of ${founder.name}`}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-[center_30%]"
               loading="lazy"
             />
           </div>

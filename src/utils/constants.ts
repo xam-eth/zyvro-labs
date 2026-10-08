@@ -13,11 +13,19 @@ export const SYSTEM_METADATA = {
 };
 
 /**
- * The real founder. Every field is supplied by the owner; nothing here is invented.
- * While this is null the Founder section, its navigation entry and its console
- * command are not rendered anywhere on the site.
+ * The real founder. Every field was supplied by the owner; nothing here is invented.
+ * Set this to null to hide the Founder section, its navigation entry and its
+ * console command everywhere on the site.
  */
-export const FOUNDER: FounderProfile | null = null;
+export const FOUNDER: FounderProfile | null = {
+  name: "Jamadianur",
+  role: "Founder · Solo indie game developer",
+  location: "Rantau, South Kalimantan, Indonesia",
+  photo: "/assets/founder/jamadianur-portrait.jpg",
+  bio: "Jamadianur is a solo indie developer from Rantau, South Kalimantan, Indonesia. He works alone by choice and spends his time taking apart new AI tools and new tech, then turning what he learns into playable games.",
+  workStyle: "One person, by design. The ideas, game design and direction are his; implementation is accelerated with AI coding agents. Every game on this site is developed in public repositories, so the progress can be checked.",
+  links: [{ label: "GITHUB", url: "https://github.com/xam-eth" }],
+};
 
 /**
  * The one verified contact mailbox on the owned domain (zyvrolabs.com).
