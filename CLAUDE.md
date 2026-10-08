@@ -120,7 +120,6 @@ These exist in the repo today and break rule 2 or 4. Treat them as priority work
 
 | Item | Where | Problem | Fix |
 |---|---|---|---|
-| Contact mailbox | `CONTACT_EMAIL` in `constants.ts` | Null until a working `@zyvrolabs.com` mailbox exists. While null no email is shown and the contact page points to GitHub. `zyvro.com` is **not** an owned domain and must never reappear. | Owner confirms the mailbox. |
 | Social links | `SOCIAL_LINKS` in `constants.ts` | Only GitHub (and email once set) are verified. | Add a row only for an account that exists and is the project's own. |
 | Lab "metrics" | `LAB_EXPERIMENTS` | Values like "1,024 NODES" should match what the canvas demo really does | Verify against the demo code or reword. |
 
@@ -142,7 +141,7 @@ Fixed in the trust pass (do not reintroduce): the fictional five-person crew and
 
 Claude cannot resolve these alone. Ask once, record the answer here, then proceed.
 
-1. **Domain and email:** which domain is canonical, and which mailboxes exist (hello, press, support, privacy)?
+1. **Domain and email:** answered 2026-10-08. Canonical domain **zyvrolabs.com**; the active mailbox is **zamady@zyvrolabs.com** (MX on Hostinger), set in `CONTACT_EMAIL`. `zyvro.com` is not owned and must never appear. Role mailboxes (press, support, privacy) do not exist yet.
 2. **Legal entity and store accounts:** is the Google Play account personal or organisation? A personal account created after 13 November 2023 must run closed testing with at least 12 testers for 14 days before production access. Steam needs the $100 app fee and an identity/tax review.
 3. **Store plan per game:** which of the four go to Google Play, which to Steam, which stay web-only? Repositories state a Play target for LAST NIGHT and an Android target for CHAIN RIDER, but none documents a Steam plan.
 4. **Real team and public identity:** answered 2026-10-08. Solo founder **Jamadianur** (Rantau, South Kalimantan, Indonesia), photo and bio supplied by the owner, in `FOUNDER`. No other person is credited.
