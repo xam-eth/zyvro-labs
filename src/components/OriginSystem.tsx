@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ORIGIN_MANIFESTO, SYSTEM_METADATA } from '../utils/constants';
+import { ORIGIN_MANIFESTO, SYSTEM_METADATA, FOUNDER } from '../utils/constants';
+import { TeamSection } from './TeamSection';
 import { sound } from '../utils/soundManager';
 import { ZyvroLogo, ZVColorMode } from './ZyvroLogo';
 import { 
@@ -41,12 +42,12 @@ export const OriginSystem: React.FC = () => {
         <div>
           <div className="flex items-center space-x-2 text-[11px] font-mono text-[#D7FF3F] tracking-widest uppercase mb-1">
             <Globe className="w-3.5 h-3.5 text-[#D7FF3F]" />
-            <span>ORIGIN SPECIFICATION &amp; PHILOSOPHY</span>
+            <span>ABOUT ZYVRO LABS</span>
             <span className="text-[#666666]">|</span>
-            <span className="text-[#A0A0A0]">IDENTITY ARCHITECTURE</span>
+            <span className="text-[#A0A0A0]">ORIGIN · PILLARS · TEAM</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-black font-display tracking-tight text-white uppercase">
-            SYSTEM // ORIGIN
+            ABOUT
           </h1>
         </div>
 
@@ -63,7 +64,7 @@ export const OriginSystem: React.FC = () => {
                 : 'text-[#888888] hover:text-white'
             }`}
           >
-            MANIFESTO &amp; PILLARS
+            ABOUT &amp; TEAM
           </button>
           <button
             onClick={() => {
@@ -85,7 +86,8 @@ export const OriginSystem: React.FC = () => {
           TAB 1: MANIFESTO & PHILOSOPHY
       ========================================================================= */}
       {activeTab === 'manifesto' && (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start my-auto">
+        <>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Column: Core System Identifier Specification (5 cols) */}
           <div className="lg:col-span-5 bg-[#0f0f0f] border border-[#262626] p-6 space-y-6 shadow-[0_0_35px_rgba(0,0,0,0.8)] relative">
@@ -198,6 +200,9 @@ export const OriginSystem: React.FC = () => {
           </div>
 
         </div>
+
+        {FOUNDER && <TeamSection founder={FOUNDER} />}
+        </>
       )}
 
       {/* =========================================================================

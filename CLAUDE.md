@@ -47,7 +47,7 @@ Long-term competitive strategy and player benefits are in [`docs/STRATEGY-LONG-T
 
 - **Stack:** React 18, TypeScript, Vite 6, Tailwind CSS 3, Lucide icons. No router, no backend, no analytics.
 - **Entry:** `index.html` → `src/main.tsx` → `src/App.tsx`.
-- **Navigation:** a `SystemSection` state (`hub | projects | lab | archive | origin | founder | transmission`), not URL routes. A skippable boot screen (`BootScreen`) runs on the first visit; `?skipboot=1`, a repeat visit or `prefers-reduced-motion` skip it.
+- **Navigation:** a `SystemSection` state (`hub | projects | lab | archive | origin | transmission`; `origin` is labelled ABOUT and ends with the Team section built from `FOUNDER`), not URL routes. A skippable boot screen (`BootScreen`) runs on the first visit; `?skipboot=1`, a repeat visit or `prefers-reduced-motion` skip it.
 - **Single source of truth for content:** `src/utils/constants.ts` (`GAME_PROJECTS`, `LAB_EXPERIMENTS`, `ARCHIVE_LOGS`, `FOUNDER`, `CONTACT_EMAIL`, `SOCIAL_LINKS`, `ORIGIN_MANIFESTO`, `SYSTEM_METADATA`). Types live in `src/types/index.ts`.
 - **Media:** `public/assets/games/<game>-<subject>.jpg`, `public/assets/brandkit/*`, `public/assets/founder/*` (the founder's photo, supplied by the owner).
 - **Audio:** procedural Web Audio synthesizer in `src/utils/soundManager.ts`.

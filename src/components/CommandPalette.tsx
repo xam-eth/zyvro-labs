@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { SystemSection, GameProject } from '../types';
-import { GAME_PROJECTS, SYSTEM_METADATA, FOUNDER } from '../utils/constants';
+import { GAME_PROJECTS, SYSTEM_METADATA } from '../utils/constants';
 import { sound } from '../utils/soundManager';
 import { Terminal, X, CornerDownLeft } from 'lucide-react';
 
@@ -75,7 +75,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       case 'help':
         newLogs.push({
           type: 'output',
-          text: `AVAILABLE PROTOCOLS:\n • hub, projects, lab, archive, origin, ${FOUNDER ? 'founder, ' : ''}transmission\n • last-night, chain-rider, phagos, palm (direct world launch)\n • sound (toggle audio), scanlines (toggle CRT)\n • reboot (restart OS), purge (vram reset), clear (cls)`
+          text: `AVAILABLE PROTOCOLS:\n • hub, projects, lab, archive, about, team, transmission\n • last-night, chain-rider, phagos, palm (direct world launch)\n • sound (toggle audio), scanlines (toggle CRT)\n • reboot (restart OS), purge (vram reset), clear (cls)`
         });
         break;
 
@@ -119,17 +119,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
       case 'founder':
       case 'team':
-        if (FOUNDER) {
-          onNavigate('founder');
-          newLogs.push({ type: 'success', text: `OPENING FOUNDER PROFILE: ${FOUNDER.name.toUpperCase()}...` });
-          setTimeout(onClose, 400);
-        } else {
-          sound.playFault();
-          newLogs.push({
-            type: 'error',
-            text: `COMMAND NOT RECOGNIZED: '${cmdInput}'. TYPE 'help' FOR SYSTEM COMMANDS.`
-          });
-        }
+        onNavigate('origin');
+        newLogs.push({ type: 'success', text: 'OPENING ABOUT // TEAM...' });
+        setTimeout(onClose, 400);
         break;
 
       case 'transmission':

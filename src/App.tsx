@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { SystemSection, GameProject } from './types';
-import { FOUNDER } from './utils/constants';
 import { sound } from './utils/soundManager';
 
 import { CustomCursor } from './components/CustomCursor';
@@ -13,7 +12,6 @@ import { GameDetailModal } from './components/GameDetailModal';
 import { ZyvroLab } from './components/ZyvroLab';
 import { ArchiveDatabase } from './components/ArchiveDatabase';
 import { OriginSystem } from './components/OriginSystem';
-import { FounderProfile } from './components/FounderProfile';
 import { TransmissionTerminal } from './components/TransmissionTerminal';
 import { SystemFooter } from './components/SystemFooter';
 import { CommandPalette } from './components/CommandPalette';
@@ -102,7 +100,6 @@ export const App: React.FC = () => {
             isScanlinesOn={isScanlinesOn}
             onToggleScanlines={() => setIsScanlinesOn(!isScanlinesOn)}
             onOpenConsole={() => setIsConsoleOpen(true)}
-            showFounder={FOUNDER !== null}
           />
 
           {/* Dynamic Content Views */}
@@ -132,9 +129,6 @@ export const App: React.FC = () => {
               <OriginSystem />
             )}
 
-            {activeSection === 'founder' && FOUNDER && (
-              <FounderProfile founder={FOUNDER} />
-            )}
 
             {activeSection === 'transmission' && (
               <TransmissionTerminal />

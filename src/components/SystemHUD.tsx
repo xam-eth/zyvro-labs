@@ -12,7 +12,6 @@ import {
   FlaskConical, 
   BookOpen, 
   Globe, 
-  User, 
   Radio, 
   Home
 } from 'lucide-react';
@@ -23,7 +22,6 @@ interface SystemHUDProps {
   isScanlinesOn: boolean;
   onToggleScanlines: () => void;
   onOpenConsole: () => void;
-  showFounder: boolean;
 }
 
 interface NavItem {
@@ -39,8 +37,7 @@ export const SystemHUD: React.FC<SystemHUDProps> = ({
   onSelectSection,
   isScanlinesOn,
   onToggleScanlines,
-  onOpenConsole,
-  showFounder
+  onOpenConsole
 }) => {
   const [isMuted, setIsMuted] = useState(false);
   const [fps, setFps] = useState(60);
@@ -51,14 +48,10 @@ export const SystemHUD: React.FC<SystemHUDProps> = ({
     { id: 'projects', label: 'PROJECTS', gameTerm: 'WORLDS // GAMES', glyph: '02', icon: <Layers className="w-4 h-4" /> },
     { id: 'lab', label: 'ZYVRO LAB', gameTerm: 'R&D PROTOTYPES', glyph: '03', icon: <FlaskConical className="w-4 h-4" /> },
     { id: 'archive', label: 'ARCHIVE', gameTerm: 'LORE DATABASE', glyph: '04', icon: <BookOpen className="w-4 h-4" /> },
-    { id: 'origin', label: 'ORIGIN', gameTerm: 'SYSTEM MANIFESTO', glyph: '05', icon: <Globe className="w-4 h-4" /> },
-    { id: 'founder', label: 'FOUNDER', gameTerm: 'THE PERSON BEHIND THE LAB', glyph: '06', icon: <User className="w-4 h-4" /> },
+    { id: 'origin', label: 'ABOUT', gameTerm: 'ORIGIN · PILLARS · TEAM', glyph: '05', icon: <Globe className="w-4 h-4" /> },
     { id: 'transmission', label: 'TRANSMISSION', gameTerm: 'COMMS TERMINAL', glyph: '07', icon: <Radio className="w-4 h-4" /> },
   ];
-  // The Founder entry exists only once the real founder profile is set.
-  const navItems: NavItem[] = allNavItems
-    .filter((item) => item.id !== 'founder' || showFounder)
-    .map((item, index) => ({ ...item, glyph: String(index + 1).padStart(2, '0') }));
+  const navItems: NavItem[] = allNavItems.map((item, index) => ({ ...item, glyph: String(index + 1).padStart(2, '0') }));
 
   const handleToggleSound = () => {
     const muted = sound.toggleMute();
