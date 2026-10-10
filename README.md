@@ -24,8 +24,8 @@
 | **13** | **Game Detail** | `INITIALIZING PROJECT 00X`, diagnostic progress bars (World 82%, Characters 100%, Combat 64%), 4K gallery, audio visualizer. |
 | **14** | **Zyvro Lab** | 4 Live interactive canvas experiments: Bio-Neural Organism, Procedural 3D Terrain Matrix, Quantum Cipher, Gravity Singularities. |
 | **15** | **Archive** | Lore & Dev Database with category filters (`WORLD DESIGN`, `AI LOGIC`, `COMBAT TEST`, `AUDIO SYNTHESIS`, `CLASSIFIED`). |
-| **16** | **Origin** | `SYSTEM // ORIGIN` (About): independent game lab with one founder, Origin 2026, Core Focus, Studio Manifesto, 3 Core Pillars. |
-| **17** | **Founder** | The real founder's profile, rendered only once `FOUNDER` is set in `constants.ts`. No invented team. |
+| **16** | **About** | About page (nav: ABOUT): independent game lab with one founder, origin 2026, core focus, manifesto, 3 pillars, then the Team section. |
+| **17** | **Team** | Bottom of the About page: the real founder from `FOUNDER` in `constants.ts`. No invented team. |
 | **18** | **Transmission** | Comms Terminal: FROM, CALLSIGN, PURPOSE (`[ BUSINESS ]`, `[ COLLABORATION ]`, `[ PRESS ]`, `[ TALENT ]`), typewriter audio feedback. |
 | **19** | **Footer** | `END OF TRANSMISSION // ZYVRO LABS`, `● ONLINE`, Social channels, Build specs, and `[ RESTART SYSTEM ]` reboot button. |
 | **20** | **Motion & Sound** | Procedural Web Audio API synthesizer (boot hum, UI clicks, hover blips, access granted chimes, radar scans, faults). |
@@ -37,7 +37,7 @@
 
 - **`[ ENTER ]` or `[ SPACE ]`**: Start system on Boot Screen.
 - **`[ ← ]` / `[ → ]` (or `[ A ]` / `[ D ]`)**: Cycle active project in Game Selection screen.
-- **`[ ~ ]` or Console Button**: Open In-Game Terminal CLI prompt (`help`, `founder` when set, `last-night`, `chain-rider`, `phagos`, `palm`, `lab`, `sound`, `scanlines`, `reboot`, `purge`).
+- **`[ ~ ]` or Console Button**: Open In-Game Terminal CLI prompt (`help`, `about`, `team`, `last-night`, `chain-rider`, `phagos`, `palm`, `lab`, `sound`, `scanlines`, `reboot`, `purge`).
 - **Sound Toggle (HUD)**: Enable/disable the built-in procedural Web Audio synthesizer.
 - **CRT Scanlines (HUD)**: Toggle retro high-frequency scanline matrix.
 - **Interactive Prototypes (Zyvro Lab)**:

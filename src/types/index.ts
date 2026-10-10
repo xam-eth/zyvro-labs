@@ -4,7 +4,6 @@ export type SystemSection =
   | 'lab' 
   | 'archive' 
   | 'origin' 
-  | 'founder' 
   | 'transmission';
 
 export interface ProgressMetric {
