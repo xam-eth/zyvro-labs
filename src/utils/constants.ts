@@ -22,8 +22,8 @@ export const FOUNDER: FounderProfile | null = {
   role: "Founder · Solo indie game developer",
   location: "Rantau, South Kalimantan, Indonesia",
   photo: "/assets/founder/jamadianur-portrait.jpg",
-  bio: "Jamadianur is a solo indie developer from Rantau, South Kalimantan, Indonesia. He works alone by choice and spends his time taking apart new AI tools and new tech, then turning what he learns into playable games.",
-  workStyle: "One person, by design. The ideas, game design and direction are his; implementation is accelerated with AI coding agents. Every game on this site is developed in public repositories, so the progress can be checked.",
+  bio: "I'm a solo indie developer from Rantau, South Kalimantan, Indonesia. I work alone by choice and spend my time taking apart new AI tools and new tech, then turning what I learn into playable games.",
+  workStyle: "Zyvro Labs is the home for my games. The ideas, game design and direction are mine; implementation is accelerated with AI coding agents. Every game is developed in public repositories, so the progress can be checked.",
   links: [{ label: "GITHUB", url: "https://github.com/xam-eth" }],
 };
 
