@@ -11,6 +11,16 @@ export const SYSTEM_METADATA = {
   tagline: "WE BUILD GAMES, INTERACTIVE WORLDS, AND EXPERIMENTAL DIGITAL EXPERIENCES.",
 };
 
+// Studio mailbox. Owner-confirmed on 2026-10-08 (see CLAUDE.md §9).
+export const CONTACT_EMAIL = "zamady@zyvrolabs.com";
+
+// Only destinations that are verified to be the studio's own accounts.
+// Add a row only when the owner supplies a real handle.
+export const SOCIAL_LINKS: { label: string; url: string }[] = [
+  { label: "GITHUB", url: "https://github.com/xam-eth" },
+  { label: "EMAIL", url: `mailto:${CONTACT_EMAIL}` },
+];
+
 export const GAME_PROJECTS: GameProject[] = [
   {
     id: "project-001",

@@ -95,7 +95,6 @@ export interface CrewMember {
 export interface TransmissionForm {
   from: string;
   callsign: string;
-  frequency: string;
   purpose: 'BUSINESS' | 'COLLABORATION' | 'PRESS' | 'TALENT' | 'CLASSIFIED';
   message: string;
 }

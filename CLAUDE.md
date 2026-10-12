@@ -124,10 +124,8 @@ These exist in the repo today and break rule 2 or 4. Treat them as priority work
 | Origin page | `ORIGIN_MANIFESTO`, `OriginSystem.tsx` | Studio facts (origin year, focus, "independent self-sovereign") are asserted without a source | Owner confirms each fact. |
 | Archive logs 003 and 004 | `ARCHIVE_LOGS` | Studio-wide claims (a "mandate" against monetisation, a four-week contact-mic recording) are not backed by any repo | Remove or have the owner confirm. Note that LAST NIGHT does ship a store (the Blood Market), so a blanket "no monetisation" mandate contradicts it. |
 | System metadata | `SYSTEM_METADATA` | Coordinates, "Z-CORE.64x" kernel and build string are theatre, not data | Keep only as clearly decorative boot flavour, or derive build from `package.json` and the git commit. |
-| Wishlist button | `GameDetailModal.tsx` | Shows "ACCESS TOKEN DISPATCHED" but sends nothing | Replace with a real wishlist (Steam widget link) or a real signup. |
-| Contact form | `TransmissionTerminal.tsx` | `setTimeout` simulates sending | Wire it to a real endpoint or reduce to the plain `mailto:` link and a verified inbox. |
-| Social links | `SystemFooter.tsx` | Point to `x.com`, `discord.gg`, `youtube.com`, `github.com` homepages | Use the studio's real handles once the owner confirms them. |
-| Contact email | `contact@zyvro.com` | Unverified that this inbox or domain exists | Owner confirms the domain and mailbox. |
+| Contact email | `CONTACT_EMAIL` in `constants.ts` | Owner-confirmed 2026-10-08 as `zamady@zyvrolabs.com`. The old `zyvro.com` address was removed. | Keep `zyvro.com` out of the site. Role mailboxes (press, support, privacy) do not exist yet. |
+| Owner-blocked items | Crew roster, Origin page, archive logs 003 and 004, `SYSTEM_METADATA`, `GAME_PROJECTS` | Left untouched on purpose (owner decision pending). The fake wishlist, the simulated contact form and the homepage-only social links were removed. A real wishlist or signup, a Discord invite and social handles wait for the owner and the store pages. | Owner decides each item. Do not add them without the owner's answer. |
 | Lab "metrics" | `LAB_EXPERIMENTS` | Values like "1,024 NODES" should match what the canvas demo really does | Verify against the demo code or reword. |
 | "4K" labels | various comments and badges | Screenshots are not 4K masters | Do not claim resolution that the asset does not have. |
 

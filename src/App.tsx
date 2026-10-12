@@ -25,7 +25,6 @@ export const App: React.FC = () => {
   const [isScanlinesOn, setIsScanlinesOn] = useState(true);
   const [isConsoleOpen, setIsConsoleOpen] = useState(false);
   const [isPurging, setIsPurging] = useState(false);
-  const [wishlistNotifications, setWishlistNotifications] = useState<string[]>([]);
 
   const handleBootComplete = () => {
     setIsBooted(true);
@@ -43,13 +42,6 @@ export const App: React.FC = () => {
     setTimeout(() => {
       setIsPurging(false);
     }, 700);
-  };
-
-  const handleWishlist = (projectName: string) => {
-    setWishlistNotifications(prev => [...prev, projectName]);
-    setTimeout(() => {
-      setWishlistNotifications(prev => prev.filter(p => p !== projectName));
-    }, 5000);
   };
 
   // Scroll to top smoothly when section changes
@@ -126,7 +118,6 @@ export const App: React.FC = () => {
           <GameDetailModal
             project={selectedProject}
             onClose={() => setSelectedProject(null)}
-            onWishlist={handleWishlist}
           />
 
           {/* In-Game Terminal CLI Console */}
@@ -140,18 +131,6 @@ export const App: React.FC = () => {
             onReboot={handleRestartSystem}
             onPurge={handleEmergencyPurge}
           />
-
-          {/* Wishlist Frequency Notification Toast */}
-          {wishlistNotifications.length > 0 && (
-            <div className="fixed bottom-20 right-6 z-50 flex flex-col space-y-2 pointer-events-none">
-              {wishlistNotifications.map((name, i) => (
-                <div key={i} className="p-3 bg-[#101010]/95 border-2 border-[#D7FF3F] text-xs font-mono text-white shadow-[0_0_20px_rgba(215,255,63,0.3)] animate-fadeIn">
-                  <div className="text-[#D7FF3F] font-bold">TRANSMISSION CONFIRMED //</div>
-                  <div>Access Token for <span className="font-bold">{name}</span> dispatched.</div>
-                </div>
-              ))}
-            </div>
-          )}
 
           {/* Footer: End of Transmission / System Shutdown */}
           <SystemFooter

@@ -1,5 +1,5 @@
 import React from 'react';
-import { SYSTEM_METADATA } from '../utils/constants';
+import { SYSTEM_METADATA, SOCIAL_LINKS } from '../utils/constants';
 import { sound } from '../utils/soundManager';
 import { ZyvroLogo } from './ZyvroLogo';
 import { 
@@ -16,15 +16,6 @@ export const SystemFooter: React.FC<SystemFooterProps> = ({
   onRestartSystem,
   onEmergencyPurge
 }) => {
-  const socials = [
-    { label: 'X // TWITTER', href: 'https://x.com' },
-    { label: 'DISCORD', href: 'https://discord.gg' },
-    { label: 'STEAM', href: 'https://store.steampowered.com' },
-    { label: 'YOUTUBE', href: 'https://youtube.com' },
-    { label: 'GITHUB', href: 'https://github.com' },
-    { label: 'EMAIL', href: 'mailto:contact@zyvro.com' },
-  ];
-
   return (
     <footer className="relative z-20 border-t border-[#202020] bg-[#070707] text-[#A0A0A0] font-mono py-16 px-4 md:px-8 select-none">
       
@@ -68,12 +59,12 @@ export const SystemFooter: React.FC<SystemFooterProps> = ({
 
         {/* Social Frequencies Channels */}
         <div className="flex flex-wrap justify-center gap-2 md:gap-3 pt-2">
-          {socials.map((s) => (
+          {SOCIAL_LINKS.map((s) => (
             <a
               key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={s.url}
+              target={s.url.startsWith('mailto:') ? undefined : '_blank'}
+              rel={s.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
               onMouseEnter={() => sound.playHover()}
               data-cursor="interact"
               data-cursor-label={s.label.split(' ')[0]}
