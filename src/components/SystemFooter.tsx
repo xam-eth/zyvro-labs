@@ -1,5 +1,5 @@
 import React from 'react';
-import { SYSTEM_METADATA } from '../utils/constants';
+import { SYSTEM_METADATA, SOCIAL_LINKS } from '../utils/constants';
 import { sound } from '../utils/soundManager';
 import { ZyvroLogo } from './ZyvroLogo';
 import { 
@@ -16,15 +16,6 @@ export const SystemFooter: React.FC<SystemFooterProps> = ({
   onRestartSystem,
   onEmergencyPurge
 }) => {
-  const socials = [
-    { label: 'X // TWITTER', href: 'https://x.com' },
-    { label: 'DISCORD', href: 'https://discord.gg' },
-    { label: 'STEAM', href: 'https://store.steampowered.com' },
-    { label: 'YOUTUBE', href: 'https://youtube.com' },
-    { label: 'GITHUB', href: 'https://github.com' },
-    { label: 'EMAIL', href: 'mailto:contact@zyvro.com' },
-  ];
-
   return (
     <footer className="relative z-20 border-t border-[#202020] bg-[#070707] text-[#A0A0A0] font-mono py-16 px-4 md:px-8 select-none">
       
@@ -54,7 +45,7 @@ export const SystemFooter: React.FC<SystemFooterProps> = ({
               <div className="h-[1px] w-4 bg-[#D7FF3F]" />
             </div>
             <p className="text-[11px] tracking-[0.2em] text-[#666666] uppercase mt-2">
-              EXPERIMENTAL DIGITAL WORLD &amp; GAME OPERATING SYSTEM
+              AN INDEPENDENT GAME LAB · ONE FOUNDER
             </p>
           </div>
         </div>
@@ -68,16 +59,16 @@ export const SystemFooter: React.FC<SystemFooterProps> = ({
 
         {/* Social Frequencies Channels */}
         <div className="flex flex-wrap justify-center gap-2 md:gap-3 pt-2">
-          {socials.map((s) => (
+          {SOCIAL_LINKS.map((s) => (
             <a
               key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={s.url}
+              target={s.url.startsWith('mailto:') ? undefined : '_blank'}
+              rel={s.url.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
               onMouseEnter={() => sound.playHover()}
               data-cursor="interact"
               data-cursor-label={s.label.split(' ')[0]}
-              className="px-3.5 py-1.5 bg-[#121212] hover:bg-[#1a1a1a] border border-[#262626] hover:border-[#D7FF3F] text-xs text-[#CCCCCC] hover:text-[#D7FF3F] transition-all flex items-center gap-1.5"
+              className="min-h-[44px] px-3.5 py-1.5 bg-[#121212] hover:bg-[#1a1a1a] border border-[#262626] hover:border-[#D7FF3F] text-xs text-[#CCCCCC] hover:text-[#D7FF3F] transition-all flex items-center gap-1.5"
             >
               <span>[ {s.label} ]</span>
             </a>

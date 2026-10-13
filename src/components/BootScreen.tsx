@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { sound } from '../utils/soundManager';
 import { ZyvroLogo } from './ZyvroLogo';
+import { SYSTEM_METADATA } from '../utils/constants';
 import { Shield, Cpu, Activity, Terminal } from 'lucide-react';
 
 interface BootScreenProps {
@@ -45,7 +46,7 @@ export const BootScreen: React.FC<BootScreenProps> = ({
     }, 250);
 
     setTimeout(() => {
-      setLogSteps(prev => [...prev, 'MOUNTING PROJECT DATABASE & 4K ASSETS [ OK ]']);
+      setLogSteps(prev => [...prev, 'MOUNTING PROJECT DATABASE & GAME ASSETS [ OK ]']);
       sound.playHover();
     }, 550);
 
@@ -113,11 +114,21 @@ export const BootScreen: React.FC<BootScreenProps> = ({
 
       <div className="absolute bottom-6 left-6 text-xs text-[#666666] font-mono flex items-center gap-2">
         <Terminal className="w-3.5 h-3.5 text-[#D7FF3F]" />
-        <span>TERMINAL: TTY_01 // LAT: 37.7749° N</span>
+        <span>TERMINAL: TTY_01</span>
       </div>
 
-      <div className="absolute bottom-6 right-6 text-xs text-[#666666] font-mono">
-        <span>PRESS [ENTER] OR CLICK [START]</span>
+      <div className="absolute bottom-6 right-6 flex items-center gap-3 text-xs text-[#666666] font-mono z-10">
+        <span className="hidden sm:inline">PRESS [ENTER] OR CLICK [START]</span>
+        <button
+          type="button"
+          onClick={() => {
+            sound.playClick();
+            onBootComplete();
+          }}
+          className="min-h-[44px] min-w-[44px] px-4 border border-[#3a3a3a] text-[#F2F2F2] hover:border-[#D7FF3F] hover:text-[#D7FF3F] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#D7FF3F] tracking-widest uppercase transition-colors"
+        >
+          SKIP INTRO ›
+        </button>
       </div>
 
       {/* Center Console Container */}
@@ -195,9 +206,9 @@ export const BootScreen: React.FC<BootScreenProps> = ({
             <div className="pt-4 flex flex-col md:flex-row items-center justify-between w-full text-[11px] font-mono text-[#666666] border-t border-[#202020] gap-2">
               <span className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#D7FF3F]" />
-                BUILD 2026.09.27
+                BUILD {SYSTEM_METADATA.build}
               </span>
-              <span className="text-[#A0A0A0]">CONNECTION: SECURE (TLS 1.3)</span>
+              <span className="text-[#A0A0A0]">CONNECTION: {typeof window !== 'undefined' && window.location.protocol === 'https:' ? 'HTTPS' : 'HTTP'}</span>
               <span>KERNEL: Z-CORE.64x</span>
             </div>
 

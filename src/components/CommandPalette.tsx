@@ -75,7 +75,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       case 'help':
         newLogs.push({
           type: 'output',
-          text: 'AVAILABLE PROTOCOLS:\n • hub, projects, lab, archive, origin, crew, transmission\n • last-night, chain-rider, phagos, palm (direct world launch)\n • sound (toggle audio), scanlines (toggle CRT)\n • reboot (restart OS), purge (vram reset), clear (cls)'
+          text: `AVAILABLE PROTOCOLS:\n • hub, projects, lab, archive, about, team, transmission\n • last-night, chain-rider, phagos, palm (direct world launch)\n • sound (toggle audio), scanlines (toggle CRT)\n • reboot (restart OS), purge (vram reset), clear (cls)`
         });
         break;
 
@@ -117,11 +117,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         setTimeout(onClose, 400);
         break;
 
-      case 'crew':
+      case 'founder':
       case 'team':
-      case 'players':
-        onNavigate('crew');
-        newLogs.push({ type: 'success', text: 'OPENING OPERATIVE ROSTER...' });
+        onNavigate('origin');
+        newLogs.push({ type: 'success', text: 'OPENING ABOUT // TEAM...' });
         setTimeout(onClose, 400);
         break;
 

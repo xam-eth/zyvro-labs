@@ -1,252 +1,248 @@
 import React, { useState } from 'react';
 import { TransmissionForm } from '../types';
 import { sound } from '../utils/soundManager';
-import { 
-  Radio, 
-  Send, 
-  CheckCircle2, 
-  Terminal, 
-  ShieldCheck, 
-  Mail, 
-  MessageSquare, 
+import { CONTACT_EMAIL, GITHUB_PROFILE_URL } from '../utils/constants';
+import {
+  Radio,
+  Send,
+  Terminal,
+  Mail,
+  Github,
+  Copy,
   RotateCcw,
-  Sparkles
+  Info
 } from 'lucide-react';
 
+const MESSAGE_LIMIT = 1500;
+
+const PURPOSES: TransmissionForm['purpose'][] = ['BUSINESS', 'PARTNERSHIP', 'PRESS', 'PLAYER FEEDBACK'];
+
+const EMPTY_FORM: TransmissionForm = {
+  from: '',
+  callsign: '',
+  purpose: 'BUSINESS',
+  message: ''
+};
+
+function buildSubject(form: TransmissionForm): string {
+  const who = form.callsign.trim() || form.from.trim();
+  return `[ZYVRO // ${form.purpose}] ${who}`;
+}
+
+function buildBody(form: TransmissionForm): string {
+  const lines = [`Name / email: ${form.from.trim()}`];
+  if (form.callsign.trim()) lines.push(`Organisation: ${form.callsign.trim()}`);
+  lines.push(`Purpose: ${form.purpose}`, '', form.message.trim());
+  return lines.join('\n');
+}
+
+type CopyState = 'idle' | 'copied' | 'failed';
+
+/** Contact page. With no verified mailbox it shows the verified GitHub route only. */
 export const TransmissionTerminal: React.FC = () => {
-  const [form, setForm] = useState<TransmissionForm>({
-    from: '',
-    callsign: '',
-    frequency: 'BAND-142.9 MHz',
-    purpose: 'BUSINESS',
-    message: ''
-  });
-
-  const [state, setState] = useState<'idle' | 'sending' | 'sent'>('idle');
-
-  const purposes: TransmissionForm['purpose'][] = [
-    'BUSINESS',
-    'COLLABORATION',
-    'PRESS',
-    'TALENT',
-    'CLASSIFIED'
-  ];
-
-  const handlePurposeSelect = (purpose: TransmissionForm['purpose']) => {
-    sound.playHover();
-    setForm(prev => ({ ...prev, purpose }));
-  };
+  const [form, setForm] = useState<TransmissionForm>(EMPTY_FORM);
+  const [state, setState] = useState<'idle' | 'opened'>('idle');
+  const [error, setError] = useState<string | null>(null);
+  const [copyState, setCopyState] = useState<CopyState>('idle');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!CONTACT_EMAIL) return;
     if (!form.from.trim() || !form.message.trim()) {
       sound.playFault();
+      setError('Your email and a message are both required.');
       return;
     }
-
+    if (form.message.length > MESSAGE_LIMIT) {
+      sound.playFault();
+      setError(`The message is longer than ${MESSAGE_LIMIT} characters.`);
+      return;
+    }
+    setError(null);
     sound.playClick();
-    setState('sending');
+    const mailtoUrl =
+      `mailto:${CONTACT_EMAIL}` +
+      `?subject=${encodeURIComponent(buildSubject(form))}` +
+      `&body=${encodeURIComponent(buildBody(form))}`;
+    setState('opened');
+    window.location.href = mailtoUrl;
+  };
 
-    // Simulate encrypted dispatch
-    setTimeout(() => {
+  const handleCopy = async () => {
+    const text = `To: ${CONTACT_EMAIL}\nSubject: ${buildSubject(form)}\n\n${buildBody(form)}`;
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopyState('copied');
       sound.playAccessGranted();
-      setState('sent');
-    }, 1200);
+    } catch {
+      setCopyState('failed');
+      sound.playFault();
+    }
   };
 
   const handleReset = () => {
     sound.playClick();
-    setForm({
-      from: '',
-      callsign: '',
-      frequency: 'BAND-142.9 MHz',
-      purpose: 'BUSINESS',
-      message: ''
-    });
+    setForm(EMPTY_FORM);
+    setCopyState('idle');
+    setError(null);
     setState('idle');
   };
 
-  return (
-    <div className="relative min-h-screen pt-20 pb-28 md:pl-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col justify-between select-none">
-      
-      {/* Header */}
-      <div className="border-b border-[#202020] pb-4 mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-        <div>
-          <div className="flex items-center space-x-2 text-[11px] font-mono text-[#D7FF3F] tracking-widest uppercase mb-1">
-            <Radio className="w-3.5 h-3.5 text-[#D7FF3F] animate-pulse" />
-            <span>COMMUNICATION TERMINAL &amp; DISPATCH</span>
-            <span className="text-[#666666]">|</span>
-            <span className="text-[#A0A0A0]">SECURE UPLINK</span>
-          </div>
-          <h1 className="text-3xl md:text-5xl font-black font-display tracking-tight text-white uppercase">
-            TRANSMISSION
-          </h1>
-        </div>
+  const inputClass =
+    'w-full bg-[#121212] border border-[#2a2a2a] focus:border-[#D7FF3F] text-sm text-white p-3 outline-none placeholder:text-[#555555]';
 
-        <div className="flex items-center space-x-2 bg-[#101010] border border-[#262626] px-3 py-1.5 text-xs font-mono text-[#D7FF3F]">
-          <ShieldCheck className="w-3.5 h-3.5 text-[#D7FF3F]" />
-          <span>ENCRYPTED DISPATCH READY</span>
+  return (
+    <div className="relative min-h-screen pt-20 pb-28 md:pl-20 px-4 md:px-8 max-w-7xl mx-auto">
+      <div className="border-b border-[#202020] pb-4 mb-6">
+        <div className="flex items-center space-x-2 text-[11px] font-mono text-[#D7FF3F] tracking-widest uppercase mb-1">
+          <Radio className="w-3.5 h-3.5" aria-hidden="true" />
+          <span>CONTACT</span>
         </div>
+        <h1 className="text-3xl md:text-5xl font-black font-display tracking-tight text-white uppercase">
+          TRANSMISSION
+        </h1>
       </div>
 
-      {/* Main Terminal Rig */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start my-auto">
-        
-        {/* Left Column: Direct Studio Frequencies & Spec (4 cols) */}
-        <div className="lg:col-span-4 bg-[#0e0e0e] border border-[#262626] p-6 space-y-6 shadow-[0_0_35px_rgba(0,0,0,0.8)]">
-          
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="lg:col-span-4 bg-[#0e0e0e] border border-[#262626] p-6 space-y-5">
           <div className="space-y-2">
-            <div className="text-xs font-mono text-[#D7FF3F] font-bold tracking-widest uppercase">
-              // STUDIO FREQUENCIES
-            </div>
+            <div className="text-xs font-mono text-[#D7FF3F] font-bold tracking-widest uppercase">// HOW TO REACH US</div>
             <p className="text-xs font-mono text-[#A0A0A0] leading-relaxed">
-              Open a direct transmission to our core systems for publishing, investment, press briefings, or technical collaboration.
+              Zyvro Labs is one founder. Messages about partnerships, ecosystem programmes, press or the games are read by the founder personally.
             </p>
           </div>
 
-          <div className="space-y-3 font-mono text-xs border-y border-[#202020] py-4">
+          <div className="space-y-4 font-mono text-xs border-t border-[#202020] pt-4">
+            {CONTACT_EMAIL && (
+              <div>
+                <div className="text-[10px] text-[#666666] uppercase mb-1">EMAIL</div>
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="inline-flex items-center gap-2 min-h-[44px] text-white hover:text-[#D7FF3F] font-bold transition-colors"
+                >
+                  <Mail className="w-3.5 h-3.5 text-[#D7FF3F]" aria-hidden="true" />
+                  {CONTACT_EMAIL}
+                </a>
+              </div>
+            )}
             <div>
-              <div className="text-[10px] text-[#666666] uppercase mb-0.5">DIRECT SYSTEM DISPATCH</div>
-              <a 
-                href="mailto:contact@zyvro.com"
-                className="text-white hover:text-[#D7FF3F] flex items-center gap-2 font-bold transition-colors"
+              <div className="text-[10px] text-[#666666] uppercase mb-1">SOURCE &amp; DEVELOPMENT</div>
+              <a
+                href={GITHUB_PROFILE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 min-h-[44px] text-white hover:text-[#D7FF3F] font-bold transition-colors"
               >
-                <Mail className="w-3.5 h-3.5 text-[#D7FF3F]" />
-                contact@zyvro.com
+                <Github className="w-3.5 h-3.5 text-[#D7FF3F]" aria-hidden="true" />
+                {GITHUB_PROFILE_URL.replace('https://', '')}
               </a>
             </div>
-
-            <div>
-              <div className="text-[10px] text-[#666666] uppercase mb-0.5">COMMUNITY NETWORK</div>
-              <div className="text-[#D0D0D0] flex items-center gap-2">
-                <MessageSquare className="w-3.5 h-3.5 text-[#D7FF3F]" />
-                discord.gg/zyvro
-              </div>
-            </div>
-
-            <div>
-              <div className="text-[10px] text-[#666666] uppercase mb-0.5">LOCATION / ORIGIN</div>
-              <div className="text-[#D0D0D0]">
-                LAT: 37.7749° N // LON: 122.4194° W
-              </div>
-            </div>
           </div>
-
-          <div className="p-3 bg-[#141414] border-l-2 border-[#D7FF3F] text-[11px] font-mono text-[#888888]">
-            "Signals transmitted through this console are parsed directly by our game architects. No PR automated bot responses."
-          </div>
-
         </div>
 
-        {/* Right Column: Interactive Transmission Terminal (8 cols) */}
-        <div className="lg:col-span-8 bg-[#0b0b0b] border border-[#262626] p-6 md:p-8 shadow-[0_0_40px_rgba(0,0,0,0.9)] relative">
-          
+        <div className="lg:col-span-8 bg-[#0b0b0b] border border-[#262626] p-6 md:p-8 relative">
           <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#D7FF3F] to-transparent" />
 
-          {state === 'sent' ? (
-            
-            /* SUCCESS CONFIRMATION SCREEN */
-            <div className="py-12 px-6 flex flex-col items-center text-center space-y-6">
-              <div className="p-4 bg-[#D7FF3F]/15 border-2 border-[#D7FF3F] rounded-full text-[#D7FF3F] animate-bounce">
-                <CheckCircle2 className="w-10 h-10" />
+          {!CONTACT_EMAIL ? (
+            <div className="py-10 flex flex-col items-start space-y-4 font-mono">
+              <div className="flex items-center gap-2 text-white text-sm font-bold uppercase">
+                <Info className="w-4 h-4 text-[#D7FF3F]" aria-hidden="true" />
+                <span>EMAIL CONTACT IS BEING SET UP</span>
               </div>
-
-              <div className="space-y-2">
-                <h2 className="text-3xl md:text-4xl font-black font-display text-white uppercase tracking-wider">
-                  TRANSMISSION SENT
-                </h2>
-                <div className="text-sm font-mono text-[#D7FF3F] tracking-widest font-bold">
-                  SIGNAL RECEIVED // THANK YOU, PLAYER.
-                </div>
-                <p className="text-xs font-mono text-[#888888] max-w-md mx-auto pt-2">
-                  Your encrypted packet has been logged into the ZYVRO queue. An operative will reply over your specified frequency.
-                </p>
-              </div>
-
-              <button
-                onClick={handleReset}
-                onMouseEnter={() => sound.playHover()}
-                data-cursor="interact"
-                data-cursor-label="NEW SIGNAL"
-                className="px-6 py-3 bg-[#181818] hover:bg-[#252525] border border-[#333333] hover:border-[#D7FF3F] text-xs font-mono text-white tracking-widest uppercase transition-all flex items-center gap-2"
+              <p className="text-sm text-[#A0A0A0] leading-relaxed max-w-xl">
+                Until the zyvrolabs.com mailbox is live, the fastest verified way to reach the founder is through GitHub, where every game on this site is developed in the open.
+              </p>
+              <a
+                href={GITHUB_PROFILE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => sound.playClick()}
+                className="inline-flex items-center gap-2 min-h-[44px] px-5 bg-[#D7FF3F] hover:bg-white text-[#080808] text-xs font-bold tracking-widest uppercase transition-colors"
               >
-                <RotateCcw className="w-3.5 h-3.5 text-[#D7FF3F]" />
-                <span>DISPATCH ANOTHER TRANSMISSION</span>
-              </button>
+                <Github className="w-4 h-4" aria-hidden="true" />
+                OPEN GITHUB PROFILE
+              </a>
             </div>
-
-          ) : (
-
-            /* TRANSMISSION FORM */
-            <form onSubmit={handleSubmit} className="space-y-6">
-              
-              <div className="flex items-center justify-between border-b border-[#202020] pb-3">
-                <div className="flex items-center space-x-2 text-xs font-mono text-white font-bold uppercase">
-                  <Terminal className="w-4 h-4 text-[#D7FF3F]" />
-                  <span>OPEN TRANSMISSION CHANNEL</span>
-                </div>
-                <span className="text-[10px] font-mono text-[#666666]">
-                  STATUS: CARRIER READY
+          ) : state === 'opened' ? (
+            <div className="py-8 space-y-5 font-mono">
+              <h2 className="text-2xl md:text-3xl font-black font-display text-white uppercase">CHECK YOUR MAIL APP</h2>
+              <p className="text-sm text-[#A0A0A0] leading-relaxed max-w-xl">
+                Your mail app should have opened with this message ready to send. This website does not store or send anything itself. If nothing opened, copy the message and send it to <span className="text-white font-bold">{CONTACT_EMAIL}</span>.
+              </p>
+              <div className="flex flex-wrap items-center gap-3">
+                <button
+                  type="button"
+                  onClick={handleCopy}
+                  className="inline-flex items-center gap-2 min-h-[44px] px-5 bg-[#D7FF3F] hover:bg-white text-[#080808] text-xs font-bold tracking-widest uppercase transition-colors"
+                >
+                  <Copy className="w-4 h-4" aria-hidden="true" />
+                  COPY MESSAGE
+                </button>
+                <button
+                  type="button"
+                  onClick={handleReset}
+                  className="inline-flex items-center gap-2 min-h-[44px] px-5 border border-[#333333] hover:border-[#D7FF3F] text-white text-xs tracking-widest uppercase transition-colors"
+                >
+                  <RotateCcw className="w-4 h-4 text-[#D7FF3F]" aria-hidden="true" />
+                  WRITE ANOTHER
+                </button>
+                <span role="status" className="text-xs">
+                  {copyState === 'copied' && <span className="text-[#D7FF3F]">Copied to clipboard.</span>}
+                  {copyState === 'failed' && <span className="text-[#FF6B6B]">Could not copy. Select and copy the text manually.</span>}
                 </span>
               </div>
-
-              {/* Form Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                
-                {/* From / Contact Email */}
-                <div className="space-y-1.5 font-mono">
-                  <label className="text-[11px] text-[#A0A0A0] uppercase block">
-                    FROM / IDENTIFIER (EMAIL) *
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    placeholder="player@network.com"
-                    value={form.from}
-                    onChange={(e) => {
-                      sound.playKeyTick();
-                      setForm(f => ({ ...f, from: e.target.value }));
-                    }}
-                    className="w-full bg-[#121212] border border-[#2a2a2a] focus:border-[#D7FF3F] text-xs text-white p-3 outline-none uppercase placeholder:text-[#555555]"
-                  />
-                </div>
-
-                {/* Callsign / Name */}
-                <div className="space-y-1.5 font-mono">
-                  <label className="text-[11px] text-[#A0A0A0] uppercase block">
-                    CALLSIGN / ENTITY NAME
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="OPERATIVE // ORG"
-                    value={form.callsign}
-                    onChange={(e) => {
-                      sound.playKeyTick();
-                      setForm(f => ({ ...f, callsign: e.target.value }));
-                    }}
-                    className="w-full bg-[#121212] border border-[#2a2a2a] focus:border-[#D7FF3F] text-xs text-white p-3 outline-none uppercase placeholder:text-[#555555]"
-                  />
-                </div>
-
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-6 font-mono" noValidate>
+              <div className="flex items-center space-x-2 text-xs text-white font-bold uppercase border-b border-[#202020] pb-3">
+                <Terminal className="w-4 h-4 text-[#D7FF3F]" aria-hidden="true" />
+                <span>COMPOSE A MESSAGE</span>
               </div>
 
-              {/* Purpose Selector Pills */}
-              <div className="space-y-2 font-mono">
-                <label className="text-[11px] text-[#A0A0A0] uppercase block">
-                  PURPOSE / CATEGORY *
-                </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label htmlFor="tx-from" className="text-[11px] text-[#A0A0A0] uppercase block">YOUR EMAIL *</label>
+                  <input
+                    id="tx-from"
+                    type="email"
+                    required
+                    autoComplete="email"
+                    value={form.from}
+                    onChange={(e) => setForm((f) => ({ ...f, from: e.target.value }))}
+                    className={inputClass}
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <label htmlFor="tx-org" className="text-[11px] text-[#A0A0A0] uppercase block">NAME / ORGANISATION</label>
+                  <input
+                    id="tx-org"
+                    type="text"
+                    autoComplete="organization"
+                    value={form.callsign}
+                    onChange={(e) => setForm((f) => ({ ...f, callsign: e.target.value }))}
+                    className={inputClass}
+                  />
+                </div>
+              </div>
+
+              <fieldset className="space-y-2">
+                <legend className="text-[11px] text-[#A0A0A0] uppercase block">PURPOSE *</legend>
                 <div className="flex flex-wrap gap-2">
-                  {purposes.map((p) => {
+                  {PURPOSES.map((p) => {
                     const isSelected = form.purpose === p;
                     return (
                       <button
                         key={p}
                         type="button"
-                        onClick={() => handlePurposeSelect(p)}
-                        className={`px-3 py-1.5 text-xs font-mono uppercase tracking-wider border transition-all ${
+                        aria-pressed={isSelected}
+                        onClick={() => {
+                          sound.playHover();
+                          setForm((f) => ({ ...f, purpose: p }));
+                        }}
+                        className={`min-h-[44px] px-3 text-xs uppercase tracking-wider border transition-all ${
                           isSelected
-                            ? 'bg-[#D7FF3F] text-[#080808] border-[#D7FF3F] font-bold shadow-[0_0_12px_rgba(215,255,63,0.3)]'
-                            : 'bg-[#121212] text-[#888888] border-[#262626] hover:text-white hover:border-[#444444]'
+                            ? 'bg-[#D7FF3F] text-[#080808] border-[#D7FF3F] font-bold'
+                            : 'bg-[#121212] text-[#A0A0A0] border-[#262626] hover:text-white hover:border-[#444444]'
                         }`}
                       >
                         [ {p} ]
@@ -254,57 +250,44 @@ export const TransmissionTerminal: React.FC = () => {
                     );
                   })}
                 </div>
-              </div>
+              </fieldset>
 
-              {/* Message */}
-              <div className="space-y-1.5 font-mono">
+              <div className="space-y-1.5">
                 <div className="flex justify-between items-center text-[11px] text-[#A0A0A0] uppercase">
-                  <span>MESSAGE PACKET DATA *</span>
-                  <span className="text-[#666666]">{form.message.length} CHARS</span>
+                  <label htmlFor="tx-msg">MESSAGE *</label>
+                  <span className={form.message.length > MESSAGE_LIMIT ? 'text-[#FF6B6B]' : 'text-[#666666]'}>
+                    {form.message.length} / {MESSAGE_LIMIT}
+                  </span>
                 </div>
                 <textarea
+                  id="tx-msg"
                   required
-                  rows={5}
-                  placeholder="COMPOSE TRANSMISSION DATA..."
+                  rows={6}
                   value={form.message}
-                  onChange={(e) => {
-                    sound.playKeyTick();
-                    setForm(f => ({ ...f, message: e.target.value }));
-                  }}
-                  className="w-full bg-[#121212] border border-[#2a2a2a] focus:border-[#D7FF3F] text-xs text-white p-3 outline-none resize-none font-mono placeholder:text-[#555555]"
+                  onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
+                  className={`${inputClass} resize-none`}
                 />
               </div>
 
-              {/* Submit Action */}
+              {error && (
+                <p role="alert" className="text-xs text-[#FF6B6B]">{error}</p>
+              )}
+
               <button
                 type="submit"
-                disabled={state === 'sending'}
                 onMouseEnter={() => sound.playHover()}
-                data-cursor="interact"
-                data-cursor-label="DISPATCH SIGNAL"
-                className="w-full py-4 bg-[#D7FF3F] hover:bg-white text-[#080808] font-mono font-bold tracking-widest text-xs uppercase transition-all flex items-center justify-center gap-3 shadow-[0_0_25px_rgba(215,255,63,0.35)]"
+                className="w-full min-h-[48px] bg-[#D7FF3F] hover:bg-white text-[#080808] font-bold tracking-widest text-xs uppercase transition-all flex items-center justify-center gap-2"
               >
-                {state === 'sending' ? (
-                  <span className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 animate-spin" />
-                    <span>ENCRYPTING &amp; DISPATCHING PACKET...</span>
-                  </span>
-                ) : (
-                  <span className="flex items-center gap-2">
-                    <Send className="w-4 h-4" />
-                    <span>[ SEND TRANSMISSION ]</span>
-                  </span>
-                )}
+                <Send className="w-4 h-4" aria-hidden="true" />
+                <span>OPEN IN MY MAIL APP</span>
               </button>
-
+              <p className="text-[11px] text-[#666666]">
+                This opens your own mail app with the message filled in. Nothing is stored or sent by this website.
+              </p>
             </form>
-
           )}
-
         </div>
-
       </div>
-
     </div>
   );
 };

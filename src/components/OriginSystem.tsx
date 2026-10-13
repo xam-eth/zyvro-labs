@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ORIGIN_MANIFESTO, SYSTEM_METADATA } from '../utils/constants';
+import { ORIGIN_MANIFESTO, SYSTEM_METADATA, FOUNDER } from '../utils/constants';
+import { TeamSection } from './TeamSection';
 import { sound } from '../utils/soundManager';
 import { ZyvroLogo, ZVColorMode } from './ZyvroLogo';
 import { 
@@ -41,12 +42,12 @@ export const OriginSystem: React.FC = () => {
         <div>
           <div className="flex items-center space-x-2 text-[11px] font-mono text-[#D7FF3F] tracking-widest uppercase mb-1">
             <Globe className="w-3.5 h-3.5 text-[#D7FF3F]" />
-            <span>ORIGIN SPECIFICATION &amp; PHILOSOPHY</span>
+            <span>ABOUT ZYVRO LABS</span>
             <span className="text-[#666666]">|</span>
-            <span className="text-[#A0A0A0]">IDENTITY ARCHITECTURE</span>
+            <span className="text-[#A0A0A0]">ORIGIN · PILLARS · TEAM</span>
           </div>
           <h1 className="text-3xl md:text-5xl font-black font-display tracking-tight text-white uppercase">
-            SYSTEM // ORIGIN
+            ABOUT
           </h1>
         </div>
 
@@ -63,7 +64,7 @@ export const OriginSystem: React.FC = () => {
                 : 'text-[#888888] hover:text-white'
             }`}
           >
-            MANIFESTO &amp; PILLARS
+            ABOUT &amp; TEAM
           </button>
           <button
             onClick={() => {
@@ -85,7 +86,8 @@ export const OriginSystem: React.FC = () => {
           TAB 1: MANIFESTO & PHILOSOPHY
       ========================================================================= */}
       {activeTab === 'manifesto' && (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start my-auto">
+        <>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Column: Core System Identifier Specification (5 cols) */}
           <div className="lg:col-span-5 bg-[#0f0f0f] border border-[#262626] p-6 space-y-6 shadow-[0_0_35px_rgba(0,0,0,0.8)] relative">
@@ -106,7 +108,7 @@ export const OriginSystem: React.FC = () => {
 
               <div className="flex items-center justify-between border-b border-[#202020] pb-2">
                 <span className="text-[11px] font-mono text-[#666666] tracking-widest uppercase">TYPE</span>
-                <span className="text-xs font-mono text-[#D7FF3F] font-bold">INDEPENDENT GAME STUDIO</span>
+                <span className="text-xs font-mono text-[#D7FF3F] font-bold text-right">{ORIGIN_MANIFESTO.type}</span>
               </div>
 
               <div className="flex items-center justify-between border-b border-[#202020] pb-2">
@@ -116,7 +118,7 @@ export const OriginSystem: React.FC = () => {
 
               <div className="flex items-center justify-between border-b border-[#202020] pb-2">
                 <span className="text-[11px] font-mono text-[#666666] tracking-widest uppercase">STATUS</span>
-                <span className="text-xs font-mono text-[#D7FF3F] font-bold">SOVEREIGN // ACTIVE</span>
+                <span className="text-xs font-mono text-[#D7FF3F] font-bold text-right">{ORIGIN_MANIFESTO.status}</span>
               </div>
 
               <div className="space-y-2 pt-2">
@@ -137,14 +139,14 @@ export const OriginSystem: React.FC = () => {
             <div className="p-4 bg-[#141414] border-l-2 border-[#D7FF3F] space-y-2">
               <div className="text-xs font-mono text-[#A0A0A0] uppercase tracking-widest">DIRECTIVE // 01</div>
               <p className="text-sm md:text-base font-display font-bold text-white tracking-wide leading-snug">
-                WE CRAFT HIGH-PERFORMANCE EXPERIENCES THAT PUSH BOUNDARIES AND REDEFINE WHAT'S POSSIBLE.
+                WE SHIP SMALL, PLAYABLE GAMES AND PUBLISH THE EVIDENCE BEHIND EVERY CLAIM.
               </p>
             </div>
 
             {/* Technical Telemetry */}
             <div className="text-[10px] font-mono text-[#666666] space-y-1">
               <div>KERNEL: {SYSTEM_METADATA.kernel}</div>
-              <div>COORDINATES: {SYSTEM_METADATA.coordinates}</div>
+              <div>SITE BUILD: {SYSTEM_METADATA.build}</div>
             </div>
 
           </div>
@@ -198,6 +200,9 @@ export const OriginSystem: React.FC = () => {
           </div>
 
         </div>
+
+        {FOUNDER && <TeamSection founder={FOUNDER} />}
+        </>
       )}
 
       {/* =========================================================================
@@ -357,16 +362,16 @@ export const OriginSystem: React.FC = () => {
             </div>
           </div>
 
-          {/* Master 4K Assets & Vector Downloads Matrix */}
+          {/* Brand assets & vector downloads */}
           <div className="bg-[#0b0b0b] border border-[#202020] p-6 space-y-4">
             <div className="flex items-center justify-between border-b border-[#202020] pb-3">
               <div>
                 <span className="text-xs font-mono text-[#D7FF3F] uppercase tracking-widest flex items-center gap-2">
                   <Layers className="w-4 h-4 text-[#D7FF3F]" />
-                  4K MASTER RENDERS &amp; VECTOR ASSETS
+                  BRAND RENDERS &amp; VECTOR ASSETS
                 </span>
                 <span className="text-[11px] font-mono text-[#666666]">
-                  HIGH DENSITY PRODUCTION ASSETS (.JPG 4K, .PNG TRANSPARENT, .SVG VECTOR)
+                  BRAND ASSETS (.JPG, .PNG TRANSPARENT, .SVG VECTOR)
                 </span>
               </div>
             </div>
@@ -382,7 +387,7 @@ export const OriginSystem: React.FC = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <span className="absolute bottom-2 left-2 px-1.5 py-0.5 bg-black/80 text-[9px] font-mono text-[#D7FF3F] border border-[#D7FF3F]/40">
-                    4K MASTER BOARD
+                    1254px BOARD
                   </span>
                 </div>
                 <div className="flex items-center justify-between pt-1">
@@ -393,7 +398,7 @@ export const OriginSystem: React.FC = () => {
                     rel="noopener noreferrer"
                     className="text-[10px] font-mono text-[#D7FF3F] hover:underline"
                   >
-                    VIEW 4K ↗
+                    VIEW ↗
                   </a>
                 </div>
               </div>
@@ -498,21 +503,21 @@ export const OriginSystem: React.FC = () => {
                 </div>
               </div>
 
-              {/* Asset 6: Scalable Vector SVG Package */}
+              {/* Asset 6: Transparent Horizontal Lockup */}
               <div className="bg-[#121212] border border-[#252525] p-3 space-y-2 group flex flex-col justify-between">
                 <div className="aspect-video w-full bg-[#171717] border border-dashed border-[#333333] flex flex-col items-center justify-center p-4">
-                  <ZyvroLogo variant="horizontal" renderMode="vector" size={42} />
-                  <span className="text-[10px] font-mono text-[#888888] mt-2">100% SCALABLE VECTOR (.SVG)</span>
+                  <ZyvroLogo variant="horizontal" size={42} />
+                  <span className="text-[10px] font-mono text-[#888888] mt-2">TRANSPARENT PNG (.PNG)</span>
                 </div>
                 <div className="flex items-center justify-between pt-1">
-                  <span className="text-xs font-mono text-white font-bold">VECTOR SVG ASSET</span>
-                  <a 
-                    href="/assets/brandkit/zyvro-zv-symbol-lime-transparent.svg" 
-                    target="_blank" 
+                  <span className="text-xs font-mono text-white font-bold">TRANSPARENT LOCKUP</span>
+                  <a
+                    href="/assets/brandkit/zyvro-zv-horizontal-lockup-transparent.png"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-[10px] font-mono text-[#D7FF3F] hover:underline"
                   >
-                    SVG SOURCE ↗
+                    PNG SOURCE ↗
                   </a>
                 </div>
               </div>
@@ -530,7 +535,7 @@ export const OriginSystem: React.FC = () => {
                 SAFE ZONE &amp; CLEAR SPACE
               </span>
               <p className="text-xs font-mono text-[#A0A0A0] leading-relaxed">
-                Maintain a minimum clear space equal to <span className="text-white font-bold">1X the width of the central Z-diagonal bar</span> on all four quadrants of the logo. No typography, borders, or competing UI HUD elements may encroach inside this perimeter.
+                Maintain a minimum clear space equal to <span className="text-white font-bold">1X the width of the central lime diamond</span> on all four quadrants of the logo. No typography, borders, or competing UI HUD elements may encroach inside this perimeter.
               </p>
               <div className="p-4 bg-[#121212] border border-dashed border-[#333333] flex items-center justify-center">
                 <div className="p-4 border border-dashed border-[#D7FF3F]/50">
