@@ -51,6 +51,7 @@ export const LOG_AUTHOR: string = creditName(FOUNDER);
 export const GAME_PROJECTS: GameProject[] = [
   {
     id: "project-001",
+    slug: "duskhold",
     featured: true,
     code: "PROJECT 001",
     title: "LAST NIGHT",
@@ -120,6 +121,7 @@ export const GAME_PROJECTS: GameProject[] = [
   },
   {
     id: "project-002",
+    slug: "chain-rider",
     featured: false,
     code: "PROJECT 002",
     title: "CHAIN RIDER",
@@ -187,6 +189,7 @@ export const GAME_PROJECTS: GameProject[] = [
   },
   {
     id: "project-003",
+    slug: "phagos-dermal-rift",
     featured: false,
     code: "PROJECT 003",
     title: "PHAGOS: DERMAL RIFT",
@@ -251,6 +254,7 @@ export const GAME_PROJECTS: GameProject[] = [
   },
   {
     id: "project-004",
+    slug: "palm-plantation",
     featured: false,
     code: "PROJECT 004",
     title: "PALM PLANTATION",

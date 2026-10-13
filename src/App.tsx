@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { Routes, Route, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { SystemSection, GameProject } from './types';
+import { GAME_PROJECTS } from './utils/constants';
 import { sound } from './utils/soundManager';
 
 import { CustomCursor } from './components/CustomCursor';
@@ -15,14 +17,10 @@ import { OriginSystem } from './components/OriginSystem';
 import { TransmissionTerminal } from './components/TransmissionTerminal';
 import { SystemFooter } from './components/SystemFooter';
 import { CommandPalette } from './components/CommandPalette';
+import { NotFound } from './components/NotFound';
 
 const BOOT_SEEN_KEY = 'zyvro_booted';
 
-/**
- * The boot sequence is skipped for links shared with reviewers (?skipboot=1),
- * for visitors who already watched it once, and for visitors who asked the
- * system to reduce motion.
- */
 function shouldSkipBoot(): boolean {
   if (typeof window === 'undefined') return false;
   if (new URLSearchParams(window.location.search).get('skipboot') === '1') return true;
@@ -38,129 +36,168 @@ function rememberBootSeen(): void {
   try {
     window.localStorage.setItem(BOOT_SEEN_KEY, '1');
   } catch {
-    // Storage unavailable (private mode or blocked): the intro simply shows again next visit.
+    // Storage unavailable
   }
 }
 
+/** Map a pathname to the SystemSection the HUD expects */
+function pathnameToSection(pathname: string): SystemSection {
+  if (pathname === '/') return 'hub';
+  if (pathname.startsWith('/games/lab')) return 'lab';
+  if (pathname.startsWith('/games/archive')) return 'archive';
+  if (pathname.startsWith('/games')) return 'projects';
+  if (pathname === '/about') return 'origin';
+  if (pathname === '/contact') return 'transmission';
+  return 'hub';
+}
+
+/** Wrapper for /games/:slug route that opens the modal */
+const GameRoute: React.FC<{ onSelectProject: (p: GameProject) => void }> = ({ onSelectProject }) => {
+  const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
+  const project = GAME_PROJECTS.find(p => p.slug === slug) || null;
+
+  useEffect(() => {
+    if (project) {
+      onSelectProject(project);
+    }
+  }, [project, onSelectProject]);
+
+  if (!project) {
+    return <NotFound />;
+  }
+
+  return (
+    <>
+      <GameLibrary onSelectProject={(p) => {
+        navigate(`/games/${p.slug}`);
+      }} />
+      <GameDetailModal
+        project={project}
+        onClose={() => navigate('/games')}
+      />
+    </>
+  );
+};
+
 export const App: React.FC = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [isBooted, setIsBooted] = useState<boolean>(shouldSkipBoot);
-  const [activeSection, setActiveSection] = useState<SystemSection>('hub');
   const [selectedProject, setSelectedProject] = useState<GameProject | null>(null);
   const [isScanlinesOn, setIsScanlinesOn] = useState(true);
   const [isConsoleOpen, setIsConsoleOpen] = useState(false);
   const [isPurging, setIsPurging] = useState(false);
 
-  const handleBootComplete = () => {
+  const activeSection = useMemo(() => pathnameToSection(location.pathname), [location.pathname]);
+
+  const handleBootComplete = useCallback(() => {
     rememberBootSeen();
     setIsBooted(true);
-  };
+  }, []);
 
-  const handleRestartSystem = () => {
+  const handleRestartSystem = useCallback(() => {
     setIsBooted(false);
     setSelectedProject(null);
-    setActiveSection('hub');
     setIsConsoleOpen(false);
-  };
+    navigate('/');
+  }, [navigate]);
 
-  const handleEmergencyPurge = () => {
+  const handleEmergencyPurge = useCallback(() => {
     setIsPurging(true);
     setTimeout(() => {
       setIsPurging(false);
     }, 700);
-  };
+  }, []);
 
-  // Scroll to top smoothly when section changes
+  const handleNavigate = useCallback((section: SystemSection) => {
+    const routeMap: Record<SystemSection, string> = {
+      hub: '/',
+      projects: '/games',
+      lab: '/games/lab',
+      archive: '/games/archive',
+      origin: '/about',
+      transmission: '/contact',
+    };
+    navigate(routeMap[section] || '/');
+  }, [navigate]);
+
+  const handleSelectProject = useCallback((project: GameProject) => {
+    navigate(`/games/${project.slug}`);
+  }, [navigate]);
+
+  // Scroll to top on route change
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [activeSection]);
+  }, [location.pathname]);
 
   return (
     <div className={`min-h-screen bg-[#080808] text-[#F2F2F2] selection:bg-[#D7FF3F] selection:text-[#080808] relative ${isPurging ? 'filter invert hue-rotate-180 animate-glitch' : ''}`}>
       
-      {/* Custom Precision Targeting Reticle Cursor */}
       <CustomCursor />
-
-      {/* CRT Scanlines and Screen Curvature */}
       <ScanlinesOverlay enabled={isScanlinesOn} />
 
-      {/* MANDATORY BOOT SCREEN */}
       {!isBooted && (
-        <BootScreen 
-          onBootComplete={handleBootComplete} 
-        />
+        <BootScreen onBootComplete={handleBootComplete} />
       )}
 
-      {/* ACTIVE GAME OPERATING SYSTEM ENVIRONMENT */}
       {isBooted && (
         <>
-          {/* Global System HUD Header and Vertical Navigation Console */}
           <SystemHUD
             activeSection={activeSection}
-            onSelectSection={(section) => setActiveSection(section)}
+            onSelectSection={handleNavigate}
             isScanlinesOn={isScanlinesOn}
             onToggleScanlines={() => setIsScanlinesOn(!isScanlinesOn)}
             onOpenConsole={() => setIsConsoleOpen(true)}
           />
 
-          {/* Dynamic Content Views */}
           <main className="relative z-10 transition-opacity duration-300">
-            {activeSection === 'hub' && (
-              <MainHub
-                onSelectProject={(project) => setSelectedProject(project)}
-                onNavigate={(section) => setActiveSection(section)}
-              />
-            )}
-
-            {activeSection === 'projects' && (
-              <GameLibrary
-                onSelectProject={(project) => setSelectedProject(project)}
-              />
-            )}
-
-            {activeSection === 'lab' && (
-              <ZyvroLab />
-            )}
-
-            {activeSection === 'archive' && (
-              <ArchiveDatabase />
-            )}
-
-            {activeSection === 'origin' && (
-              <OriginSystem />
-            )}
-
-
-            {activeSection === 'transmission' && (
-              <TransmissionTerminal />
-            )}
+            <Routes>
+              <Route path="/" element={
+                <MainHub
+                  onSelectProject={handleSelectProject}
+                  onNavigate={handleNavigate}
+                />
+              } />
+              <Route path="/games" element={
+                <GameLibrary onSelectProject={handleSelectProject} />
+              } />
+              <Route path="/games/:slug" element={
+                <GameRoute onSelectProject={setSelectedProject} />
+              } />
+              <Route path="/games/lab" element={<ZyvroLab />} />
+              <Route path="/games/archive" element={<ArchiveDatabase />} />
+              <Route path="/about" element={<OriginSystem />} />
+              <Route path="/contact" element={<TransmissionTerminal />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
           </main>
 
-          {/* Interactive Game Detail Modal / Initialization Screen */}
-          <GameDetailModal
-            project={selectedProject}
-            onClose={() => setSelectedProject(null)}
-          />
+          {/* Game modal for direct navigation from non-game routes */}
+          {selectedProject && !location.pathname.startsWith('/games/') && (
+            <GameDetailModal
+              project={selectedProject}
+              onClose={() => setSelectedProject(null)}
+            />
+          )}
 
-          {/* In-Game Terminal CLI Console */}
           <CommandPalette
             isOpen={isConsoleOpen}
             onClose={() => setIsConsoleOpen(false)}
-            onNavigate={(section) => setActiveSection(section)}
-            onSelectProject={(project) => setSelectedProject(project)}
+            onNavigate={handleNavigate}
+            onSelectProject={handleSelectProject}
             onToggleScanlines={() => setIsScanlinesOn(!isScanlinesOn)}
             onToggleSound={() => sound.toggleMute()}
             onReboot={handleRestartSystem}
             onPurge={handleEmergencyPurge}
           />
 
-          {/* Footer: End of Transmission / System Shutdown */}
           <SystemFooter
             onRestartSystem={handleRestartSystem}
             onEmergencyPurge={handleEmergencyPurge}
           />
         </>
       )}
-
     </div>
   );
 };
