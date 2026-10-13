@@ -3,6 +3,8 @@ import { Routes, Route, useLocation, useNavigate, useParams } from 'react-router
 import { SystemSection, GameProject } from './types';
 import { GAME_PROJECTS } from './utils/constants';
 import { sound } from './utils/soundManager';
+import { useDocumentHead } from './utils/useDocumentHead';
+import { getRouteHead } from './utils/routeHead';
 
 import { CustomCursor } from './components/CustomCursor';
 import { BootScreen } from './components/BootScreen';
@@ -90,6 +92,10 @@ export const App: React.FC = () => {
   const [isPurging, setIsPurging] = useState(false);
 
   const activeSection = useMemo(() => pathnameToSection(location.pathname), [location.pathname]);
+
+  // Per-route head tags (title, description, OG, canonical)
+  const headConfig = useMemo(() => getRouteHead(location.pathname), [location.pathname]);
+  useDocumentHead(headConfig);
 
   const handleBootComplete = useCallback(() => {
     rememberBootSeen();
