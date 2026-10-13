@@ -106,7 +106,7 @@ export const TransmissionTerminal: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         <div className="lg:col-span-4 bg-[#0e0e0e] border border-[#262626] p-6 space-y-5">
           <div className="space-y-2">
-            <div className="text-xs font-mono text-[#D7FF3F] font-bold tracking-widest uppercase">// HOW TO REACH US</div>
+            <div className="text-xs font-mono text-[#D7FF3F] font-bold tracking-widest uppercase">// HOW TO REACH ME</div>
             <p className="text-xs font-mono text-[#A0A0A0] leading-relaxed">
               Zyvro Labs is one founder. Messages about partnerships, ecosystem programmes, press or the games are read by the founder personally.
             </p>

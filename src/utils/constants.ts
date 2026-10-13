@@ -9,7 +9,7 @@ export const SYSTEM_METADATA = {
   kernel: "Z-CORE.64x",
   status: "ONLINE",
   originYear: "2026",
-  tagline: "WE BUILD GAMES, INTERACTIVE WORLDS, AND EXPERIMENTAL DIGITAL EXPERIENCES.",
+  tagline: "ZYVRO LABS BUILDS GAMES, INTERACTIVE WORLDS AND EXPERIMENTAL DIGITAL EXPERIENCES.",
 };
 
 /**
@@ -468,7 +468,7 @@ export const ORIGIN_MANIFESTO = {
   status: "INDEPENDENT // SELF-FUNDED // BUILDING IN THE OPEN",
   focus: ["HIGH-TENSION MECHANICS", "ATMOSPHERIC WORLDS", "UNCOMPROMISING TECHNICAL UI", "HARD INDUSTRIAL AESTHETICS"],
   manifesto: [
-    "We believe modern gaming has grown complacent: bloated corporate committees, recycled formulas, and hollow cinematic distractions.",
+    "I believe modern gaming has grown complacent: bloated corporate committees, recycled formulas, and hollow cinematic distractions.",
     "Zyvro Labs is a return to mechanical weight, sensory audacity, and pure digital craft.",
     "Zyvro Labs is one founder building games in the open, with AI coding agents as the workforce and every claim traceable to source.",
     "No predatory gimmicks. No fluff. Only raw interactive atmosphere."

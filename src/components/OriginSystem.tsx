@@ -139,7 +139,7 @@ export const OriginSystem: React.FC = () => {
             <div className="p-4 bg-[#141414] border-l-2 border-[#D7FF3F] space-y-2">
               <div className="text-xs font-mono text-[#A0A0A0] uppercase tracking-widest">DIRECTIVE // 01</div>
               <p className="text-sm md:text-base font-display font-bold text-white tracking-wide leading-snug">
-                WE SHIP SMALL, PLAYABLE GAMES AND PUBLISH THE EVIDENCE BEHIND EVERY CLAIM.
+                I SHIP SMALL, PLAYABLE GAMES AND PUBLISH THE EVIDENCE BEHIND EVERY CLAIM.
               </p>
             </div>
 
