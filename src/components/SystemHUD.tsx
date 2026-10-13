@@ -44,14 +44,24 @@ export const SystemHUD: React.FC<SystemHUDProps> = ({
   const [timeString, setTimeString] = useState('');
 
   const allNavItems: NavItem[] = [
-    { id: 'hub', label: 'MAIN HUB', gameTerm: 'COMMAND CENTER', glyph: '01', icon: <Home className="w-4 h-4" /> },
-    { id: 'projects', label: 'PROJECTS', gameTerm: 'WORLDS // GAMES', glyph: '02', icon: <Layers className="w-4 h-4" /> },
-    { id: 'lab', label: 'ZYVRO LAB', gameTerm: 'R&D PROTOTYPES', glyph: '03', icon: <FlaskConical className="w-4 h-4" /> },
-    { id: 'archive', label: 'ARCHIVE', gameTerm: 'LORE DATABASE', glyph: '04', icon: <BookOpen className="w-4 h-4" /> },
-    { id: 'origin', label: 'ABOUT', gameTerm: 'ORIGIN · PILLARS · TEAM', glyph: '05', icon: <Globe className="w-4 h-4" /> },
-    { id: 'transmission', label: 'TRANSMISSION', gameTerm: 'COMMS TERMINAL', glyph: '07', icon: <Radio className="w-4 h-4" /> },
+    { id: 'hub', label: 'HOME', gameTerm: 'COMMAND CENTER', glyph: '01', icon: <Home className="w-4 h-4" /> },
+    { id: 'projects', label: 'GAMES', gameTerm: 'WORLDS // GAMES', glyph: '02', icon: <Layers className="w-4 h-4" /> },
+    { id: 'origin', label: 'ABOUT', gameTerm: 'ORIGIN · PILLARS · TEAM', glyph: '03', icon: <Globe className="w-4 h-4" /> },
+  ];
+  // Secondary items (lab, archive, contact) are only in footer + command palette
+  const secondaryNavItems: NavItem[] = [
+    { id: 'lab', label: 'LAB', gameTerm: 'R&D PROTOTYPES', glyph: '04', icon: <FlaskConical className="w-4 h-4" /> },
+    { id: 'archive', label: 'ARCHIVE', gameTerm: 'LORE DATABASE', glyph: '05', icon: <BookOpen className="w-4 h-4" /> },
+    { id: 'transmission', label: 'CONTACT', gameTerm: 'COMMS TERMINAL', glyph: '06', icon: <Radio className="w-4 h-4" /> },
   ];
   const navItems: NavItem[] = allNavItems.map((item, index) => ({ ...item, glyph: String(index + 1).padStart(2, '0') }));
+
+  // Active item: lab/archive/projects all highlight GAMES
+  const getActiveNavId = (): SystemSection => {
+    if (activeSection === 'lab' || activeSection === 'archive') return 'projects';
+    return activeSection;
+  };
+  const activeNavId = getActiveNavId();
 
   const handleToggleSound = () => {
     const muted = sound.toggleMute();
@@ -135,7 +145,7 @@ export const SystemHUD: React.FC<SystemHUDProps> = ({
         <div className="hidden md:flex items-center space-x-2 bg-[#101010] border border-[#262626] px-3 py-1">
           <span className="text-[#D7FF3F] text-[11px] font-bold">◈</span>
           <span className="text-white text-[11px] tracking-widest uppercase font-bold">
-            {navItems.find(n => n.id === activeSection)?.gameTerm || activeSection}
+            {(navItems.find(n => n.id === activeNavId) || secondaryNavItems.find(n => n.id === activeSection))?.gameTerm || activeSection}
           </span>
           <span className="text-[#666666] text-[10px]">
             [ {activeSection.toUpperCase()} ]
@@ -237,7 +247,7 @@ export const SystemHUD: React.FC<SystemHUDProps> = ({
           {/* Nav Items List */}
           <nav className="flex flex-col space-y-1 py-2">
             {navItems.map((item) => {
-              const isActive = activeSection === item.id;
+              const isActive = activeNavId === item.id;
               return (
                 <div key={item.id} className="relative group">
                   <button
@@ -304,7 +314,7 @@ export const SystemHUD: React.FC<SystemHUDProps> = ({
         aria-label="Mobile Navigation"
       >
         {navItems.map((item) => {
-          const isActive = activeSection === item.id;
+          const isActive = activeNavId === item.id;
           return (
             <button
               key={item.id}

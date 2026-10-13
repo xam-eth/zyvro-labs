@@ -4,7 +4,10 @@ import { sound } from '../utils/soundManager';
 import { ZyvroLogo } from './ZyvroLogo';
 import { 
   RotateCcw, 
-  Flame
+  Flame,
+  FlaskConical,
+  BookOpen,
+  Radio
 } from 'lucide-react';
 
 interface SystemFooterProps {
@@ -71,6 +74,28 @@ export const SystemFooter: React.FC<SystemFooterProps> = ({
               className="min-h-[44px] px-3.5 py-1.5 bg-[#121212] hover:bg-[#1a1a1a] border border-[#262626] hover:border-[#D7FF3F] text-xs text-[#CCCCCC] hover:text-[#D7FF3F] transition-all flex items-center gap-1.5"
             >
               <span>[ {s.label} ]</span>
+            </a>
+          ))}
+        </div>
+
+        {/* Secondary Navigation Links (Lab, Archive, Contact) */}
+        <div className="flex flex-wrap justify-center gap-2 md:gap-3 pt-2">
+          {[
+            { label: 'LAB', path: '/games/lab', icon: <FlaskConical className="w-3 h-3" /> },
+            { label: 'ARCHIVE', path: '/games/archive', icon: <BookOpen className="w-3 h-3" /> },
+            { label: 'CONTACT', path: '/contact', icon: <Radio className="w-3 h-3" /> },
+          ].map((item) => (
+            <a
+              key={item.label}
+              href={item.path}
+              onMouseEnter={() => sound.playHover()}
+              onClick={() => sound.playClick()}
+              data-cursor="interact"
+              data-cursor-label={item.label}
+              className="min-h-[44px] px-3.5 py-1.5 bg-[#121212] hover:bg-[#1a1a1a] border border-[#262626] hover:border-[#D7FF3F] text-xs text-[#CCCCCC] hover:text-[#D7FF3F] transition-all flex items-center gap-1.5"
+            >
+              {item.icon}
+              <span>[ {item.label} ]</span>
             </a>
           ))}
         </div>

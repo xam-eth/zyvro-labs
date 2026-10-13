@@ -361,12 +361,12 @@ export const MainHub: React.FC<MainHubProps> = ({ onSelectProject, onNavigate })
               PROJECT WORLDS
             </h3>
             <p className="text-xs text-[#A0A0A0] font-mono leading-relaxed">
-              Explore 4 high-tension tactical simulations, survival horror complexes, and void exploration engines.
+              Explore {GAME_PROJECTS.length} game projects across survival horror, crowd shooters, organic exploration and strategy management.
             </p>
           </div>
 
           <div className="pt-4 mt-4 border-t border-[#1a1a1a] flex items-center justify-between text-xs font-mono text-[#D7FF3F]">
-            <span className="font-bold tracking-wider">[ 4 ACTIVE BUILDS ]</span>
+            <span className="font-bold tracking-wider">[ {GAME_PROJECTS.length} PROJECTS ]</span>
             <ExternalLink className="w-3.5 h-3.5" />
           </div>
         </div>
