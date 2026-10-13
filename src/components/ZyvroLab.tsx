@@ -516,7 +516,7 @@ const CipherSignalSimulation: React.FC = () => {
               <span>LOG DECRYPTED // HOW ZYVRO LABS WORKS</span>
             </div>
             <p className="text-[#D0D0D0] leading-relaxed pt-1">
-              "Every game in this lab is built by one founder directing AI coding agents. The design calls are human; the code is real, tested and public. Each game page links to the repository it came from."
+              "Every game in this lab is built by one founder. The design calls are human; the code is real, tested and public. Each game page links to the repository it came from."
             </p>
           </div>
         ) : (

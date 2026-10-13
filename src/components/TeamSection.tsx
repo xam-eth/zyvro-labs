@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, ExternalLink, MapPin } from 'lucide-react';
+import { Users, ExternalLink } from 'lucide-react';
 import { FounderProfile as FounderProfileData } from '../types';
 import { sound } from '../utils/soundManager';
 
@@ -39,10 +39,6 @@ export const TeamSection: React.FC<TeamSectionProps> = ({ founder }) => {
           <div>
             <h3 className="text-xl md:text-2xl font-black font-display text-white uppercase">{founder.name}</h3>
             <p className="text-xs font-mono text-[#A0A0A0]">{founder.role}</p>
-            <p className="mt-1 flex items-center gap-1.5 text-xs font-mono text-[#888888]">
-              <MapPin className="w-3.5 h-3.5 text-[#D7FF3F]" aria-hidden="true" />
-              {founder.location}
-            </p>
           </div>
 
           <p className="text-sm font-mono text-[#DDDDDD] leading-relaxed">{founder.bio}</p>

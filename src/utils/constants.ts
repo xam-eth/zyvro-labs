@@ -19,11 +19,10 @@ export const SYSTEM_METADATA = {
  */
 export const FOUNDER: FounderProfile | null = {
   name: "Jamadianur",
-  role: "Founder · Solo indie game developer",
-  location: "Rantau, South Kalimantan, Indonesia",
+  role: "Founder · Solo game designer and developer",
   photo: "/assets/founder/jamadianur-portrait.jpg",
-  bio: "Jamadianur is a solo indie developer from Rantau, South Kalimantan, Indonesia. He works alone by choice and spends his time taking apart new AI tools and new tech, then turning what he learns into playable games.",
-  workStyle: "One person, by design. The ideas, game design and direction are his; implementation is accelerated with AI coding agents. Every game on this site is developed in public repositories, so the progress can be checked.",
+  bio: "I'm a solo game designer and developer. I design gameplay systems and game feel: pacing, balancing and the small rules that make a game readable. I build with Godot 4 and with JavaScript, three.js, Canvas 2D and Web Audio.",
+  workStyle: "Zyvro Labs is the home for my games. The ideas, systems and design decisions are mine. Vibe coding is one of the tools I build with; it does not decide what a game is. Every game is developed in public repositories, so the progress can be checked.",
   links: [{ label: "GITHUB", url: "https://github.com/xam-eth" }],
 };
 
@@ -470,7 +469,7 @@ export const ORIGIN_MANIFESTO = {
   manifesto: [
     "We believe modern gaming has grown complacent: bloated corporate committees, recycled formulas, and hollow cinematic distractions.",
     "Zyvro Labs is a return to mechanical weight, sensory audacity, and pure digital craft.",
-    "Zyvro Labs is one founder building games in the open, with AI coding agents as the workforce and every claim traceable to source.",
+    "Zyvro Labs is one founder building games in the open, with every claim traceable to source.",
     "No predatory gimmicks. No fluff. Only raw interactive atmosphere."
   ],
   pillars: [

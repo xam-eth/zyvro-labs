@@ -80,7 +80,6 @@ export interface SocialLink {
 export interface FounderProfile {
   name: string;         // real name, as used on the founder's public profiles
   role: string;         // e.g. "Founder · Game developer"
-  location: string;     // real city or country
   photo: string;        // path under /assets/founder/ — a real photo of the founder
   bio: string;          // two or three true sentences, approved by the founder
   workStyle: string;    // how the work is actually done
