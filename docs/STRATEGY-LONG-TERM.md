@@ -1,3 +1,5 @@
+> **SUPERSEDED (2026-10-12):** Ronin-first is no longer the primary funding direction. The revenue path is portfolio to clients, then ship to Google Play. This strategy document is retained for reference.
+
 # Long-Term Strategy — How Zyvro Competes and Benefits Players
 
 Written 3 October 2026. This is a plan, not a forecast. It uses facts from the four game repositories and third-party market data (sources at the end). Third-party figures differ between publishers; wherever they do, the range is shown. Judgments that are Claude's own are labelled **(judgment)**; ideas that need testing are labelled **(hypothesis)**.

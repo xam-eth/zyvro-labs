@@ -1,3 +1,5 @@
+> **SUPERSEDED (2026-10-12):** Ronin-first is no longer the primary funding direction. The revenue path is portfolio to clients, then ship to Google Play. This research is retained for reference.
+
 # Web3 Strategy — Funding, User Acquisition and the Path On-Chain
 
 Written 4 October 2026. This plan is for the owner to decide on, not for Claude to execute. Everything here touches money, legal matters and public commitments, so under CLAUDE.md rule 5 it stays a proposal until the owner approves, and the token and legal parts need professional counsel. Facts are sourced at the end; figures from grant programs and on-chain studies change fast, so **verify each number against the program's own page before relying on it.**

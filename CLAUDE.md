@@ -4,7 +4,7 @@ This file is the standing brief for Claude working in this repository. Read it f
 
 ## 1. Role and mission
 
-Claude acts as **site admin and game studio director** for Zyvro Labs.
+Claude acts as **website dev admin** for Zyvro Labs. The owner's coding agent implements on `arena/01a105d1-zyvro-labs`; only the owner merges.
 
 - **Admin:** keep this website correct, fast, secure and current. Every game listed here must match the real state of its source repository.
 - **Director:** make the studio look and operate like a professional game studio. The website is the **first public launch venue for every game, before Google Play and Steam**. It is the first traffic funnel, so it must convert visitors into wishlists, installs, newsletter subscribers and community members.
@@ -36,6 +36,8 @@ Long-term competitive strategy and player benefits are in [`docs/STRATEGY-LONG-T
 8. **No model or tool identifiers in anything pushed** (commits, PR text, code comments, docs). Chat replies only.
 9. **Attribution:** end commits and PR descriptions with the attribution lines the session's system reminder specifies.
 10. **Do not implement site code yourself unless the owner says so.** Website changes are done by the owner's site agent working in this repository. Claude writes the issues, reviews the pull requests and supervises (see §12).
+11. **Public positioning rules.** Zyvro Labs is one person. The subject is "I" or the brand name, never "we" or "our team". AI is a tool, never the identity or "how I work"; when the build method must be named, the term is "vibe coding", never "AI coding agents" or "AI tools". No city or region of residence in public bios. No Ronin, grant or token wording on the public site.
+12. **Blog content rule.** The blog admin's pull requests may change only `content/blog/**`. No other file.
 
 ## 3. Language and tone
 
@@ -45,10 +47,10 @@ Long-term competitive strategy and player benefits are in [`docs/STRATEGY-LONG-T
 
 ## 4. The product today
 
-- **Stack:** React 18, TypeScript, Vite 6, Tailwind CSS 3, Lucide icons. No router, no backend, no analytics.
-- **Entry:** `index.html` → `src/main.tsx` → `src/App.tsx`.
-- **Navigation:** a `SystemSection` state (`hub | projects | lab | archive | origin | transmission`; `origin` is labelled ABOUT and ends with the Team section built from `FOUNDER`), not URL routes. A skippable boot screen (`BootScreen`) runs on the first visit; `?skipboot=1`, a repeat visit or `prefers-reduced-motion` skip it.
-- **Single source of truth for content:** `src/utils/constants.ts` (`GAME_PROJECTS`, `LAB_EXPERIMENTS`, `ARCHIVE_LOGS`, `FOUNDER`, `CONTACT_EMAIL`, `SOCIAL_LINKS`, `ORIGIN_MANIFESTO`, `SYSTEM_METADATA`). Types live in `src/types/index.ts`.
+- **Stack:** React 18, TypeScript, Vite 6, Tailwind CSS 3, Lucide icons, react-router-dom 6. No backend, no analytics.
+- **Entry:** `index.html` → `src/main.tsx` (BrowserRouter) → `src/App.tsx` (Routes).
+- **Routing:** real URL routes (`/`, `/games`, `/games/:slug`, `/games/lab`, `/games/archive`, `/about`, `/contact`). A `pathnameToSection()` helper maps paths to `SystemSection` values the HUD still uses. SPA fallback via `vercel.json`. A skippable boot screen runs on first visit; `?skipboot=1`, a repeat visit or `prefers-reduced-motion` skip it.
+- **Single source of truth for content:** `src/utils/constants.ts` (`GAME_PROJECTS`, `LAB_EXPERIMENTS`, `ARCHIVE_LOGS`, `FOUNDER`, `CONTACT_EMAIL`, `SOCIAL_LINKS`, `ORIGIN_MANIFESTO`, `SYSTEM_METADATA`). Types live in `src/types/index.ts`. Blog articles live in `content/blog/<slug>/index.md` (validated at build time by `scripts/validate-blog.mjs`).
 - **Media:** `public/assets/games/<game>-<subject>.jpg`, `public/assets/brandkit/*`, `public/assets/founder/*` (the founder's photo, supplied by the owner).
 - **Audio:** procedural Web Audio synthesizer in `src/utils/soundManager.ts`.
 
@@ -70,7 +72,7 @@ The four games are real and live in their own repositories. Always read the **ne
 
 | Slot | Game | Repository | Source branch used | Status on the site |
 |---|---|---|---|---|
-| 001 | LAST NIGHT | `xam-eth/Scary-Night` | `arena/01a0cee1-scary-night` | BETA v1.0.0-beta.1 |
+| 001 | DUSKHOLD | `xam-eth/Scary-Night` | `arena/4e10f2ff-scary-night` | ALPHA Survival M1 |
 | 002 | CHAIN RIDER | `xam-eth/Chain-Rider` | `arena/01a0ee17-chain-shot-rider` | TESTING MVP v2 |
 | 003 | PHAGOS: DERMAL RIFT | `xam-eth/Phagosinec` | `arena/01a0d899-phagos-space` | ALPHA slice |
 | 004 | PALM PLANTATION | `xam-eth/Ground-to-Empire` | `arena/01a0f46d-palm-plantation` | PROTOTYPE 0.2 |
@@ -143,12 +145,12 @@ Claude cannot resolve these alone. Ask once, record the answer here, then procee
 
 1. **Domain and email:** answered 2026-10-08. Canonical domain **zyvrolabs.com**; the active mailbox is **zamady@zyvrolabs.com** (MX on Hostinger), set in `CONTACT_EMAIL`. `zyvro.com` is not owned and must never appear. Role mailboxes (press, support, privacy) do not exist yet.
 2. **Legal entity and store accounts:** is the Google Play account personal or organisation? A personal account created after 13 November 2023 must run closed testing with at least 12 testers for 14 days before production access. Steam needs the $100 app fee and an identity/tax review.
-3. **Store plan per game:** which of the four go to Google Play, which to Steam, which stay web-only? Repositories state a Play target for LAST NIGHT and an Android target for CHAIN RIDER, but none documents a Steam plan.
+3. **Store plan per game:** which of the four go to Google Play, which to Steam, which stay web-only? Repositories state a Play target for DUSKHOLD (formerly LAST NIGHT) and an Android target for CHAIN RIDER, but none documents a Steam plan.
 4. **Real team and public identity:** answered 2026-10-08. Solo founder **Jamadianur** (Rantau, South Kalimantan, Indonesia), photo and bio supplied by the owner, in `FOUNDER`. No other person is credited.
 5. **Brand register:** keep the full Game OS interface as the front door, or add a conventional "Games / News / Community / Press" shell around it. Claude recommends the shell, with the Game OS as the signature layer (see the roadmap).
 6. **Community stack:** Discord plus a web forum. Claude recommends both, because Discord is where chat happens and a web forum gives searchable, indexable content. Confirm the platform and who moderates.
 7. **Promote a real `main`:** the repos' `main` branches are stubs. Decide the production branch and deployment host.
-8. **Monetisation stance per game:** LAST NIGHT ships a sandbox store with Midtrans server routes. A Google Play build must bill digital goods through Google Play Billing.
+8. **Monetisation stance per game:** DUSKHOLD (formerly LAST NIGHT) ships a sandbox store with Midtrans server routes. A Google Play build must bill digital goods through Google Play Billing.
 9. **Access unlocks (see `docs/TOOLS-ACCESS.md`):** provide a live hosting target + domain, a Supabase project, verified mailboxes and an analytics tool; create the Google Play, Steam, Discord and forum accounts. These gate almost all site and launch work.
 10. **Web3 sequencing gate (see `docs/WEB3-STRATEGY.md`):** confirm that no token or airdrop happens before a game is stable with a measured, retained user base, and that Ronin is the primary grant target with Arbitrum/Immutable as alternatives.
 11. **Web3 legal:** agree to engage Indonesian crypto counsel (OJK regime) before any token decision; the token is never a payment method, rupiah/e-wallet rails stay.
