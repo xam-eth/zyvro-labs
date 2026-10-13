@@ -14,6 +14,7 @@ export interface ProgressMetric {
 
 export interface GameProject {
   id: string;
+  slug: string; // URL-safe identifier, e.g. "duskhold"
   featured: boolean; // the first release, shown as the hub hero
   code: string; // e.g. "PROJECT 001"
   title: string;

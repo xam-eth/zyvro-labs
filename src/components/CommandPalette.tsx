@@ -75,7 +75,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       case 'help':
         newLogs.push({
           type: 'output',
-          text: `AVAILABLE PROTOCOLS:\n • hub, projects, lab, archive, about, team, transmission\n • last-night, chain-rider, phagos, palm (direct world launch)\n • sound (toggle audio), scanlines (toggle CRT)\n • reboot (restart OS), purge (vram reset), clear (cls)`
+          text: `AVAILABLE PROTOCOLS:\n • hub, projects, lab, archive, about, team, transmission\n • duskhold, chain-rider, phagos, palm (direct world launch)\n • sound (toggle audio), scanlines (toggle CRT)\n • reboot (restart OS), purge (vram reset), clear (cls)`
         });
         break;
 
@@ -131,11 +131,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         setTimeout(onClose, 400);
         break;
 
+      case 'duskhold':
       case 'last-night':
       case 'lastnight':
       case 'scary-night':
         onSelectProject(GAME_PROJECTS[0]);
-        newLogs.push({ type: 'success', text: 'INITIALIZING PROJECT 001: LAST NIGHT...' });
+        newLogs.push({ type: 'success', text: 'INITIALIZING PROJECT 001: DUSKHOLD...' });
         setTimeout(onClose, 400);
         break;
 
@@ -260,7 +261,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
               sound.playKeyTick();
               setCmdInput(e.target.value);
             }}
-            placeholder="Type 'help', 'last-night', 'lab', 'reboot'..."
+            placeholder="Type 'help', 'duskhold', 'lab', 'reboot'..."
             className="flex-1 bg-transparent text-xs font-mono text-white outline-none uppercase placeholder:text-[#444444]"
           />
           <button

@@ -51,75 +51,71 @@ export const LOG_AUTHOR: string = creditName(FOUNDER);
 export const GAME_PROJECTS: GameProject[] = [
   {
     id: "project-001",
+    slug: "duskhold",
     featured: true,
     code: "PROJECT 001",
-    title: "LAST NIGHT",
+    title: "DUSKHOLD",
     codename: "SCARY_NIGHT",
-    genre: "3/4 VAMPIRE SURVIVAL HORROR",
-    tagline: "SURVIVE UNTIL DAWN. YOU DO NOT HAVE TO KILL ANYTHING.",
-    brief: "A 3/4 vampire survival horror about psychological tension, defensive decision-making, resource management and sound. One night lasts five minutes.",
-    description: "You start at 00:00 and only have to still be alive at 05:00. You wake hungry, and the servant door is already shaking — bar it, or open it and feed. Blood is your health, doors are your life, and a tension director decides where the pressure comes from. Five predators hunt you through the mansion, and from the latest build the house is besieged: a crowd of cheap bodies mass at the walls and lean on the wood until it gives, while a smaller set of fully simulated besiegers finish the job.",
-    status: "BETA",
-    build: "v1.0.0-beta.1",
-    engine: "CUSTOM ES MODULES // CANVAS 2D + THREE.JS GLB",
+    genre: "GOTHIC SURVIVAL / BUILD-DEFEND",
+    tagline: "HOLD UNTIL DAWN.",
+    brief: "A gothic survival game about doors, dread, and the siege outside. Build by day, defend by night. Oil keeps the hearth fire lit \u2014 if it reaches zero, the fire goes out and the night is lost.",
+    description: "DUSKHOLD is a 3D gothic survival game played in a besieged manor. By day, you gather oil and wood, build extractors, sawmills and shelters, upgrade the hearth and repair gates. By night, waves of enemies flow through the darkness toward the fire. Light slows them and reduces damage; a lit siege costs 50% door damage. If the hearth oil reaches zero at night, the fire goes out and the game is over. The default route is Survival M1 \u2014 three nights of escalating waves with a build-and-defend loop. The legacy hunt mode is still reachable via ?legacy=1.",
+    status: "ALPHA",
+    build: "SURVIVAL M1 // b648f64",
+    engine: "CUSTOM ES MODULES // THREE.JS WEBGL + CANVAS 2D UI",
     threatLevel: "CRITICAL",
     year: "2026",
     progress: [
       {
-        label: "CORE SYSTEMS",
-        value: 100,
-        evidence: "Tension director, mansion with collision and nav grid, blood economy, seeded night objectives, haunts layer and the Blood Market all ship in v1.0.0-beta.1."
+        label: "SURVIVAL M1 LOOP",
+        value: 60,
+        evidence: "Three-night loop with day/night phases, reward, builder queue and save/checkpoint is implemented and passing harness tests. Acceptance for manual combat, readability on real devices and balance playtesting is still open (roadmap \u00a7Acceptance 1-4)."
       },
       {
-        label: "THREAT ROSTER",
-        value: 100,
-        evidence: "5 of 5 predators implemented: Crawler, Hunter, Werewolf, Stalker and Ghoul, plus FRENZIED, MARKSMAN and ALPHA late-night variants."
+        label: "UI & READABILITY",
+        value: 50,
+        evidence: "Icon-first HUD rebuilt; luma playfield 74.9/255 (12.8% near-black) vs baseline 1.4/255 (99.6%). Visual pass on real devices, state sweeps and overlap fixes still open (roadmap \u00a7Acceptance 5)."
       },
       {
-        label: "AUTOMATED VERIFICATION",
-        value: 100,
-        evidence: "Latest arena commit reports harness 273 PASS / 0 FAIL, with glbtest, clicktest, server/test and envqa (40 checks) all green."
-      },
-      {
-        label: "LIVE BILLING",
+        label: "DEVICE & PERFORMANCE",
         value: 0,
-        evidence: "The web beta runs the sandbox provider: nothing is charged. Real payments need Midtrans server keys, and a Google Play build must use Google Play Billing."
+        evidence: "Frame time 66-90 enemies/night on low-end, DPR, hidden-tab resume, WebGL context loss and orientation decision are all unverified (roadmap \u00a7Acceptance 6)."
+      },
+      {
+        label: "RELEASE BUNDLE",
+        value: 0,
+        evidence: "SHA-256 fingerprint signing, origin-trial token, Bubblewrap/AAB validation and Play Store packaging are all blocked on release configuration (roadmap \u00a7Acceptance 7)."
       }
     ],
     features: [
-      "Tension director replaces random spawning: a pressure budget, moods that rise fast and decay slowly, and enforced quiet stretches",
-      "Blood is health — it drains with time and sprinting, every claw swing and dash costs it, and enemies are the only sustainable food",
-      "Five predators route on a walkability grid with BFS pathfinding, and give up after a long hunt with no contact",
-      "The siege: the house is surrounded and you can count them, with a crowd for scale and a smaller fully simulated besieger set for the fight",
-      "Three seeded objectives every night, paid in shards with partial credit even if you die at 4:58",
-      "40+ sounds synthesised with the Web Audio API on three buses with limiter and reverb, and an animated GLB vampire loaded through a vendored Three.js GLTFLoader"
+      "Build by day, defend by night: gather oil and wood, queue buildings, upgrade the hearth and repair gates before the next wave arrives",
+      "Oil is life: the hearth fire is both a light source and a damage reducer; if oil reaches zero at night, the fire goes out and the game is over",
+      "Light slows enemies and halves door damage but does not freeze them; a lit siege still costs 50% door durability",
+      "Three nights of escalating waves (66/78/90 per night) with Breakers that target intact doors then the hearth, plus Individual hunters each night",
+      "3D mansion with WebGL rendering, 11 authored rooms, BFS flow-field pathfinding and nav refresh when doors break",
+      "Legacy hunt mode preserved at ?legacy=1 for QA and comparison; the old tension director and five-predator system are still accessible"
     ],
     specs: {
-      targetPlatforms: ["WEB // STATIC HTTP", "MOBILE TOUCH // VIRTUAL STICK", "GOOGLE PLAY // PLANNED"],
-      rendering: "2D canvas with half-res lightmap, particles and post, 11 photographed room plates, animated GLB player via vendored Three.js",
-      physics: "Fixed-step loop, wall and furniture collision, BFS navigation grid, durability-based entrances",
+      targetPlatforms: ["WEB // STATIC HTTP", "MOBILE TOUCH // PORTRAIT", "GOOGLE PLAY // PLANNED"],
+      rendering: "Three.js WebGL mansion with orthographic camera, Canvas 2D HUD/icon layer, authored room plates and GLB actors",
+      physics: "Fixed-step loop, wall and door collision, BFS flow-field pathfinding, durability-based entrances with local nav refresh",
       multiplayer: "Single player"
     },
     images: {
-      hero: "/assets/games/last-night-hero.jpg",
-      cover: "/assets/games/last-night-gatehouse.jpg",
-      conceptArt: [
-        "/assets/games/last-night-gallery.jpg",
-        "/assets/games/last-night-oratory.jpg",
-        "/assets/games/last-night-library.jpg",
-        "/assets/games/last-night-basement.jpg",
-        "/assets/games/last-night-chapel.jpg"
-      ]
+      hero: "/assets/games/duskhold-hero.jpg",
+      cover: "/assets/games/duskhold-cover.jpg",
+      conceptArt: []
     },
-    loreQuote: "“You are not a soldier. You do not have to kill anything. Dawn is at 05:00 — spending the night fighting is a losing strategy; spending it surviving is the game.”",
+    loreQuote: "“Fortify the manor. Hold through the night. Survive until dawn.”",
     links: {
       repository: "xam-eth/Scary-Night",
-      branch: "arena/01a0cee1-scary-night",
-      sourceUrl: "https://github.com/xam-eth/Scary-Night/tree/arena/01a0cee1-scary-night"
+      branch: "arena/4e10f2ff-scary-night",
+      sourceUrl: "https://github.com/xam-eth/Scary-Night/tree/arena/4e10f2ff-scary-night"
     }
   },
   {
     id: "project-002",
+    slug: "chain-rider",
     featured: false,
     code: "PROJECT 002",
     title: "CHAIN RIDER",
@@ -187,6 +183,7 @@ export const GAME_PROJECTS: GameProject[] = [
   },
   {
     id: "project-003",
+    slug: "phagos-dermal-rift",
     featured: false,
     code: "PROJECT 003",
     title: "PHAGOS: DERMAL RIFT",
@@ -251,6 +248,7 @@ export const GAME_PROJECTS: GameProject[] = [
   },
   {
     id: "project-004",
+    slug: "palm-plantation",
     featured: false,
     code: "PROJECT 004",
     title: "PALM PLANTATION",
@@ -385,12 +383,12 @@ export const ARCHIVE_LOGS: ArchiveEntry[] = [
   {
     id: "log-001",
     code: "LOG // 001",
-    title: "THE TENSION DIRECTOR: WHY LAST NIGHT STOPPED RANDOM SPAWNING",
+    title: "THE TENSION DIRECTOR: WHY DUSKHOLD (FORMERLY LAST NIGHT) STOPPED RANDOM SPAWNING",
     category: "WORLD DESIGN",
     timestamp: "2026.10.02 — SOURCE: SCARY-NIGHT // ARENA/01A0CEE1",
     build: "v1.0.0-beta.1",
     author: LOG_AUTHOR,
-    summary: "How a pressure budget, slow-decaying moods and enforced quiet stretches replaced random enemy spawns in the five-minute vampire night.",
+    summary: "How a pressure budget, slow-decaying moods and enforced quiet stretches replaced random enemy spawns. Note: this system belongs to the legacy route, accessible at ?legacy=1.",
     content: [
       "Last Night owns a tension director instead of a spawner. It holds a pressure budget, composes waves from it, decides where things come from, and enforces quiet stretches, because pressure only reads as pressure when there is contrast.",
       "Mood raises instantly and decays slowly, so it never flaps. The camera follows the same discipline: shake happens on door breaks, hits, blood moon and the panic phase, never as decoration.",
@@ -417,12 +415,12 @@ export const ARCHIVE_LOGS: ArchiveEntry[] = [
   {
     id: "log-005",
     code: "LOG // 005",
-    title: "FIVE PREDATORS: PATHFINDING, PATIENCE AND THE STALKER",
+    title: "FIVE PREDATORS: PATHFINDING, PATIENCE AND THE STALKER (LEGACY ROUTE)",
     category: "AI LOGIC",
     timestamp: "2026.10.02 — SOURCE: SCARY-NIGHT // ARENA/01A0CEE1",
     build: "v1.0.0-beta.1",
     author: LOG_AUTHOR,
-    summary: "Why Last Night enemies route on a walkability grid, give up after a long hunt, and why one of them only moves when unseen.",
+    summary: "Why DUSKHOLD (formerly Last Night) legacy enemies route on a walkability grid, give up after a long hunt, and why one of them only moves when unseen. These systems belong to the legacy route at ?legacy=1.",
     content: [
       "The mansion has interior walls and large grounds, so enemies route on a coarse walkability grid with BFS instead of steering straight at the player. They also give up: after a long hunt with no contact they leave, which rewards evasion over killing.",
       "Five predators share the house. Crawler, Hunter and Werewolf are joined in v1.0 by the Stalker, which moves only while unseen and never breaks a door, and the Ghoul, a thinner wolf that eats barricades.",

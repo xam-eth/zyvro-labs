@@ -64,7 +64,7 @@ The Game Library, Main Hub, Command Palette and Archive read from `src/utils/con
 
 | Slot | Title | Genre | Status / Build | Engine | Source |
 |---|---|---|---|---|---|
-| 001 | **LAST NIGHT** | 3/4 vampire survival horror | BETA // v1.0.0-beta.1 | Custom ES modules, Canvas 2D + Three.js GLB | [`Scary-Night`](https://github.com/xam-eth/Scary-Night/tree/arena/01a0cee1-scary-night) |
+| 001 | **DUSKHOLD** | Gothic survival / build-defend | ALPHA // Survival M1 | Custom ES modules, Three.js WebGL + Canvas 2D UI | [`Scary-Night`](https://github.com/xam-eth/Scary-Night/tree/arena/4e10f2ff-scary-night) |
 | 002 | **CHAIN RIDER** | Bullet-steering crowd shooter | TESTING // MVP v2 | Godot 4.3 + Three.js r128 web build | [`Chain-Rider`](https://github.com/xam-eth/Chain-Rider/tree/arena/01a0ee17-chain-shot-rider) |
 | 003 | **PHAGOS: DERMAL RIFT** | Organic 2D exploration adventure | ALPHA // Dermal Rift slice | Godot 4.3 GDScript 2D | [`Phagosinec`](https://github.com/xam-eth/Phagosinec/tree/arena/01a0d899-phagos-space) |
 | 004 | **PALM PLANTATION** | Plantation strategy / management | PROTOTYPE // 0.2 | Godot 4.3 + Three.js browser preview | [`Ground-to-Empire`](https://github.com/xam-eth/Ground-to-Empire/tree/arena/01a0f46d-palm-plantation) |

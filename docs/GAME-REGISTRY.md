@@ -6,7 +6,7 @@ Stage definitions (S0 to S4) are in `docs/LAUNCH-PLAYBOOK.md`.
 
 | Slot | Game | Repository @ branch | Latest commit seen | Stage | Site status |
 |---|---|---|---|---|---|
-| 001 | LAST NIGHT | `xam-eth/Scary-Night` @ `arena/01a0cee1-scary-night` | 2 Oct 2026 | S2 public beta candidate | BETA |
+| 001 | DUSKHOLD | `xam-eth/Scary-Night` @ `arena/4e10f2ff-scary-night` | 2 Oct 2026 | S2 public beta candidate | BETA |
 | 002 | CHAIN RIDER | `xam-eth/Chain-Rider` @ `arena/01a0ee17-chain-shot-rider` | 2 Oct 2026 | S1 playable web alpha, moving to S2 | TESTING |
 | 003 | PHAGOS: DERMAL RIFT | `xam-eth/Phagosinec` @ `arena/01a0d899-phagos-space` | 30 Sep 2026 | S1 (single slice only) | ALPHA |
 | 004 | PALM PLANTATION | `xam-eth/Ground-to-Empire` @ `arena/01a0f46d-palm-plantation` | 2 Oct 2026 | S0 prototype | PROTOTYPE |
@@ -15,7 +15,7 @@ Note: Scary-Night has a second arena branch, `arena/01a0e66a-scary-night`, last 
 
 ---
 
-## 001 · LAST NIGHT
+## 001 · DUSKHOLD (formerly LAST NIGHT)
 
 **What it is.** A 3/4 vampire survival horror. One night lasts five minutes, from 00:00 to 05:00. Blood is health, doors are the defence, a tension director shapes pressure, five predators hunt through an 11-room mansion, and the latest build adds the siege (a crowd at the walls plus a smaller set of fully simulated besiegers).
 
