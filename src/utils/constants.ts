@@ -104,11 +104,9 @@ export const GAME_PROJECTS: GameProject[] = [
       hero: "/assets/games/last-night-hero.jpg",
       cover: "/assets/games/last-night-gatehouse.jpg",
       conceptArt: [
-        "/assets/games/last-night-gallery.jpg",
-        "/assets/games/last-night-oratory.jpg",
-        "/assets/games/last-night-library.jpg",
-        "/assets/games/last-night-basement.jpg",
-        "/assets/games/last-night-chapel.jpg"
+        "/assets/games/scenes/duskhold/01-gallery-night.jpg",
+        "/assets/games/scenes/duskhold/02-oratory-dawn.jpg",
+        "/assets/games/scenes/duskhold/03-ftue-15s.png"
       ]
     },
     loreQuote: "“You are not a soldier. You do not have to kill anything. Dawn is at 05:00 — spending the night fighting is a losing strategy; spending it surviving is the game.”",
@@ -173,9 +171,9 @@ export const GAME_PROJECTS: GameProject[] = [
       hero: "/assets/games/chain-rider-showcase.jpg",
       cover: "/assets/games/chain-rider-hero.jpg",
       conceptArt: [
-        "/assets/games/chain-rider-classic-pit.jpg",
-        "/assets/games/chain-rider-twin-towers.jpg",
-        "/assets/games/chain-rider-gameplay.jpg"
+        "/assets/games/scenes/chain-rider/01-classic-pit.png",
+        "/assets/games/scenes/chain-rider/02-twin-towers.png",
+        "/assets/games/scenes/chain-rider/03-qa-gameplay.png"
       ]
     },
     loreQuote: "“Shoot one bullet, ride inside it, and bend it to slaughter hundreds of enemies.”",
@@ -239,7 +237,9 @@ export const GAME_PROJECTS: GameProject[] = [
       hero: "/assets/games/phagos-hero.jpg",
       cover: "/assets/games/phagos-cross-section.jpg",
       conceptArt: [
-        "/assets/games/phagos-layout-plan.jpg"
+        "/assets/games/scenes/phagos/01-dermal-rift-playfield.png",
+        "/assets/games/scenes/phagos/02-skin-cross-section.png",
+        "/assets/games/scenes/phagos/03-preview.png"
       ]
     },
     loreQuote: "“Each organ is a recognizable biome with its own material hierarchy, topology, rhythm, and traversal vocabulary.”",

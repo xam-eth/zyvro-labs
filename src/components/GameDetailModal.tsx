@@ -218,7 +218,7 @@ export const GameDetailModal: React.FC<GameDetailModalProps> = ({
               
               {/* Main 4K Image Spotlight (8 cols) */}
               <div className="lg:col-span-8 space-y-3">
-                <div className="relative h-[280px] sm:h-[380px] md:h-[420px] bg-[#080808] border border-[#262626] overflow-hidden group">
+                <div className="relative h-[180px] sm:h-[240px] md:h-[300px] bg-[#080808] border border-[#262626] overflow-hidden group">
                   <img 
                     src={galleryImages[activeGalleryIdx] || project.images.hero} 
                     alt={project.title}
