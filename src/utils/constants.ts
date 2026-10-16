@@ -104,9 +104,11 @@ export const GAME_PROJECTS: GameProject[] = [
       hero: "/assets/games/last-night-hero.jpg",
       cover: "/assets/games/last-night-gatehouse.jpg",
       conceptArt: [
+        "/assets/games/scenes/duskhold/00-ftue-00s.png",
         "/assets/games/scenes/duskhold/01-gallery-night.jpg",
         "/assets/games/scenes/duskhold/02-oratory-dawn.jpg",
-        "/assets/games/scenes/duskhold/03-ftue-15s.png"
+        "/assets/games/scenes/duskhold/03-ftue-15s.png",
+        "/assets/games/scenes/duskhold/04-ftue-30s.png"
       ]
     },
     loreQuote: "“You are not a soldier. You do not have to kill anything. Dawn is at 05:00 — spending the night fighting is a losing strategy; spending it surviving is the game.”",
@@ -173,7 +175,10 @@ export const GAME_PROJECTS: GameProject[] = [
       conceptArt: [
         "/assets/games/scenes/chain-rider/01-classic-pit.png",
         "/assets/games/scenes/chain-rider/02-twin-towers.png",
-        "/assets/games/scenes/chain-rider/03-qa-gameplay.png"
+        "/assets/games/scenes/chain-rider/03-qa-gameplay.png",
+        "/assets/games/scenes/chain-rider/04-gravity-chamber.png",
+        "/assets/games/scenes/chain-rider/05-explosive-yard.png",
+        "/assets/games/scenes/chain-rider/06-moving-maze.png"
       ]
     },
     loreQuote: "“Shoot one bullet, ride inside it, and bend it to slaughter hundreds of enemies.”",
