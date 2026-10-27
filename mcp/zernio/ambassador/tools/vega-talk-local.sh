@@ -22,7 +22,10 @@
 #   - ~6 GB disk for FaceFusion models (auto-downloaded on first run)
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if ! REPO_ROOT="$(git -C "$SCRIPT_DIR" rev-parse --show-toplevel 2>/dev/null)"; then
+  REPO_ROOT="$(cd "$SCRIPT_DIR/../../../.." && pwd)" # tools -> ambassador -> zernio -> mcp -> root
+fi
 AMB="$REPO_ROOT/mcp/zernio/ambassador"
 VIDEO="$REPO_ROOT/mcp/zernio/video"
 WORK="${VEGA_TALK_WORKDIR:-$HOME/.zyvro/vega-talk}"
