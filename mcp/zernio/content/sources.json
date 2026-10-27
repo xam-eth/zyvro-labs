@@ -5,11 +5,11 @@
     "title": "THE HERO ON YOUR LOBBY SCREEN IS THE HERO IN YOUR MATCH",
     "hook": "A painted soldier that never changes is a lie the player catches on day two. Ours is the same 36,000-triangle GLB that takes the field.",
     "facts": [
-      "The lobby hero is hero.glb rendered live in a WebGL stage over a photographed empty bay \u2014 one asset, two contexts.",
+      "The lobby hero is hero.glb rendered live in a WebGL stage over a photographed empty bay — one asset, two contexts.",
       "GPU is rented only while visible: play on entry, pause on exit, dispose before the engine boots.",
       "Keyart went from a 2.8 MB PNG to a ~430 KB JPEG q90 without a visible seam in the audit frame."
     ],
-    "take": "One asset, two contexts \u2014 the lobby IS the match renderer. Everything else is marketing.",
+    "take": "One asset, two contexts — the lobby IS the match renderer. Everything else is marketing.",
     "question": "What is the one asset in your project that never gets a stand-in?",
     "visualNote": "Two frames travel with this post: the empty deploy bay photograph, and the live rig standing on it.",
     "media": {
@@ -26,12 +26,12 @@
     "title": "FOUR THEATRES, ONE 116 MB PROMISE",
     "hook": "Most web games hide their download behind a spinner. Ours prints 116,282,422 bytes on the door and refuses to open until the debt is paid.",
     "facts": [
-      "Four theatres \u2014 Frostline Relay, Verdant Bloom, Emberfall Foundry, Vanguard Station \u2014 open from one committed WASM + PCK payload.",
+      "Four theatres — Frostline Relay, Verdant Bloom, Emberfall Foundry, Vanguard Station — open from one committed WASM + PCK payload.",
       "The boot screen prints the exact byte debt before it opens: 116,282,422 bytes, no spinner lies.",
-      "PCK 76,767,668 B across 873 files; WASM 39,514,754 B \u2014 both measured in CI, both printed at boot."
+      "PCK 76,767,668 B across 873 files; WASM 39,514,754 B — both measured in CI, both printed at boot."
     ],
     "take": "Honest boot beats fast boot: the door prints the debt before it opens.",
-    "question": "What does your loading screen promise \u2014 and what does it actually measure?",
+    "question": "What does your loading screen promise — and what does it actually measure?",
     "visualNote": "Two frames travel with this post: the four-theatre world plate, and the boss vantage from the world tour.",
     "media": {
       "kind": "game",
@@ -52,7 +52,7 @@
       "The palette contract lives in CI, so art direction is a test result, not an opinion."
     ],
     "take": "A palette is a contract. Ours fails the build at 8% drift.",
-    "question": "How does your team enforce art direction \u2014 reviews or tests?",
+    "question": "How does your team enforce art direction — reviews or tests?",
     "visualNote": "Two frames travel with this post: the dashboard plate at 0.2% off-palette, and the loading keyart poster.",
     "media": {
       "kind": "game",
@@ -65,14 +65,14 @@
   {
     "id": "post-004",
     "kind": "progress",
-    "title": "PLAYTEST PASS 07 \u2014 THE BROWSER PLAYED BACK",
+    "title": "PLAYTEST PASS 07 — THE BROWSER PLAYED BACK",
     "hook": "We let a headless browser play our own game for 30 seconds. The rifle reloaded. That is the whole headline.",
     "facts": [
-      "Scripted input for 30 s \u2014 walk, aim, fire, reload \u2014 pulse rifle logged 23/24 then a clean G-reload in the HUD.",
+      "Scripted input for 30 s — walk, aim, fire, reload — pulse rifle logged 23/24 then a clean G-reload in the HUD.",
       "Weapon voice shot_pulse_rifle fired through the real audio pipeline; 14 sounds synthesised in 208 ms on boot.",
       "The EMP chip read READY the entire pass and the mute toggle reached the audio pipeline mid-fight."
     ],
-    "take": "If a headless browser can play it for 30 seconds, a human probably can too. Probably \u2014 which stays UNVERIFIED.",
+    "take": "If a headless browser can play it for 30 seconds, a human probably can too. Probably — which stays UNVERIFIED.",
     "question": "What is the shortest playtest you would trust?",
     "visualNote": "Two frames travel with this post: the aim pose mid-pass, and the walk cycle that opened it.",
     "media": {
@@ -86,10 +86,10 @@
   {
     "id": "post-005",
     "kind": "progress",
-    "title": "WORLD REVIEW CAMERA \u2014 EIGHT DISTRICTS, ONE PASS",
+    "title": "WORLD REVIEW CAMERA — EIGHT DISTRICTS, ONE PASS",
     "hook": "Eight keys, eight districts, one camera pass. The world finally fits in a single screenshot set.",
     "facts": [
-      "The review camera frames all eight districts without a cut \u2014 four theatres plus staging, on one continuous world.",
+      "The review camera frames all eight districts without a cut — four theatres plus staging, on one continuous world.",
       "Every district frame holds the nine-family palette: 0.2% max drift against the audited colour contract.",
       "Blockout massing now reads from altitude: rooftops, rails and relay masts silhouette before textures do."
     ],
@@ -110,7 +110,7 @@
     "title": "THE ENCOUNTER GATE STAYS HONEST",
     "hook": "Our own playtest refuses to start the defense until a human says ready. So do our claims.",
     "facts": [
-      "Explore stays a safe zone by design: no hostiles until START DEFENSE is pressed \u2014 the log prints it every session.",
+      "Explore stays a safe zone by design: no hostiles until START DEFENSE is pressed — the log prints it every session.",
       "Defense remains UNVERIFIED in headless runs: software WebGL is slow, and we will not claim a mode we have not timed.",
       "The gate is the promise: built and tested gets claimed, everything else gets listed as unverified in the same font."
     ],
@@ -131,9 +131,9 @@
     "title": "HUD THAT READS AT A GLANCE, 720P",
     "hook": "Vitals, objective, weapon state: three blocks, one glance, zero tutorial.",
     "facts": [
-      "The 720p HUD keeps vitals, the objective card and the weapon block in fixed corners \u2014 readable in a single eye sweep.",
+      "The 720p HUD keeps vitals, the objective card and the weapon block in fixed corners — readable in a single eye sweep.",
       "A HUD MOBILE toggle exists in the build, but touch play on a physical device is still listed UNVERIFIED.",
-      "Active weapon reads PULSE RIFLE 23/24 with reload and armory hints on one line \u2014 no menu diving mid-fight."
+      "Active weapon reads PULSE RIFLE 23/24 with reload and armory hints on one line — no menu diving mid-fight."
     ],
     "take": "HUD is UI copy: three blocks, one glance, zero tutorial.",
     "question": "What does your HUD say when the player is losing?",
@@ -152,7 +152,7 @@
     "title": "AUDIO SYNTH, NOT SAMPLES: 208 MS",
     "hook": "Fourteen sounds, synthesised in 208 milliseconds, zero sample files shipped. The mix is code.",
     "facts": [
-      "The whole session audio kit \u2014 14 voices \u2014 is synthesised at boot in 208 ms; the PCK ships no sample library.",
+      "The whole session audio kit — 14 voices — is synthesised at boot in 208 ms; the PCK ships no sample library.",
       "First voice landed 10.6 s after synthesis in the headless pass: pipeline latency is measured, not assumed.",
       "Mute and unmute reach the live pipeline mid-session without restarting a single voice."
     ],
@@ -174,11 +174,11 @@
     "hook": "WebGPU is at 85.72% of global traffic. WebGL2 is at 96.44%. We ship to the floor and profile the ceiling.",
     "facts": [
       "caniuse pull 2026-10-09: WebGPU full support 85.72% (+3.05% partial), up from 28.53% in Jan 2024.",
-      "WebGL2 sits at 96.44% and WebAssembly 96.63% \u2014 why nearly every 2026 production web game still ships a WebGL2 path.",
+      "WebGL2 sits at 96.44% and WebAssembly 96.63% — why nearly every 2026 production web game still ships a WebGL2 path.",
       "Godot's web export stays WebGL2-only through 4.8-beta1; Unity 6.6 moved WebGPU out of experimental but keeps it off by default."
     ],
     "take": "Render on the floor, profile the ceiling weekly. The migration date is a number, not a vibe.",
-    "question": "What is your WebGPU fallback threshold \u2014 and what measures it?",
+    "question": "What is your WebGPU fallback threshold — and what measures it?",
     "visualNote": "Two plates travel with this post: the renderer-floor audit, and our dashboard at 0.2% drift.",
     "media": {
       "kind": "generated",
@@ -196,9 +196,9 @@
     "facts": [
       "Every capture in this feed comes from headless Chromium with SwiftShader: real engine, real input, zero GPU.",
       "Which is exactly why every mobile claim in our posts carries UNVERIFIED until device data exists.",
-      "1280x720 canvas, HUD readable, rifle reloaded \u2014 rendering evidence, labelled as rendering evidence."
+      "1280x720 canvas, HUD readable, rifle reloaded — rendering evidence, labelled as rendering evidence."
     ],
-    "take": "A test you cannot run on target hardware is still evidence \u2014 of something narrower. Say which.",
+    "take": "A test you cannot run on target hardware is still evidence — of something narrower. Say which.",
     "question": "How do you label the gap between CI evidence and device truth?",
     "visualNote": "Two frames travel with this post: the aim pose the headless pass captured, and the walk cycle before it.",
     "media": {
@@ -213,15 +213,15 @@
     "id": "post-011",
     "kind": "news",
     "title": "GODOT 4.8-BETA1: NEW TOYS UPSTREAM, SAME FLOOR DOWNSTREAM",
-    "hook": "Godot 4.8-beta1 landed 15 Oct with Trail3D, multi-bounce AO and contact shadows. Our web build did not move an inch \u2014 and that is the point.",
+    "hook": "Godot 4.8-beta1 landed 15 Oct with Trail3D, multi-bounce AO and contact shadows. Our web build did not move an inch — and that is the point.",
     "facts": [
       "4.8-beta1 (15 Oct 2026): native Trail3D, multi-bounce AO approximation, screen-space contact shadows, dockable main screens.",
-      "Web export docs still read WebGL 2.0 only \u2014 no WebGPU path for Forward+/Mobile on web.",
+      "Web export docs still read WebGL 2.0 only — no WebGPU path for Forward+/Mobile on web.",
       "We run 4.7.2-stable in the web preview: 39.5 MB wasm, 34 MB pck, 2/2 browser QA green."
     ],
     "take": "Engine upgrades are cheap; renderer migrations are not. We migrate on browser-share numbers, not release notes.",
     "question": "How do you decide when a renderer floor is safe to leave?",
-    "visualNote": "Attached: a 16:9 capture of the source article \u2014 read it there, our stance is here.",
+    "visualNote": "Attached: a 16:9 capture of the source article — read it there, our stance is here.",
     "media": {
       "kind": "source",
       "refs": [
@@ -235,15 +235,15 @@
     "id": "post-012",
     "kind": "news",
     "title": "THE DECOMPILED-PORT WAVE HAS A PROVENANCE PROBLEM",
-    "hook": "Halo, Vice City, Cyberpunk \u2014 decompiled into browser tabs by models overnight. Some nuked by DMCA in hours. None shipped a receipt.",
+    "hook": "Halo, Vice City, Cyberpunk — decompiled into browser tabs by models overnight. Some nuked by DMCA in hours. None shipped a receipt.",
     "facts": [
       "Oct 2026 wave: AI-decompiled ports of Halo CE, GTA Vice City and Cyberpunk 2077 running in browsers via Wasm + WebGPU.",
       "The GTA V port went live and was taken down within hours; Xbox opened a lab for AI-created ports on 13 Oct.",
-      "WebGPU approaching 90% global support is why these ports run at all \u2014 the same floor we audit weekly."
+      "WebGPU approaching 90% global support is why these ports run at all — the same floor we audit weekly."
     ],
     "take": "A port without provenance is a demo. A release without evidence is a promise. We publish the difference.",
     "question": "Where should the line sit for AI-decompiled ports of shipped games?",
-    "visualNote": "Attached: a 16:9 capture of the source article \u2014 read it there, our stance is here.",
+    "visualNote": "Attached: a 16:9 capture of the source article — read it there, our stance is here.",
     "media": {
       "kind": "source",
       "refs": [
@@ -260,12 +260,12 @@
     "hook": "RimWorld left Unity for an in-house engine and got 2-4x. Turing Complete left Godot after a years-long rewrite. GameMaker goes free-commercial in 2027.",
     "facts": [
       "RimWorld 1.7 (12 Oct 2026): Unity to in-house Waylith engine, same look, 2-4x performance in studio tests.",
-      "Turing Complete 2.0 swapped Godot for a custom engine and compiler \u2014 a rewrite that took years.",
+      "Turing Complete 2.0 swapped Godot for a custom engine and compiler — a rewrite that took years.",
       "GameMaker's GMRT runtime goes free for commercial use in Jan 2027."
     ],
-    "take": "We stay on our engine for audited reasons \u2014 web export, payload size, test count \u2014 and we re-run that audit every quarter. Loyalty with receipts.",
-    "question": "What would make you swap engines mid-project \u2014 and what evidence would you require?",
-    "visualNote": "Attached: a 16:9 capture of the source article \u2014 read it there, our stance is here.",
+    "take": "We stay on our engine for audited reasons — web export, payload size, test count — and we re-run that audit every quarter. Loyalty with receipts.",
+    "question": "What would make you swap engines mid-project — and what evidence would you require?",
+    "visualNote": "Attached: a 16:9 capture of the source article — read it there, our stance is here.",
     "media": {
       "kind": "source",
       "refs": [
@@ -282,7 +282,7 @@
     "hook": "The data says confessing beats celebrating by 3-5x. That is exactly why the ledger cannot be a growth hack.",
     "facts": [
       "Build-in-public measurements put failure posts 3-5x above milestone posts.",
-      "The trap: audiences of supporters cheer confessions and never buy \u2014 overlap between readers and buyers is the real metric.",
+      "The trap: audiences of supporters cheer confessions and never buy — overlap between readers and buyers is the real metric.",
       "Our ledger line ships in the same font as the wins, on good weeks and bad ones."
     ],
     "take": "If honesty is scheduled for engagement, it is advertising. Ours is scheduled because the wins need a witness.",
@@ -302,12 +302,12 @@
     "title": "EVIDENCE, NOT NOISE: THE TO-DO LIST IS NOT CONTENT",
     "hook": "'Shipped dark mode' is a to-do list wearing a megaphone. Build-in-public dies exactly there.",
     "facts": [
-      "The field's failure mode: daily updates nobody outside the team can use \u2014 broadcasting, not building in public.",
+      "The field's failure mode: daily updates nobody outside the team can use — broadcasting, not building in public.",
       "The working mode: decisions with reasons, screenshots with numbers, failures with dates.",
       "House rule: every post carries a number, a frame, or a confession. Zero of three means it does not post."
     ],
     "take": "Content is the audit trail of decisions. Everything else is status.",
-    "question": "What is your filter for 'worth posting' \u2014 and what did it kill this week?",
+    "question": "What is your filter for 'worth posting' — and what did it kill this week?",
     "visualNote": "One plate travels with this post: signal over noise, in the house palette.",
     "media": {
       "kind": "generated",
@@ -322,9 +322,9 @@
     "title": "FIRST LIGHT: THE WAVE NOW BRIEFS YOU BEFORE IT TESTS YOU",
     "hook": "Chapter 01 opened in our headless pass this morning: FIRST LIGHT, objective survive the wave, one CONTINUE between us and the arena.",
     "facts": [
-      "The encounter now opens on a briefing card \u2014 chapter, objective, one button \u2014 no auto-start, no ambiguity about what is about to be tested.",
-      "Behind it the deployment shell lists operative, theatre and arsenal with real stats \u2014 DMG 18, rate 5/s, mag 24, reload 1.35 s \u2014 before a single shot exists.",
-      "Defense itself still reads NOT OBSERVED under software WebGL in headless \u2014 the prep frames are evidence of the gate, not of the wave."
+      "The encounter now opens on a briefing card — chapter, objective, one button — no auto-start, no ambiguity about what is about to be tested.",
+      "Behind it the deployment shell lists operative, theatre and arsenal with real stats — DMG 18, rate 5/s, mag 24, reload 1.35 s — before a single shot exists.",
+      "Defense itself still reads NOT OBSERVED under software WebGL in headless — the prep frames are evidence of the gate, not of the wave."
     ],
     "take": "A wave you can refuse to start is a wave you can measure twice.",
     "question": "What does your game show in the three seconds before the first fight?",
@@ -343,7 +343,7 @@
     "title": "THE ARENA MOVED ITS MASTS OFF THE SPAWN RING",
     "hook": "Cover is the east module now. The relay masts that used to crowd the spawn ring are gone, and the lane breathes.",
     "facts": [
-      "Oct 24 world pass: relay masts moved off the spawn ring, turrets flanked, centrepiece box skipped \u2014 the arena lane stays open at 6 m per side.",
+      "Oct 24 world pass: relay masts moved off the spawn ring, turrets flanked, centrepiece box skipped — the arena lane stays open at 6 m per side.",
       "The monument is measured from the origin where the forge puts it, not from where a human remembered it last week.",
       "Every one of those moves landed with a forge-verify import report in the same batch: 3 worlds checked, 0 failed, 259 animation clips counted."
     ],
@@ -365,7 +365,7 @@
     "hook": "There is no texture synthesis anywhere in our pipeline. Four real surface families, graded into the palette by code that admits what it did.",
     "facts": [
       "Kit surfaces are graded, not scanned: gradeKit() re-maps authored material colours; gradeNature() lerps nature tones into the nine-family contract.",
-      "The one scanned plate in the set was lifted legally and graded on top \u2014 the licence cleanup sits in the same commit as the grade.",
+      "The one scanned plate in the set was lifted legally and graded on top — the licence cleanup sits in the same commit as the grade.",
       "The night pass keeps it honest: emissive veins and lamp pools hold the audited palette under a ringed-planet skybox."
     ],
     "take": "Procedural-looking does not mean procedural. Ours is authored, graded, and receipted.",
@@ -385,7 +385,7 @@
     "title": "THREE WORLDS, FIFTEEN RENDERS, ONE SELECTOR THAT NEVER WORKED",
     "hook": "The world selector shipped broken: the launcher never used the short ids. One human clicking through all three worlds found it in a minute.",
     "facts": [
-      "Confession first: letting a world id select itself fixed a launcher that ignored short ids \u2014 the bug shipped because nobody clicked past world one.",
+      "Confession first: letting a world id select itself fixed a launcher that ignored short ids — the bug shipped because nobody clicked past world one.",
       "The same batch documents all three worlds with their own in-engine renders: five frames each for Frostline, Verdant and Emberfall.",
       "Those renders now do two jobs: review evidence in the world docs, and the media attached to this post."
     ],
@@ -403,11 +403,11 @@
   {
     "id": "post-020",
     "kind": "progress",
-    "title": "DEV TRANSMISSION W44 \u2014 THE RECEIPT CUT",
-    "hook": "Twenty-four seconds, eight shots, one promise: nothing in this video is announced \u2014 every frame is a receipt.",
+    "title": "DEV TRANSMISSION W44 — THE RECEIPT CUT",
+    "hook": "Twenty-four seconds, eight shots, one promise: nothing in this video is announced — every frame is a receipt.",
     "facts": [
       "The receipt cut: crane rise over the FIRST LIGHT gate, crash zoom into the arena lane, whip pan to Frostline, speed ramp into the defense gate.",
-      "Three odometers settle on the week's numbers \u2014 116,282,422 boot bytes, 259 forge-verified clips, 9 hue families under contract.",
+      "Three odometers settle on the week's numbers — 116,282,422 boot bytes, 259 forge-verified clips, 9 hue families under contract.",
       "It closes on the ledger in amber: the unverified list, same font, same weight as the wins."
     ],
     "take": "A product video that ends on its own unverified list is a product video people trust.",
@@ -425,7 +425,7 @@
     "id": "post-021",
     "kind": "progress",
     "title": "VEGA ARUNIKA READS THE LEDGER ALoud",
-    "hook": "Our AI ambassador reads this week's receipt on camera \u2014 and closes on the amber list, because that is the job.",
+    "hook": "Our AI ambassador reads this week's receipt on camera — and closes on the amber list, because that is the job.",
     "facts": [
       "41 seconds, one take: the W44 receipts read aloud over the receipt-cut frames, captions verbatim, disclosure corner always on.",
       "The odometers settle at 259 clips / 3 worlds / 0 failures; the arena lane breathes at six metres per side.",
@@ -437,8 +437,8 @@
     "media": {
       "kind": "video",
       "refs": [
-        "/assets/media/video/vega-ledger-read-w44.mp4",
-        "/mcp/zernio/ambassador/vega-arunika-portrait.jpg"
+        "/assets/media/video/vega-field-report-w44.mp4",
+        "/assets/media/ambassador/vega-arunika-portrait.jpg"
       ]
     }
   }
