@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "zernio-drafts": {
+      "command": "node",
+      "args": ["mcp/zernio/server/dist/index.js"]
+    }
+  }
+}

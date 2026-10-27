@@ -10,6 +10,9 @@ Stage definitions (S0 to S4) are in `docs/LAUNCH-PLAYBOOK.md`.
 | 002 | CHAIN RIDER | `xam-eth/Chain-Rider` @ `arena/01a0ee17-chain-shot-rider` | 2 Oct 2026 | S1 playable web alpha, moving to S2 | TESTING |
 | 003 | PHAGOS: DERMAL RIFT | `xam-eth/Phagosinec` @ `arena/01a0d899-phagos-space` | 30 Sep 2026 | S1 (single slice only) | ALPHA |
 | 004 | PALM PLANTATION | `xam-eth/Ground-to-Empire` @ `arena/01a0f46d-palm-plantation` | 2 Oct 2026 | S0 prototype | PROTOTYPE |
+| 005 | EXOCOMPLICT | private repository @ branch withheld (owner security decision, 25 Oct 2026) | 25 Oct 2026 | S1→S2: committed web payload boots in CI browsers; device QA open | TESTING |
+
+Note on 005: the repository is **private** and the owner ruled on 25 October 2026 that no repository name, branch, commit or CI identifier may appear in any public artifact (site bundle, docs, blog). Two development lines moved in parallel that day: the newer one carries the painted shell, the hero-roster lobby and the live WebGL hero rig; the other carries the four-theatre opening integration (Frostline Relay, Verdant Bloom, Emberfall Foundry, Vanguard Station; PCK 76,767,668 bytes / 873 files). Both were green in private CI. The DEV BLOG posts therefore cite each number against an internal document or a date, never against a locator, and every outbound link on the site points at article content instead of source. The public game name is **EXOCOMPLICT**.
 
 Note: Scary-Night has a second arena branch, `arena/01a0e66a-scary-night`, last committed 28 September 2026. It is older and is not the source for the listing.
 
@@ -108,6 +111,26 @@ Note: Scary-Night has a second arena branch, `arena/01a0e66a-scary-night`, last 
 **Website call to action now.** "Try the browser preview" (clearly labelled prototype) and "Follow development".
 
 **Next actions.** Capture proper screenshots from the native Godot build once a visible renderer is available; write a devlog on the evidence-first status audit.
+
+---
+
+## 005 · EXOCOMPLICT
+
+**What it is.** A mobile-first third-person sci-fi arena shooter named **EXOCOMPLICT**, developed in the studio's private repository (name withheld), set in one connected 3D frontier world: hexagonal combat arena, suspended reactor, command centre, lab, depot, landing pad and perimeter defences. Safe Explore by default — no wave starts until the player presses START DEFENSE — then Runner/Shooter waves against three data-driven weapons (Pulse Rifle, Nova Launcher, chaining Arc Shooter), Battle Points and unlocks.
+
+**How it runs today.** Godot 4.7.2-stable project in `game/`, plus a no-install browser route: a committed WebAssembly + PCK payload in `web/` served by any static server (single-threaded export, so no COOP/COEP headers). The painted shell front end (`index.html` + `ui/`) covers opening, dashboard, hero roster and theatre carousel, then hands the screen to the engine; the lobby hero is `hero.glb` rendered live in a WebGL stage over a photographed empty bay.
+
+**Evidence.** Private CI green on 25 Oct 2026 on both lines: static checks, the engine smoke suite, journey and menu-layout tests; the four-world line added 28/28 import-OK Godot tests, export/payload audit, four normal browser boots and interrupted WASM/PCK recovery at 100 Mbps. Art ships against a nine-hue palette audited by the internal art build script (9/9 on-palette, DRIFT threshold 8%). Identifiers are withheld from this public document by owner decision.
+
+**Blockers and flags.**
+1. Android packaging, physical touch behaviour, mobile frame time and final visual acceptance are UNVERIFIED; no APK result is claimed anywhere.
+2. First-load weight is 116,282,422 bytes combined (WASM 39,514,754 + PCK 76,767,668); a compressed or CDN host is a product decision, not an optimization afterthought.
+3. ~~Working title drift~~ resolved by the owner on 25 Oct 2026: the game ships as **EXOCOMPLICT**. Store listings, press copy and the site must use EXOCOMPLICT; the private repository name must never appear in public artifacts.
+4. Licensed kit props carry provenance files in-repo; keep them current if the world kit changes.
+
+**Website call to action now.** "Read the build update" (DEV BLOG), "Open project file", and the repository branch link. Not "play on mobile" — no device build exists yet.
+
+**Next actions.** Resolve the title; capture portrait and landscape frame sets from a real GPU browser; write the Android baseline update once a device run exists; keep filing one DEV BLOG transmission per verified milestone, citing internal documents and dates only — never repository locators.
 
 ---
 

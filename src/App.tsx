@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SystemSection, GameProject } from './types';
 import { sound } from './utils/soundManager';
+import { latestPostForProject } from './utils/constants';
 
 import { CustomCursor } from './components/CustomCursor';
 import { BootScreen } from './components/BootScreen';
@@ -11,6 +12,7 @@ import { GameLibrary } from './components/GameLibrary';
 import { GameDetailModal } from './components/GameDetailModal';
 import { ZyvroLab } from './components/ZyvroLab';
 import { ArchiveDatabase } from './components/ArchiveDatabase';
+import { DevBlog } from './components/DevBlog';
 import { OriginSystem } from './components/OriginSystem';
 import { TransmissionTerminal } from './components/TransmissionTerminal';
 import { SystemFooter } from './components/SystemFooter';
@@ -48,6 +50,7 @@ export const App: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<GameProject | null>(null);
   const [isScanlinesOn, setIsScanlinesOn] = useState(true);
   const [isConsoleOpen, setIsConsoleOpen] = useState(false);
+  const [activeBlogPostId, setActiveBlogPostId] = useState<string | null>(null);
   const [isPurging, setIsPurging] = useState(false);
 
   const handleBootComplete = () => {
@@ -60,6 +63,12 @@ export const App: React.FC = () => {
     setSelectedProject(null);
     setActiveSection('hub');
     setIsConsoleOpen(false);
+  };
+
+  /** Jump to the DEV BLOG wire, optionally straight into one transmission. */
+  const handleOpenBlog = (postId?: string | null) => {
+    setActiveBlogPostId(postId ?? null);
+    setActiveSection('blog');
   };
 
   const handleEmergencyPurge = () => {
@@ -108,12 +117,16 @@ export const App: React.FC = () => {
               <MainHub
                 onSelectProject={(project) => setSelectedProject(project)}
                 onNavigate={(section) => setActiveSection(section)}
+                onOpenBlog={(postId) => handleOpenBlog(postId)}
               />
             )}
 
             {activeSection === 'projects' && (
               <GameLibrary
                 onSelectProject={(project) => setSelectedProject(project)}
+                onReadUpdate={(projectId) =>
+                  handleOpenBlog(latestPostForProject(projectId)?.id ?? null)
+                }
               />
             )}
 
@@ -123,6 +136,14 @@ export const App: React.FC = () => {
 
             {activeSection === 'archive' && (
               <ArchiveDatabase />
+            )}
+
+            {activeSection === 'blog' && (
+              <DevBlog
+                activePostId={activeBlogPostId}
+                onSelectPost={(postId) => setActiveBlogPostId(postId)}
+                onOpenProject={(project) => setSelectedProject(project)}
+              />
             )}
 
             {activeSection === 'origin' && (
@@ -139,6 +160,10 @@ export const App: React.FC = () => {
           <GameDetailModal
             project={selectedProject}
             onClose={() => setSelectedProject(null)}
+            onReadUpdate={(projectId) => {
+              setSelectedProject(null);
+              handleOpenBlog(latestPostForProject(projectId)?.id ?? null);
+            }}
           />
 
           {/* In-Game Terminal CLI Console */}

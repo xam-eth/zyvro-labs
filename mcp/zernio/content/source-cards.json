@@ -1,0 +1,36 @@
+[
+  {
+    "file": "assets/media/sources/godot-48-beta1.jpg",
+    "outlet": "GODOTENGINE.ORG",
+    "date": "15 OCT 2026",
+    "title": "Godot 4.8-beta1 released; 4.7.2 remains the stable web floor",
+    "url": "https://godotengine.org/download/archive/",
+    "quotes": [
+      "Godot 4.8 \u2014 Current state: beta1 \u2014 4.8-beta1, 15 October 2026.",
+      "Godot 4.7.2 \u2014 Current state: stable \u2014 4.7.2-stable, 18 August 2026.",
+      "Download any officially published release of the engine."
+    ]
+  },
+  {
+    "file": "assets/media/sources/xbox-ai-port-lab.jpg",
+    "outlet": "PC MAG",
+    "date": "13 OCT 2026",
+    "title": "Amid influx of decompiled games, new Xbox lab to explore AI-created ports",
+    "url": "https://www.pcmag.com/news/amid-influx-of-decompiled-games-new-xbox-lab-to-explore-ai-created-ports",
+    "quotes": [
+      "Xbox CEO Asha Sharma: in recent weeks, we've seen games rapidly decompiled and rebuilt to run on hardware they were never originally designed to support.",
+      "Windows PC builds have been translated to run on Apple Silicon or ported to run inside a browser through WebAssembly and WebGPU, the latter now approaching 90% global browser support."
+    ]
+  },
+  {
+    "file": "assets/media/sources/gamemaker-gmrt-free.jpg",
+    "outlet": "CREATIVE BLOQ / GAMESINDUSTRY.BIZ",
+    "date": "23 OCT 2026",
+    "title": "GameMaker will let indie developers sell their games for free from 2027",
+    "url": "https://www.creativebloq.com/news/gamemaker-will-let-indie-developers-sell-their-games-for-free-from-2027",
+    "quotes": [
+      "Developers will be able to sell GMRT games on desktop, mobile, web and GX Games without a Professional licence.",
+      "Head of GameMaker Russell Kay: \"As GMRT continues to roll out in beta across platforms, we are widening the scope of what we provide to developers.\""
+    ]
+  }
+]

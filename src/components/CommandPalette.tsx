@@ -75,7 +75,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       case 'help':
         newLogs.push({
           type: 'output',
-          text: `AVAILABLE PROTOCOLS:\n • hub, projects, lab, archive, about, team, transmission\n • last-night, chain-rider, phagos, palm (direct world launch)\n • sound (toggle audio), scanlines (toggle CRT)\n • reboot (restart OS), purge (vram reset), clear (cls)`
+          text: `AVAILABLE PROTOCOLS:\n • hub, projects, lab, archive, about, team, blog, transmission\n • last-night, chain-rider, phagos, palm, exocomplict (direct world launch)\n • sound (toggle audio), scanlines (toggle CRT)\n • reboot (restart OS), purge (vram reset), clear (cls)`
         });
         break;
 
@@ -124,6 +124,15 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         setTimeout(onClose, 400);
         break;
 
+      case 'blog':
+      case 'devblog':
+      case 'updates':
+      case 'news':
+        onNavigate('blog');
+        newLogs.push({ type: 'success', text: 'MOUNTING DEV BLOG // BUILD UPDATE WIRE...' });
+        setTimeout(onClose, 400);
+        break;
+
       case 'transmission':
       case 'contact':
         onNavigate('transmission');
@@ -159,6 +168,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       case 'plantation':
         onSelectProject(GAME_PROJECTS[3]);
         newLogs.push({ type: 'success', text: 'INITIALIZING PROJECT 004: PALM PLANTATION...' });
+        setTimeout(onClose, 400);
+        break;
+
+      case 'exocomplict':
+        onSelectProject(GAME_PROJECTS[4]);
+        newLogs.push({ type: 'success', text: 'INITIALIZING PROJECT 005: EXOCOMPLICT // NEON FRONTIER...' });
         setTimeout(onClose, 400);
         break;
 

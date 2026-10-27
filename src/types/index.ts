@@ -4,6 +4,7 @@ export type SystemSection =
   | 'lab' 
   | 'archive' 
   | 'origin' 
+  | 'blog'
   | 'transmission';
 
 export interface ProgressMetric {
@@ -40,7 +41,14 @@ export interface GameProject {
     cover: string;
     conceptArt: string[];
   };
+  /** The commercial heart of the build: 3-4 short selling points, plain spoken,
+   *  shown under the game detail and on the hub. Must be true and checkable. */
+  coreSell: string[];
   loreQuote: string;
+  /** False when the game repository is private: the site then hides every
+   *  repository/branch locator and points readers at the DEV BLOG article
+   *  instead. Set by the owner; never infer it. */
+  sourcePublic?: boolean;
   links: {
     repository: string;
     branch: string;
@@ -70,6 +78,39 @@ export interface ArchiveEntry {
   author: string;
   summary: string;
   content: string[];
+}
+
+/** One entry of the public development blog (DEV BLOG section). */
+export interface BlogSection {
+  heading: string;
+  body: string[];
+}
+
+export interface BlogEvidence {
+  label: string;
+  value: string;
+  source: string; // branch / commit / CI run the number was read from
+}
+
+export interface BlogPost {
+  id: string;
+  code: string;              // e.g. "UPDATE // 001"
+  projectId: string;         // id of the GAME_PROJECTS entry it reports on
+  category: 'BUILD UPDATE' | 'ART DIRECTION' | 'SYSTEMS' | 'WORLD DESIGN';
+  title: string;             // hook headline
+  deck: string;              // standfirst under the headline
+  hook: string;              // one-line hook used on compact cards
+  date: string;              // "2026.10.25"
+  readTime: string;          // "6 MIN READ"
+  author: string;
+  heroImage: string;
+  gallery: { src: string; caption: string }[];
+  tags: string[];
+  sections: BlogSection[];
+  pullQuote: string;
+  evidence: BlogEvidence[];
+  sourceBranch: string;
+  sourceUrl: string;
 }
 
 export interface SocialLink {
