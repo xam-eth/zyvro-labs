@@ -14,17 +14,21 @@ import {
   Activity,
   Flame,
   ChevronRight,
-  ExternalLink
+  ExternalLink,
+  Newspaper
 } from 'lucide-react';
 
 interface GameDetailModalProps {
   project: GameProject | null;
   onClose: () => void;
+  /** Jump from this project file to its newest DEV BLOG transmission. */
+  onReadUpdate?: (projectId: string) => void;
 }
 
 export const GameDetailModal: React.FC<GameDetailModalProps> = ({
   project,
-  onClose
+  onClose,
+  onReadUpdate
 }) => {
   const [initStage, setInitStage] = useState<'loading' | 'loaded'>('loading');
   const [metricProgress, setMetricProgress] = useState<number[]>([]);
@@ -383,7 +387,12 @@ export const GameDetailModal: React.FC<GameDetailModalProps> = ({
             <div className="space-y-4 pt-4 border-t border-[#202020]">
               <div className="flex items-center space-x-2 text-xs font-mono text-[#D7FF3F] tracking-widest uppercase">
                 <span className="w-2 h-2 bg-[#D7FF3F]" />
-                <span>BUILD STATUS &amp; EVIDENCE // {project.links.branch}</span>
+                <span>
+                  BUILD STATUS &amp; EVIDENCE //{' '}
+                  {project.sourcePublic === false
+                    ? 'INTERNAL VERIFICATION · 2026.10.25 · IDENTIFIERS WITHHELD'
+                    : project.links.branch}
+                </span>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {project.progress.map((metric) => (
@@ -401,22 +410,55 @@ export const GameDetailModal: React.FC<GameDetailModalProps> = ({
               </div>
             </div>
 
+            {/* Core sell: the commercial heart of the build, under the detail */}
+            <div className="space-y-3 pt-4 border-t border-[#202020]">
+              <div className="flex items-center space-x-2 text-xs font-mono text-[#D7FF3F] tracking-widest uppercase">
+                <span className="w-2 h-2 bg-[#D7FF3F]" />
+                <span>CORE SELL // WHY THIS BUILD MATTERS</span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+                {project.coreSell.map((sell, idx) => (
+                  <div key={sell} className="p-3 bg-[#121212] border border-[#262626] flex items-start space-x-3 hover:border-[#D7FF3F]/50 transition-colors">
+                    <span className="text-[#D7FF3F] font-mono text-xs font-bold mt-0.5">{String(idx + 1).padStart(2, '0')}</span>
+                    <p className="text-xs font-mono text-[#E0E0E0] leading-normal">{sell}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* Bottom Transmission Prompt */}
             <div className="p-4 bg-[#0a0a0a] border border-[#202020] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono">
               <span className="text-[#A0A0A0] flex items-center gap-2">
                 <Radio className="w-4 h-4 text-[#D7FF3F]" />
                 HAVE TECHNICAL QUESTIONS OR FEEDBACK FOR THIS PROJECT?
               </span>
-              <button
-                onClick={() => {
-                  sound.playClick();
-                  onClose();
-                }}
-                className="text-[#D7FF3F] hover:text-white uppercase font-bold tracking-wider flex items-center gap-1"
-              >
-                <span>OPEN TRANSMISSION CHANNEL</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </button>
+              <div className="flex flex-wrap items-center gap-2">
+                {onReadUpdate && (
+                  <button
+                    onClick={() => {
+                      sound.playAccessGranted();
+                      onReadUpdate(project.id);
+                    }}
+                    onMouseEnter={() => sound.playHover()}
+                    data-cursor="interact"
+                    data-cursor-label="READ UPDATE"
+                    className="px-4 py-2 bg-[#D7FF3F] hover:bg-white text-[#080808] font-mono font-bold tracking-wider text-xs uppercase transition-all flex items-center gap-1.5"
+                  >
+                    <Newspaper className="w-3.5 h-3.5" />
+                    <span>[ READ BUILD UPDATE ]</span>
+                  </button>
+                )}
+                <button
+                  onClick={() => {
+                    sound.playClick();
+                    onClose();
+                  }}
+                  className="text-[#D7FF3F] hover:text-white uppercase font-bold tracking-wider flex items-center gap-1"
+                >
+                  <span>OPEN TRANSMISSION CHANNEL</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
             </div>
 
           </div>

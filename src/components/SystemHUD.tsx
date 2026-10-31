@@ -13,7 +13,8 @@ import {
   BookOpen, 
   Globe, 
   Radio, 
-  Home
+  Home,
+  Newspaper
 } from 'lucide-react';
 
 interface SystemHUDProps {
@@ -49,6 +50,7 @@ export const SystemHUD: React.FC<SystemHUDProps> = ({
     { id: 'lab', label: 'ZYVRO LAB', gameTerm: 'R&D PROTOTYPES', glyph: '03', icon: <FlaskConical className="w-4 h-4" /> },
     { id: 'archive', label: 'ARCHIVE', gameTerm: 'LORE DATABASE', glyph: '04', icon: <BookOpen className="w-4 h-4" /> },
     { id: 'origin', label: 'ABOUT', gameTerm: 'ORIGIN · PILLARS · TEAM', glyph: '05', icon: <Globe className="w-4 h-4" /> },
+    { id: 'blog', label: 'DEV BLOG', gameTerm: 'BUILD UPDATE WIRE', glyph: '06', icon: <Newspaper className="w-4 h-4" /> },
     { id: 'transmission', label: 'TRANSMISSION', gameTerm: 'COMMS TERMINAL', glyph: '07', icon: <Radio className="w-4 h-4" /> },
   ];
   const navItems: NavItem[] = allNavItems.map((item, index) => ({ ...item, glyph: String(index + 1).padStart(2, '0') }));

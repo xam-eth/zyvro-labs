@@ -1,0 +1,44 @@
+[
+  {
+    "id": "linkedin-private",
+    "label": "LINKEDIN // OWNER (PRIVATE DRAFTING)",
+    "platform": "linkedin",
+    "account": "owner personal profile \u2014 handle withheld in repo",
+    "visibility": "PRIVATE DRAFT \u2014 nothing publishes without owner approval",
+    "voice": "the engineer who keeps the ledger \u2014 first person, lesson-first long-form 900-1300 chars, hook under 90 chars on line 1, multi-image, no external links, one real closing question; series tags [RECEIPT] [LAB NOTE] [OUTSIDE SIGNAL] [HOT TAKE, COLD DATA]; banned: hype adjectives, exclamation marks, emojis, three-act confession arc, hashtag stacks",
+    "cadence": "2 per week",
+    "autoPublish": false,
+    "postsPerDay": {
+      "min": 2,
+      "max": 4
+    }
+  },
+  {
+    "id": "x-owner-private",
+    "label": "X // OWNER PERSONAL (PRIVATE DRAFTING)",
+    "platform": "x",
+    "account": "owner personal X \u2014 handle withheld in repo",
+    "visibility": "PRIVATE DRAFT \u2014 nothing publishes without owner approval",
+    "voice": "same engineer, terser \u2014 receipts under 280 with a number or a confessed failure, dry humour allowed, open question when real, one 5-8 part thread per week drafted in the thread field, occasional long-form LAB NOTE; replies are manual owner work",
+    "cadence": "3 per week",
+    "autoPublish": false,
+    "postsPerDay": {
+      "min": 2,
+      "max": 4
+    }
+  },
+  {
+    "id": "x-zyvrolabs",
+    "label": "X // @ZYVROLABS BRAND",
+    "platform": "x",
+    "account": "Zyvro Labs studio account",
+    "visibility": "BRAND \u2014 owner approval still required per post",
+    "voice": "the lab terminal \u2014 LAB LOG // ALL-CAPS HEADLINE, 1-2 evidence bullets, closes with UNVERIFIED ITEMS LISTED IN THE SAME FONT; never first person singular",
+    "cadence": "3 per week",
+    "autoPublish": false,
+    "postsPerDay": {
+      "min": 2,
+      "max": 4
+    }
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "name": "zernio-drafts-mcp",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Local stdio MCP server: the Zyvro Labs content draft desk. Manages the per-channel draft calendar in mcp/zernio/content/ so agents can plan LinkedIn + X content offline; publishing goes through the hosted Zernio MCP once the owner connects it.",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "typescript": "^5.7.3"
+  }
+}

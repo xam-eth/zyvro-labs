@@ -10,14 +10,16 @@ import {
   ShieldAlert, 
   HardDrive, 
   Sliders, 
-  Eye
+  Eye,
+  Newspaper
 } from 'lucide-react';
 
 interface GameLibraryProps {
   onSelectProject: (project: GameProject) => void;
+  onReadUpdate: (projectId: string) => void;
 }
 
-export const GameLibrary: React.FC<GameLibraryProps> = ({ onSelectProject }) => {
+export const GameLibrary: React.FC<GameLibraryProps> = ({ onSelectProject, onReadUpdate }) => {
   const [activeIndex, setActiveIndex] = useState(FEATURED_PROJECT_INDEX);
   const [isAnimating, setIsAnimating] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -210,6 +212,16 @@ export const GameLibrary: React.FC<GameLibraryProps> = ({ onSelectProject }) => 
             <p className="text-xs md:text-sm text-[#A0A0A0] font-mono leading-relaxed pt-1">
               {currentProject.description}
             </p>
+            <div className="flex flex-wrap gap-1.5 pt-1">
+              {currentProject.coreSell.slice(0, 3).map((sell) => (
+                <span
+                  key={sell}
+                  className="px-2 py-0.5 bg-[#141414] border border-[#262626] text-[9px] font-mono text-[#A0A0A0] tracking-wider uppercase"
+                >
+                  <span className="text-[#D7FF3F] font-bold">CORE SELL //</span> {sell}
+                </span>
+              ))}
+            </div>
           </div>
 
           {/* Quick Technical Specs Matrix */}
@@ -227,6 +239,21 @@ export const GameLibrary: React.FC<GameLibraryProps> = ({ onSelectProject }) => 
               <span className="text-white">{currentProject.specs.multiplayer}</span>
             </div>
           </div>
+
+          {/* Jump to the project's newest build update */}
+          <button
+            onClick={() => {
+              sound.playClick();
+              onReadUpdate(currentProject.id);
+            }}
+            onMouseEnter={() => sound.playHover()}
+            data-cursor="interact"
+            data-cursor-label="BUILD UPDATE"
+            className="w-full py-2.5 bg-[#121212] hover:bg-[#1f1f1f] border border-[#292929] hover:border-[#D7FF3F] text-[#A0A0A0] hover:text-[#D7FF3F] font-mono font-bold tracking-widest text-[11px] uppercase transition-all flex items-center justify-center gap-2"
+          >
+            <Newspaper className="w-3.5 h-3.5" />
+            <span>[ LATEST BUILD UPDATE // DEV BLOG ]</span>
+          </button>
 
           {/* Enter Project Action Button */}
           <div>

@@ -4,3 +4,10 @@ dist
 .cache
 .local
 *.log
+mcp/zernio/.env
+mcp/zernio/server/node_modules
+mcp/zernio/.zernio-mapping.json
+mcp/zernio/runner/tools/
+mcp/zernio/video/node_modules/
+mcp/zernio/video/.cache/
+mcp/zernio/video/out/

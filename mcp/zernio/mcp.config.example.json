@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "zernio-drafts": {
+      "command": "node",
+      "args": ["mcp/zernio/server/dist/index.js"]
+    },
+    "zernio": {
+      "type": "http",
+      "url": "https://mcp.zernio.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${ZERNIO_API_KEY}"
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { GameProject, LabExperiment, ArchiveEntry, FounderProfile, SocialLink } from '../types';
+import { GameProject, LabExperiment, ArchiveEntry, FounderProfile, SocialLink, BlogPost } from '../types';
 
 // Site build identifier, injected by vite.config.ts from package.json and the git commit.
 export const SITE_BUILD = `${__SITE_VERSION__}+${__SITE_COMMIT__}`;
@@ -112,6 +112,12 @@ export const GAME_PROJECTS: GameProject[] = [
       ]
     },
     loreQuote: "“You are not a soldier. You do not have to kill anything. Dawn is at 05:00 — spending the night fighting is a losing strategy; spending it surviving is the game.”",
+    coreSell: [
+      "You cannot win by fighting: five minutes of night, five predators, and evasion pays better than violence",
+      "A tension director spends a pressure budget instead of rolling dice, so quiet stretches make the loud ones hurt",
+      "Blood is your health and your currency — every swing costs it, and the hunted are the only sustainable food",
+      "273 automated checks pass on the shipped beta branch, so the beta you play is the beta that was tested"
+    ],
     links: {
       repository: "xam-eth/Scary-Night",
       branch: "arena/01a0cee1-scary-night",
@@ -182,6 +188,12 @@ export const GAME_PROJECTS: GameProject[] = [
       ]
     },
     loreQuote: "“Shoot one bullet, ride inside it, and bend it to slaughter hundreds of enemies.”",
+    coreSell: [
+      "One bullet you can ride: fire it, sit inside it, and drag it through the crowd with one thumb",
+      "No physics engine, no desyncs: ricochet is solved analytically, so the same stage always plays out identically",
+      "Sessions tuned to 60-180 seconds and measured with bot runs, not guessed in a design doc",
+      "A 1.5 MB standalone HTML build that runs offline from a double-click"
+    ],
     links: {
       repository: "xam-eth/Chain-Rider",
       branch: "arena/01a0ee17-chain-shot-rider",
@@ -248,6 +260,11 @@ export const GAME_PROJECTS: GameProject[] = [
       ]
     },
     loreQuote: "“Each organ is a recognizable biome with its own material hierarchy, topology, rhythm, and traversal vocabulary.”",
+    coreSell: [
+      "Organs are biomes: the map itself breathes, contracts and reopens routes as tissue states change",
+      "Route safety is data, not hope: minimum widths, anchor offsets and cooldowns validated by tooling",
+      "Zero HUD overlay — every change you must read is drawn inside the world itself"
+    ],
     links: {
       repository: "xam-eth/Phagosinec",
       branch: "arena/01a0d899-phagos-space",
@@ -312,10 +329,91 @@ export const GAME_PROJECTS: GameProject[] = [
       ]
     },
     loreQuote: "“Harvesting does not remove the palm. After a short recovery and accelerated regrowth cycle, it develops another bunch and can be harvested again.”",
+    coreSell: [
+      "A whole plantation economy in one sitting: clear, plant, maintain, harvest, sell, regrow",
+      "284 headless assertions guard the simulation, and the status file still refuses to call it finished",
+      "Zoomable miniature diorama camera: drag, pinch and rotate over a tabletop you can read at a glance"
+    ],
     links: {
       repository: "xam-eth/Ground-to-Empire",
       branch: "arena/01a0f46d-palm-plantation",
       sourceUrl: "https://github.com/xam-eth/Ground-to-Empire/tree/arena/01a0f46d-palm-plantation"
+    }
+  },
+  {
+    id: "project-005",
+    featured: false,
+    code: "PROJECT 005",
+    title: "EXOCOMPLICT",
+    codename: "NEON_FRONTIER",
+    genre: "THIRD-PERSON SCI-FI ARENA SHOOTER",
+    tagline: "ONE THUMB ON THE STICK, ONE ON THE TRIGGER. THE FRONTIER DOES THE REST.",
+    brief: "A mobile-first third-person sci-fi arena shooter: joystick, look-drag and FIRE, three weapons that never overlap, and a connected frontier world you can walk before you ever defend it.",
+    description: "EXOCOMPLICT — built in the studio's private repository, reported here in full — drops you into NEON FRONTIER, one connected 3D world with a hexagonal combat arena, a suspended reactor, command centre, lab, depot, landing pad and perimeter defences. You boot into safe Explore — no wave starts until you press START DEFENSE — then hold the line against Runner and Shooter waves with the Pulse Rifle, the slow-burning Nova Launcher and the chaining Arc Shooter, earning Battle Points to unlock the next gun. The game ships a no-install browser route: a committed WebAssembly + PCK payload that boots from a plain static server, fronted by a painted shell whose lobby renders the real hero rig in WebGL.",
+    status: "TESTING",
+    sourcePublic: false,
+    build: "WEB PAYLOAD // PRIVATE CI GREEN · 2026.10.25",
+    engine: "GODOT 4.7.2-STABLE // GDSCRIPT + WEBGL2 WASM",
+    threatLevel: "OMEGA",
+    year: "2026",
+    progress: [
+      {
+        label: "ENGINE SMOKE SUITE",
+        value: 100,
+        evidence: "The shipped head passes the studio's private CI (static checks plus the engine smoke suite); the four-theatre integration line reports 28/28 import-OK Godot tests. Verified 25 Oct 2026; identifiers withheld because the repository is private."
+      },
+      {
+        label: "BROWSER BOOT PROOF",
+        value: 100,
+        evidence: "Private CI boots the committed web payload in a real headless browser: four normal boots plus interrupted WASM/PCK recovery at 100 Mbps."
+      },
+      {
+        label: "FRONT-END JOURNEY",
+        value: 100,
+        evidence: "BOOT > LOADING > CHAPTER > DASHBOARD > HERO > WORLD > PRELOAD > GAMEPLAY is implemented and walked by the journey smoke test, with the menu-layout test measuring every screen at four viewport sizes."
+      },
+      {
+        label: "DEVICE & ANDROID QA",
+        value: 0,
+        evidence: "Android packaging, physical touch behaviour, mobile frame time and final visual acceptance are still UNVERIFIED per the repository's own evidence boundary; no APK result is claimed."
+      }
+    ],
+    features: [
+      "Safe Explore by default: no Wave Director starts until the player deliberately presses START DEFENSE after a visible preparation countdown",
+      "Three weapons with genuinely different contracts: fast Pulse Rifle, slow area-damage Nova Launcher, limited-hop chaining Arc Shooter, all data-driven WeaponDefinition resources",
+      "One connected frontier world assembled from reusable 3D components plus licensed CC0 kit props, with provenance files committed next to the assets",
+      "Painted shell front end: poster loading composition, dashboard, hero roster and a theatre carousel that hands the screen to the engine",
+      "The lobby hero is the match hero: hero.glb rendered live in a WebGL stage over a photographed empty bay, framed by the model's own bounding box",
+      "No-install review path: committed WASM + PCK payload served by any static server, single-threaded export so no COOP/COEP headers are needed"
+    ],
+    specs: {
+      targetPlatforms: ["ANDROID // PORTRAIT + LANDSCAPE TOUCH", "WEB // WASM + COMMITTED PCK", "DESKTOP // GODOT 4.7.2"],
+      rendering: "Godot Compatibility (WebGL2) renderer on web, mobile renderer on Android; painted UI plates audited to a nine-hue palette",
+      physics: "Component colliders over the blockout world, hitscan and projectile weapon contracts, no networking in MVP",
+      multiplayer: "Single player (multiplayer deferred by written decision)"
+    },
+    images: {
+      hero: "/assets/games/exocomplict-hero.jpg",
+      cover: "/assets/games/exocomplict-cover.jpg",
+      conceptArt: [
+        "/assets/games/scenes/exocomplict/01-arena-vantage.png",
+        "/assets/games/scenes/exocomplict/02-boss-vantage.png",
+        "/assets/games/scenes/exocomplict/03-portrait-explore.png",
+        "/assets/games/scenes/exocomplict/04-first-contact.png",
+        "/assets/games/scenes/exocomplict/05-fire-held.png"
+      ]
+    },
+    coreSell: [
+      "Combat you can hold: left thumb moves, right thumb aims, one FIRE tile — measured touch hitboxes, not vibes",
+      "The lobby shows the soldier you actually deploy: the real rigged hero.glb, rendered live, rifle socketed to R_Hand",
+      "Nothing attacks you until you ask: safe Explore first, defense on demand, results that offer retry or wander",
+      "Play it without installing anything: a committed WASM + PCK payload boots from a plain static server"
+    ],
+    loreQuote: "“No wave automatically starts when the game opens. The frontier waits until you decide it is a fight.”",
+    links: {
+      repository: "PRIVATE // WITHHELD BY OWNER",
+      branch: "INTERNAL // NOT PUBLIC",
+      sourceUrl: ""
     }
   }
 ];
@@ -496,3 +594,170 @@ export const ORIGIN_MANIFESTO = {
     }
   ]
 };
+
+/**
+ * Public development blog ("DEV BLOG"). Every post reports work that already
+ * exists in a game repository; every number carries the branch, commit or CI
+ * run it was read from. Headlines follow the studio copy desk rules: one hook,
+ * one promise, ultra-specific detail, no invented urgency.
+ */
+export const BLOG_POSTS: BlogPost[] = [
+  {
+    id: "post-001",
+    code: "UPDATE // 001",
+    projectId: "project-005",
+    category: "BUILD UPDATE",
+    title: "THE HERO ON YOUR LOBBY SCREEN IS THE HERO IN YOUR MATCH — AND WE CAN PROVE IT",
+    deck: "EXOCOMPLICT replaced its painted lobby soldier with the rigged hero.glb rendered live in the browser: same socket, same rifle, same silhouette you deploy into the frontier.",
+    hook: "A painted soldier that never changes is a lie the player catches on day two. Ours is the same 36,000-triangle GLB that takes the field.",
+    date: "2026.10.25",
+    readTime: "4 MIN READ",
+    author: LOG_AUTHOR,
+    heroImage: "/assets/games/exocomplict-hero.jpg",
+    gallery: [
+      { src: "/assets/games/scenes/exocomplict/04-first-contact.png", caption: "FIRST CONTACT — SAFE EXPLORE, RELIGHT PASS 10" },
+      { src: "/assets/games/scenes/exocomplict/05-fire-held.png", caption: "FIRE HELD — PORTRAIT 390x844 TOUCH LAYOUT" },
+      { src: "/assets/games/scenes/exocomplict/01-arena-vantage.png", caption: "ARENA VANTAGE — WORLD TOUR 2026.10.22" }
+    ],
+    tags: ["HERO RIG", "WEBGL LOBBY", "UI/UX", "GODOT 4.7.2"],
+    sections: [
+      {
+        heading: "THE PROBLEM WITH A PRETTY LIE",
+        body: [
+          "The old hero screen was a generated illustration standing on a generated hangar. The art direction was approved, but as an answer it was wrong on every axis a lobby is asked about: it did not change when the livery changed, it did not change when the rig was re-exported, and the INFO tab listed clips — idle, aim, fire — that the picture could not play.",
+          "Worst of all, it showed a different character than the one in the match. A lobby is a contract. When the soldier on the door is not the soldier in the game, the player learns on day two that nothing on the screen can be trusted."
+        ]
+      },
+      {
+        heading: "A PHOTOGRAPH OF AN EMPTY ROOM, AND A LIVE RIG ON TOP OF IT",
+        body: [
+          "What ships now is a division of labour. The bay is a photograph with nobody in it — the empty deploy pad, two beams, crates, haze — because a room does not animate and does not change when the player does. Over that pad sits a WebGL canvas that loads hero.glb and frames it by the model's own bounding box: boots on the bottom edge, helmet at 93 percent of the height, so a re-scaled export re-frames itself.",
+          "The aim clip plays with the game's own rifle: the rig's socket hangs rifle.glb off R_Hand with the carry rotation and 0.4 model-unit scale the match uses. The celebration you see is the real weapon coming up, not a CSS zoom over a still. The roster card's face is baked from the same GLB by the studio's portrait tool with the stage's light rig, so the card and the stage cannot disagree about who you are looking at."
+        ]
+      },
+      {
+        heading: "THE STAGE RENTS THE GPU, IT DOES NOT OWN IT",
+        body: [
+          "The stage plays on entry, pauses on exit and disposes before the engine boots, because Deploy does not need two live WebGL contexts on a phone. Three.js is vendored and pinned inside the shell — 820 KB with an import map — so the lobby works offline and no CDN can change under a shipped build.",
+          "And if the rig cannot be reached, the canvas stays empty and the reason is printed on the pad. A silently blank stage is the one outcome that is not allowed."
+        ]
+      }
+    ],
+    pullQuote: "A silently blank stage is the one outcome that is not allowed.",
+    evidence: [
+      { label: "CI ON SHIPPED HEAD", value: "PRIVATE CI · SUCCESS", source: "shipped head, verified 2026.10.25 — identifiers withheld" },
+      { label: "LOBBY RIG", value: "36,000 TRIS, LIVE", source: "internal decision log, entries 40-41" },
+      { label: "VENDORED THREE.JS", value: "820 KB PINNED", source: "vendored in-shell with an import map" },
+      { label: "JOURNEY TESTS", value: "GREEN", source: "journey + menu-layout smoke tests (internal)" }
+    ],
+    sourceBranch: "INTERNAL // IDENTIFIERS WITHHELD",
+    sourceUrl: ""
+  },
+  {
+    id: "post-002",
+    code: "UPDATE // 002",
+    projectId: "project-005",
+    category: "SYSTEMS",
+    title: "FOUR THEATRES, ONE 116 MB PROMISE: THE WEB BUILD NOW BOOTS HONEST",
+    deck: "Frostline Relay, Verdant Bloom, Emberfall Foundry and Vanguard Station open from a single committed payload — with the opening screen printing the exact byte count it still owes you.",
+    hook: "Most web games hide their download behind a spinner. Ours prints 116,282,422 bytes on the door and refuses to open until the debt is paid.",
+    date: "2026.10.25",
+    readTime: "5 MIN READ",
+    author: LOG_AUTHOR,
+    heroImage: "/assets/games/exocomplict-cover.jpg",
+    gallery: [
+      { src: "/assets/games/scenes/exocomplict/02-boss-vantage.png", caption: "BOSS VANTAGE — WORLD TOUR 2026.10.22" },
+      { src: "/assets/games/scenes/exocomplict/03-portrait-explore.png", caption: "PORTRAIT EXPLORE, FIRE HELD" },
+      { src: "/assets/games/exocomplict-cover.jpg", caption: "WORLD PLATE — NEON FRONTIER, 0.0% OFF-PALETTE" }
+    ],
+    tags: ["WEB PAYLOAD", "CI EVIDENCE", "WORLD DESIGN", "BANDWIDTH"],
+    sections: [
+      {
+        heading: "FOUR THEATRES, ONE DOOR",
+        body: [
+          "The registry and the shell now offer four theatres: Frostline Relay, Verdant Bloom, Emberfall Foundry and Vanguard Station. Neon is retired. No parallel world manager was introduced and no combat or progression system was replaced to get there — the worlds merged into the journey that already existed.",
+          "The opening awaits Engine.init() plus preloadFile() for the complete WASM and four-world PCK before MASUK. DEPLOY then calls start() on the same instance with --main-pack: no hidden gameplay, no second PCK fetch, no quiet warm-up pretending to be a menu."
+        ]
+      },
+      {
+        heading: "THE DOWNLOAD IS THE PRODUCT'S FIRST BOSS",
+        body: [
+          "First load pulls a 39,514,754-byte WASM and a 76,767,668-byte PCK — 116,282,422 bytes combined, 873 files inside the pack. A plain python http.server compresses neither, so the opening screen shows the real combined byte total while it moves, keeps a watchdog alive when progress stalls, and offers Coba lagi with network-error detail when it fails.",
+          "Interrupted-download recovery is a tested feature, not a hope: CI interrupts the WASM and the PCK mid-flight at 100 Mbps and asserts the build recovers. Two earlier runs on the way to this one failed loudly and were fixed the same day: one repaired the merged cover fixture, the next staged 117 byte-identical image references as 69 shared textures without touching a single buffer hash."
+        ]
+      },
+      {
+        heading: "THE BOUNDARY WE KEEP",
+        body: [
+          "Everything above is automated evidence: static checks, 28/28 import-OK Godot tests, export and payload audits, four normal browser boots, and strict selected-Vanguard gameplay in private CI.",
+          "What remains UNKNOWN is written down with the same weight as what passed: Android packaging, physical touch behaviour, mobile frame time, a full human Endless Survival run, and final visual acceptance. Headless proof does not get promoted into device claims in this studio — not in the README, not in the blog, not in the pitch."
+        ]
+      }
+    ],
+    pullQuote: "Headless proof does not get promoted into device claims.",
+    evidence: [
+      { label: "GODOT TESTS", value: "28/28 IMPORT-OK", source: "private CI, 25 Oct 2026 — identifiers withheld" },
+      { label: "OPENING DOWNLOAD", value: "116,282,422 BYTES", source: "internal world-opening integration report, §11" },
+      { label: "TEXTURE DEDUPE", value: "117 REFS → 69 FILES", source: "payload audit, 25 Oct 2026" },
+      { label: "RECOVERY DRILL", value: "100 MBPS INTERRUPTED", source: "private CI recovery drill, WASM + PCK cases" }
+    ],
+    sourceBranch: "INTERNAL // IDENTIFIERS WITHHELD",
+    sourceUrl: ""
+  },
+  {
+    id: "post-003",
+    code: "UPDATE // 003",
+    projectId: "project-005",
+    category: "ART DIRECTION",
+    title: "A PALETTE SMALL ENOUGH TO AUDIT: NINE HUES, ONE SCRIPT, ZERO DRIFT",
+    deck: "EXOCOMPLICT's art direction is a contract written in hex values, and a deterministic build script fails any texture that drifts more than 8% outside it.",
+    hook: "Concept art that introduces a new colour family is not \"more interesting\". In a combat HUD where hue is read faster than numbers, it is a bug.",
+    date: "2026.10.24",
+    readTime: "4 MIN READ",
+    author: LOG_AUTHOR,
+    heroImage: "/assets/games/exocomplict-dashboard.jpg",
+    gallery: [
+      { src: "/assets/games/exocomplict-dashboard.jpg", caption: "DASHBOARD PLATE — 0.2% OFF-PALETTE" },
+      { src: "/assets/games/exocomplict-hero.jpg", caption: "LOADING KEYART POSTER — 0.0% OFF-PALETTE" },
+      { src: "/assets/games/exocomplict-cover.jpg", caption: "WORLD PLATE — JPEG q90 PROGRESSIVE" }
+    ],
+    tags: ["PALETTE", "ART PIPELINE", "AUDIT", "TYPOGRAPHY"],
+    sections: [
+      {
+        heading: "A PALETTE IS A CONTRACT, NOT A MOOD",
+        body: [
+          "The combat HUD is built from tokens the player must recognise faster than they can read a number: cyan for energy and data, amber for warning, green for health, red for damage, violet for ability charge only. Nine hue families, named in art vocabulary and mapped one-to-one onto code tokens.",
+          "That is why the rule is brutal: no new hue families. Amber is a warning colour first and an accent second. Red and green never appear in decorative art at scale. And if a composition needs exactly one saturated colour, it is cyan — cyan is the brand."
+        ]
+      },
+      {
+        heading: "THE AUDIT IS A SCRIPT OR IT IS A WISH",
+        body: [
+          "The studio's art build script is deterministic: same inputs, byte-identical outputs, and it refuses to invent a file. It crops to the content box, keys the wordmark's painted backdrop to alpha over a 16-level ramp, resizes per asset class, then downsamples every output and buckets each pixel by HSV. Above 8% off-palette the build prints DRIFT; below it, ok. Nine of nine shipping textures pass.",
+          "One window was widened by measurement, not by taste: the loading keyart carried 8.9% of its pixels in the 15-25 degree hue band — dark rust and warm dust on oxidised gunmetal — so the amber window moved from 25 to 15 degrees, and the measurement that justified it is recorded in the script. Nothing else was adjusted to make the number pass."
+        ]
+      },
+      {
+        heading: "WEIGHT IS A DESIGN DECISION",
+        body: [
+          "Opaque full-bleed backdrops ship as progressive JPEG at quality 90 because a 1920x1080 painting costs 2.8 MB as PNG and about 430 KB as JPEG. The wordmark, portraits and weapon plates stay PNG: crisp edges that must read at small sizes. The whole shipping inventory is 4.5 MB, with 16 MB of sources kept so the build stays reproducible.",
+          "The audit is honest about its own blindness. It is HSV-only: it cannot see composition, legibility or silhouette. So the document carries the rules the script cannot check — one warm key and one cool fill, never a third source; darker corners than subject; and the silhouette test: if the hero does not read at 64 pixels tall, the art failed regardless of how good the render is."
+        ]
+      }
+    ],
+    pullQuote: "If a composition needs exactly one saturated colour, it is cyan.",
+    evidence: [
+      { label: "PALETTE AUDIT", value: "9/9 ON-PALETTE", source: "internal art build script --check, art-direction contract §7" },
+      { label: "DRIFT THRESHOLD", value: "8% OFF-PALETTE", source: "internal art-direction contract §5" },
+      { label: "KEYART WEIGHT", value: "2.8 MB → ~430 KB", source: "JPEG q90 progressive vs PNG, 1920x1080" },
+      { label: "AMBER WINDOW", value: "25° → 15°, MEASURED", source: "8.9% pixels in 15-25° band on keyart" }
+    ],
+    sourceBranch: "INTERNAL // IDENTIFIERS WITHHELD",
+    sourceUrl: ""
+  }
+];
+
+/** Newest transmission for a project (BLOG_POSTS is ordered newest first). */
+export function latestPostForProject(projectId: string): BlogPost | undefined {
+  return BLOG_POSTS.find((post) => post.projectId === projectId);
+}

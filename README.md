@@ -15,15 +15,16 @@
 | **04** | **Color System** | Base (`#080808`, `#101010`, `#171717`), Surface (`#202020`), Text (`#F2F2F2`), Signature Acid Lime (`#D7FF3F`). |
 | **05** | **Typography** | Display: Geometric condensed futuristic (`Chakra Petch`, `Syne`). Technical: Precision monospace (`JetBrains Mono`). |
 | **06** | **Logo Treatment** | System Identifier badge: `SYS // 001`, `ZYVRO® SYSTEM ONLINE`, reactive status indicators. |
-| **07** | **UI Language** | `Main Hub`, `Projects`, `Origin`, `Founder`, `Archive`, `Transmission`, `Worlds`, `Lab`, `Initializing`, `Shutdown`. |
+| **07** | **UI Language** | `Main Hub`, `Projects`, `Origin`, `Founder`, `Archive`, `Dev Blog`, `Transmission`, `Worlds`, `Lab`, `Initializing`, `Shutdown`. |
 | **08** | **Navigation** | Vertical desktop HUD strip with `Z-Y-V-R-O` glyphs, status nodes, flyout tooltips, and mobile console drawer. |
 | **09** | **Custom Cursor** | Precision targeting reticle with dynamic reactive states (`SELECT`, `INTERACT`, `SCANNING`, `ACTIVE`). |
 | **10** | **Boot Screen** | Skippable opening sequence (skip button, `?skipboot=1`, repeat visits, reduced motion): `[ PRESS START ]` -> synthesized audio chime -> dynamic diagnostic progress bars -> Main Hub. |
-| **11** | **Main Hub** | Command Center with dynamic Hero World, interactive 3D particle matrix canvas, telemetry feeds, and quick portal jump. |
+| **11** | **Main Hub** | Command Center opening on a compact wire of CORE SELL CARDS (one small card per active build: photo strip, status, two selling points, ENTER + UPDATE), the DEV BLOG update band, a 4-up sector index, interactive 3D particle matrix canvas and the manifesto strip. No full-bleed hero viewport. |
 | **12** | **Game Library** | Game selection stage (NOT a card grid): 3D tilt deck, keyboard `←`/`→` controls, swipe gesture, threat gauge, build tags. |
 | **13** | **Game Detail** | `INITIALIZING PROJECT 00X`, diagnostic progress bars (World 82%, Characters 100%, Combat 64%), 4K gallery, audio visualizer. |
 | **14** | **Zyvro Lab** | 4 Live interactive canvas experiments: Bio-Neural Organism, Procedural 3D Terrain Matrix, Quantum Cipher, Gravity Singularities. |
 | **15** | **Archive** | Lore & Dev Database with category filters (`WORLD DESIGN`, `AI LOGIC`, `COMBAT TEST`, `AUDIO SYNTHESIS`, `CLASSIFIED`). |
+| **15b** | **Dev Blog** | Build Update Wire: compact wire cards on the hub, a full reader per transmission with hook block, evidence table, frame captures and one call to action. Copy standard in `docs/COPY-DESK.md`. |
 | **16** | **About** | About page (nav: ABOUT): independent game lab with one founder, origin 2026, core focus, manifesto, 3 pillars, then the Team section. |
 | **17** | **Team** | Bottom of the About page: the real founder from `FOUNDER` in `constants.ts`. No invented team. |
 | **18** | **Transmission** | Comms Terminal: FROM, CALLSIGN, PURPOSE (`[ BUSINESS ]`, `[ COLLABORATION ]`, `[ PRESS ]`, `[ TALENT ]`), typewriter audio feedback. |
@@ -37,7 +38,7 @@
 
 - **`[ ENTER ]` or `[ SPACE ]`**: Start system on Boot Screen.
 - **`[ ← ]` / `[ → ]` (or `[ A ]` / `[ D ]`)**: Cycle active project in Game Selection screen.
-- **`[ ~ ]` or Console Button**: Open In-Game Terminal CLI prompt (`help`, `about`, `team`, `last-night`, `chain-rider`, `phagos`, `palm`, `lab`, `sound`, `scanlines`, `reboot`, `purge`).
+- **`[ ~ ]` or Console Button**: Open In-Game Terminal CLI prompt (`help`, `about`, `team`, `last-night`, `chain-rider`, `phagos`, `palm`, `exocomplict`, `blog`, `lab`, `sound`, `scanlines`, `reboot`, `purge`).
 - **Sound Toggle (HUD)**: Enable/disable the built-in procedural Web Audio synthesizer.
 - **CRT Scanlines (HUD)**: Toggle retro high-frequency scanline matrix.
 - **Interactive Prototypes (Zyvro Lab)**:
@@ -68,16 +69,29 @@ The Game Library, Main Hub, Command Palette and Archive read from `src/utils/con
 | 002 | **CHAIN RIDER** | Bullet-steering crowd shooter | TESTING // MVP v2 | Godot 4.3 + Three.js r128 web build | [`Chain-Rider`](https://github.com/xam-eth/Chain-Rider/tree/arena/01a0ee17-chain-shot-rider) |
 | 003 | **PHAGOS: DERMAL RIFT** | Organic 2D exploration adventure | ALPHA // Dermal Rift slice | Godot 4.3 GDScript 2D | [`Phagosinec`](https://github.com/xam-eth/Phagosinec/tree/arena/01a0d899-phagos-space) |
 | 004 | **PALM PLANTATION** | Plantation strategy / management | PROTOTYPE // 0.2 | Godot 4.3 + Three.js browser preview | [`Ground-to-Empire`](https://github.com/xam-eth/Ground-to-Empire/tree/arena/01a0f46d-palm-plantation) |
+| 005 | **EXOCOMPLICT** | Third-person sci-fi arena shooter | TESTING // web payload, private CI green 25 Oct 2026 | Godot 4.7.2-stable + WebGL2 WASM web build | private repository — identifiers withheld by owner; see DEV BLOG |
 
 ### Updating a game
 
 1. Read the game repository's README and status documents on its newest branch. `main` only holds a stub README in these repositories, so check every branch.
-2. Edit the matching entry in `GAME_PROJECTS`. Every `progress` metric carries an `evidence` string that must come from a number or a statement in that repository, never an estimate.
+2. Edit the matching entry in `GAME_PROJECTS`. Every `progress` metric carries an `evidence` string that must come from a number or a statement in that repository, never an estimate. Keep `coreSell` to three or four plain-spoken selling points that are true in the shipped build.
 3. Put screenshots and key art in `public/assets/games/`, named `<game>-<subject>.jpg`. Capture them from the game itself.
 4. Keep `links.branch` and `links.sourceUrl` pointing at the branch the data was read from.
 5. Run `npm run build`, which type-checks first.
 
 Game images were taken from the game repositories, except Palm Plantation, which has no screenshots in its repository, so its images are captures of its own browser preview.
+
+---
+
+## 🔌 MCP // Zernio — content wire
+
+The repository ships an MCP setup in [`mcp/zernio/`](mcp/zernio/README.md): a local stdio server (`zernio-drafts`, registered in the root `.mcp.json`) that owns the draft calendar for the three content channels — owner LinkedIn (private drafting), owner X (private drafting) and the @zyvrolabs brand X — plus the config and auth guide for Zernio's hosted MCP (`https://mcp.zernio.com/mcp`) used later for scheduling and publishing. Drafts and weekly exports live in the repo; platform tokens and account handles never do.
+
+---
+
+## 📰 Dev Blog — Build Update Wire
+
+The `DEV BLOG` section (nav glyph 06, console command `blog`) is the studio's public development feed. Each transmission in `BLOG_POSTS` carries a hook headline, a standfirst, a one-sentence hook, body sections, a pull quote, frame captures and an evidence table whose rows name the branch, commit or CI run every number was read from. The home page surfaces the newest transmission as compact wire cards and links straight into the reader; every project file and the game selection terminal carry a `[ READ BUILD UPDATE ]` action under the core-sell block. Headline and hook craft follows `docs/COPY-DESK.md` (Ogilvy's specific detail, Schwartz's awareness levels, Masterson's 4 U's, Kennedy/Sugarman's PAS, Wiebe's voice-of-customer hooks, Carless's hook-as-differentiator).
 
 ---
 
